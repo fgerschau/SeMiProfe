@@ -1,6 +1,6 @@
-package api.teacher.support;
+package api.user.support;
 
-import api.teacher.Teacher;
+import api.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class TeacherController {
-    @Autowired TeacherRepository repository;
+public class UserController {
+    @Autowired
+    UserRepository repository;
 
-    @RequestMapping("/teacher")
-     public List<Teacher> get(
+    @RequestMapping("/user")
+     public List<User> get(
              @RequestParam(value="last-name", required=false) String lastName) {
-        List<Teacher> teachers;
+        List<User> users;
         if (lastName != null && lastName.length() > 0) {
-            teachers = repository.findByLastName(lastName);
+            users = repository.findByLastName(lastName);
         } else {
-            teachers = repository.findAll();
+            users = repository.findAll();
         }
 
-        return teachers;
+        return users;
     }
 }

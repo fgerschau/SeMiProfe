@@ -15,10 +15,10 @@ public class UserController {
 
     @RequestMapping("/user")
      public List<User> get(
-             @RequestParam(value="last-name", required=false) String lastName) {
+             @RequestParam(value="name", required=false) String name) {
         List<User> users;
-        if (lastName != null && lastName.length() > 0) {
-            users = repository.findByLastName(lastName);
+        if (name != null && name.length() > 0) {
+            users = repository.findByFirstNameOrLastName(name, name);
         } else {
             users = repository.findAll();
         }

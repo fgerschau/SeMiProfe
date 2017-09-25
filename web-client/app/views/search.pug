@@ -1,0 +1,17 @@
+extends ./layout
+block body
+  div(ng-controller="searchController")
+    table.table.table-striped
+      thead
+        tr
+          th Nombre
+          th Apellidos
+      tbody(ng-repeat="row in tableData")
+        tr
+          td(ng-bind="row.firstName")
+          td(ng-bind="row.lastName")
+        
+      
+block scripts
+  script(src="js/controllers/search.js")
+  script(src="js/services/user.js")

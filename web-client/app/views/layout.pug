@@ -1,0 +1,32 @@
+doctype html(lang='es')
+
+head
+  title SeMiProfe
+  meta(name="viewport", content="width=device-width, initial-scale=1")
+
+  // Bootstrap CSS
+  link(href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether-theme-arrows-dark.min.css" rel="stylesheet")
+  link(href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" rel="stylesheet")
+block head
+body(ng-app="seMiProfeApp")
+
+  .navbar.navbar-toggleable-md.navbar-light.bg-faded
+    button.navbar-toggler.navbar-toggler-right
+      span.navbar-toggler-icon
+    a.navbar-brand(href="/")
+      SeMiProfe
+    .collapse.navbar-collapse
+      ul.navbar-nav.mr-auto.mt-2.mt-md-0
+        li.nav-item.active
+          a.nav-link(href='/')
+            | Profesores 
+  .container
+    block body
+
+script(src="https://use.fontawesome.com/4e134222e7.js")
+script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
+script(src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js")
+
+script(src="js/app.js")
+
+block scripts

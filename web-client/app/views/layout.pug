@@ -18,7 +18,10 @@ body(ng-app="seMiProfeApp")
     .collapse.navbar-collapse
       ul.navbar-nav.mr-auto.mt-2.mt-md-0
         li.nav-item.active
-          a.nav-link(href='/')
+          a.navbar-brand(href='/')
+            | SeMiProfe
+        li.nav-item.active
+          a.nav-link(href='/search')
             | Profesores 
   .container
     block body

@@ -51,4 +51,4 @@ jspm_packages/
 npm-debug.log
 
 application.properties
-/api/.nb-gradle/
+web-client/node_modules/

@@ -1,11 +1,11 @@
 package api.repository;
 
 import api.model.User;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface UserRepository extends JpaRepository<User, Long> {
-    List<User> findByFirstNameOrLastName(String firstName, String lastName);
-    List<User> findAll();
+public interface UserRepository extends PagingAndSortingRepository<User, Long> {
+    Page<User> findByFirstNameOrLastNameIgnoreCaseContaining(String firstName, String lastName, Pageable pageable);
+    Page<User> findAll(Pageable pageable);
 }

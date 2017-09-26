@@ -51,3 +51,4 @@ jspm_packages/
 npm-debug.log
 
 application.properties
+web-client/node_modules/

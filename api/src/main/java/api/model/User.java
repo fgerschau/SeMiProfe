@@ -1,4 +1,4 @@
-package api.user;
+package api.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

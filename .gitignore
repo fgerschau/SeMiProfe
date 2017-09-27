@@ -52,3 +52,4 @@ npm-debug.log
 
 application.properties
 web-client/node_modules/
+web-client/package-lock.json

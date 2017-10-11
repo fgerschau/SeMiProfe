@@ -16,9 +16,9 @@ public class UserController {
     UserService service;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-     public Page<User> get(@RequestParam(value="search", required=false) String search, Pageable pageable) {
+     public Page<User> get(@RequestParam(value="search", required=false) String search, @RequestParam(value="teacher", required=false, defaultValue = "true") Boolean isTeacher, Pageable pageable) {
 
-        Page<User> users = service.get(search, pageable);
+        Page<User> users = service.get(search, isTeacher, pageable);
 
         return users;
     }

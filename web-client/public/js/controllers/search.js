@@ -36,8 +36,6 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
       language: $scope.languageCode,
     };
 
-    $scope.tableData = [];
-
     userService.get($scope.filter).then(function (data) {
       $scope.tableData = data.content;
       $scope.totalPages = data.totalPages;

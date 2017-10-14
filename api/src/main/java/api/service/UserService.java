@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("UserService")
 public class UserService {
     @Autowired
@@ -17,5 +19,11 @@ public class UserService {
         Page<User> users = repository.findAll(isTeacher, search, search, search, pageable);
 
         return users;
+    }
+
+    public List<String> getLanguages() {
+        List<String> languages = repository.getLanguages();
+
+        return languages;
     }
 }

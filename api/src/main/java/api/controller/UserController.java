@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 @RestController
 public class UserController {
     @Autowired
@@ -22,5 +24,12 @@ public class UserController {
         Page<User> users = service.get(search, isTeacher, pageable);
 
         return users;
+    }
+
+    @RequestMapping(value="/languages")
+    public List<String> getLanguages() {
+        List<String> languages = service.getLanguages();
+
+        return languages;
     }
 }

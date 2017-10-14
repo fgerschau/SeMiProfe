@@ -2,11 +2,14 @@ extends ./layout
 include ./mixins/pagination
 block body
   div(ng-controller="searchController")
-    form.row
-      .col-md-10
-        input.form-control(type="text" ng-model="searchQuery")
+    form.row(ng-cloak)
+      .col-md-6
+        input.form-control.no-label(type="text" ng-model="searchQuery")
+      .col-md-4
+        select.form-control(ng-model="languageCode")#language
+          option(ng-repeat="language in languages track by $index" value="{{language.code}}") {{language.translation}}
       .col-md-2
-        button.btn.btn-primary(ng-click="search()") Buscar
+        button.btn.btn-primary.no-label(ng-click="search()") Buscar
     .row(ng-if="tableData.length")
       table.table.table-striped
         thead

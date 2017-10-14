@@ -1,15 +1,17 @@
 extends ./layout
 include ./mixins/pagination
+block head
+  link(href="css/search.css" rel="stylesheet")
 block body
   div(ng-controller="searchController")
     form.row(ng-cloak)
-      .col-md-6
+      .col-md-6.form
         input.form-control.no-label(type="text" ng-model="searchQuery")
-      .col-md-4
+      .col-md-4.form
         select.form-control(ng-model="languageCode")#language
           option(ng-repeat="language in languages track by $index" value="{{language.code}}") {{language.translation}}
-      .col-md-2
-        button.btn.btn-primary.no-label(ng-click="search()") Buscar
+      .col-md-2.form
+        button.btn.btn-primary.no-label(ng-click="search()" style="width: 100%;") Buscar
     .row(ng-if="tableData.length")
       table.table.table-striped
         thead

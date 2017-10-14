@@ -14,9 +14,9 @@ public class UserService {
     @Autowired
     UserRepository repository;
 
-    public Page<User> get(String search, Boolean isTeacher, Pageable pageable) {
+    public Page<User> get(Boolean isTeacher, String search, String language, Pageable pageable) {
         search = search != null && search.length() > 0 ? search : "";
-        Page<User> users = repository.findAll(isTeacher, search, search, search, pageable);
+        Page<User> users = repository.findAll(isTeacher, search, search, language, pageable);
 
         return users;
     }

@@ -3,6 +3,10 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
   $scope.MAXPAGES = 5;
   $scope.page = 1;
   $scope.tableData = [];
+  $scope.languages = [{
+    translation: 'Selecciona un idioma',
+    code: '',
+  }];
 
   function getPaginationArray(from, to) {
     if (((from - 1) % $scope.MAXPAGES !== 0 || to % $scope.MAXPAGES !== 0)) {
@@ -29,6 +33,7 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
       page: $scope.page - 1,
       size: SIZE,
       search: $scope.searchQuery,
+      language: $scope.languageCode,
     };
 
     $scope.tableData = [];
@@ -43,8 +48,6 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     });
   }
 
-  getTeachers(true);
-
   $scope.search = function () {
     getTeachers(true);
   };
@@ -55,4 +58,23 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
   }
 
   $scope.goToPage = goToPage;
+
+  function getLanguages() {
+    userService.getLanguages().then(function (languages) {
+      for (var i = 0; i < languages.length; i++) {
+        var language = languages[i];
+        $scope.languages.push({
+          translation: LANGUAGETRANSLATION[language],
+          code: language,
+        });
+      }
+    });
+  }
+
+  function init() {
+    getTeachers(true);
+    getLanguages();
+  }
+
+  init();
 });

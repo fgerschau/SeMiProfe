@@ -37,12 +37,17 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     };
 
     userService.get($scope.filter).then(function (data) {
-      $scope.tableData = data.content;
       $scope.totalPages = data.totalPages;
       $scope.totalElements = data.totalElements;
       if (updatePagination) {
         getPaginationArray(1, $scope.MAXPAGES);
       }
+
+      for (var i = 0; i < data.content.length; i++) {
+        data.content[i].languageTranslation = LANGUAGETRANSLATION[data.content[i].language] || '';
+      }
+
+      $scope.tableData = data.content;
     });
   }
 

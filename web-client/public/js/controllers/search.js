@@ -49,6 +49,7 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
   }
 
   $scope.search = function () {
+    $scope.page = 1;
     getTeachers(true);
   };
 

@@ -1,17 +1,26 @@
 extends ./layout
+include ./mixins/pagination
 block body
   div(ng-controller="searchController")
-    h4 Hay {{total}} profesores
-    table.table.table-striped
-      thead
-        tr
-          th Nombre
-          th Apellidos
-      tbody(ng-repeat="row in tableData")
-        tr
-          td(ng-bind="row.firstName")
-          td(ng-bind="row.lastName")
-        
+    form.row
+      .col-md-10
+        input.form-control(type="text" ng-model="searchQuery")
+      .col-md-2
+        button.btn.btn-primary(ng-click="search()") Buscar
+    .row(ng-if="tableData.length")
+      table.table.table-striped
+        thead
+          tr
+            th Nombre
+            th Apellidos
+            th Idioma
+        tbody(ng-repeat="row in tableData")
+          tr
+            td {{row.firstName}}
+            td {{row.lastName}}
+            td {{row.language}}
+
+    +pagination()
       
 block scripts
   script(src="js/controllers/search.js")

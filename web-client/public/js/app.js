@@ -1,5 +1,6 @@
 var seMiProfeApp = angular.module('seMiProfeApp', ['ui.bootstrap']);
-var apiUrl = 'http://localhost:3000';
+var apiUrl = window.location.href.match(/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)/g);
+apiUrl = apiUrl + ":3000";
 
 var LANGUAGETRANSLATION = {
   'es-ES': 'Español',

@@ -1,0 +1,12 @@
+extends ./layout
+block head
+    link(href="https://bootswatch.com/simplex/bootstrap.min.css" rel="stylesheet")
+    link(href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" rel="stylesheet")
+block body
+    div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto")
+block scripts
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    script(src="https://momentjs.com/downloads/moment.js")
+    script(src="js/screens/calendarEditor.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js")
+    script(src="js/screens/locale-all.js")

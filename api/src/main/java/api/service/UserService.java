@@ -26,4 +26,10 @@ public class UserService {
 
         return languages;
     }
+
+    public User getByEmail(String email) {
+        User user = repository.findByEmail(email);
+
+        return user;
+    }
 }

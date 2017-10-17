@@ -4,10 +4,7 @@ import api.model.User;
 import api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -22,7 +19,6 @@ public class UserController {
                            @RequestParam(value="teacher", required=false, defaultValue = "true") Boolean isTeacher,
                            @RequestParam(value="language", required=false) String language,
                            Pageable pageable) {
-
         language = language == null ? "" : language;
         
         Page<User> users = service.get(isTeacher, search, language, pageable);
@@ -35,5 +31,13 @@ public class UserController {
         List<String> languages = service.getLanguages();
 
         return languages;
+    }
+
+    @RequestMapping(value="/user/email")
+    public User getByEmail(@RequestParam(value="email") String email) {
+
+        User user = service.getByEmail(email);
+
+        return user;
     }
 }

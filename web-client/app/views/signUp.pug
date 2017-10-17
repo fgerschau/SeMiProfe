@@ -1,0 +1,47 @@
+extends ./layout
+include ./mixins/pagination
+
+block head
+block body
+      form.row(ng-cloak)
+        div.form-group
+          label(for='name') Nombre:
+          input#name.form-control(type='text', placeholder='Nombre' name='name')
+      form.row(ng-cloak)
+        div.form-group
+          label(for='lastname') Apellidos:
+          input#lastname.form-control(type='text', placeholder='Apellidos' name='lastname')
+      form.row(ng-cloak)
+        div.form-group
+          label(for='email') Email:
+          input#email.form-control(type='email', placeholder='Han@solo.com' name='email')
+      form.row(ng-cloak)
+        div.form-group
+          label(for='tlf') Telefono:
+          input#tlf.form-control(type='text', placeholder='Numero de telefono' name='tlf')
+      form.row(ng-cloak)
+        div.form-group
+          label <strong>Localización:</strong></br>
+            label(for='provincia') &nbsp Provincia:
+            input#provincia.form-control(type='text', placeholder='Provincia' name='provincia')
+            label(for='localidad') &nbsp Localidad:
+            input#localidad.form-control(type='text', placeholder='Localidad' name='localidad')
+      form.row(ng-cloak)
+        div.form-group
+          label <strong>Tipo de usuario:</strong>
+          input#tipo.form-control(type='text', placeholder='Profesor?? ' name='tipo')
+
+
+      form.row(ng-cloak)
+        div.form-group
+          label(for='pw') Password:
+          input#pw.form-control(type='password' name='password')
+      form.row(ng-cloak)
+        div.form-group
+          label(for='pw2') Confirm Password:
+          input#pw2.form-control(type='password' name='confirmPassword')
+      form.row(ng-cloak)
+        button.btn.btn-primary(type='submit') Sign up
+block scripts
+  script(src="js/controllers/signUp.js")
+  script(src="js/services/user.js")

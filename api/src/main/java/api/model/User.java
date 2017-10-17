@@ -15,6 +15,8 @@ public class User {
     private String lastName;
     private Boolean isTeacher;
     private String language;
+    private String email;
+    private String password;
 
     protected User() {}
 
@@ -47,4 +49,13 @@ public class User {
     public String getLanguage() {
         return language;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
 }

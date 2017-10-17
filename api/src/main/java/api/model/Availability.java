@@ -15,7 +15,7 @@ import java.util.Date;
 public class Availability {
     @Id
     private long id;
-    private Event eventArray[];
+    private Event[] eventArray;
 
     public Availability(long id, Event[] eventArray) {
         id = id;

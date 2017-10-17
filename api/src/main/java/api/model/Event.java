@@ -4,10 +4,12 @@ import java.util.Date;
 
 public class Event {
     private String title;
-    private Date start;
-    private Date end;
+    private String start;
+    private String end;
 
-    public Event(String title, Date start, Date end) {
+    private Event(){}
+
+    public Event(String title, String start, String end) {
         this.title = title;
         this.start = start;
         this.end = end;
@@ -17,19 +19,23 @@ public class Event {
         return title;
     }
 
-    public Date getStart() {
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 }

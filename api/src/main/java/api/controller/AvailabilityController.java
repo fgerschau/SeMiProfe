@@ -1,30 +1,46 @@
 package api.controller;
 
-import api.model.DateTime;
+import api.model.Availability;
 import api.model.Event;
 import api.service.AvailabilityService;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @RestController
 public class AvailabilityController{
     @Autowired
     AvailabilityService service;
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+    @RequestMapping(value = "/add-availability", method = RequestMethod.POST)
+    public @ResponseBody void add(@RequestBody Event event){
+        System.out.print(event.getStart());
+        Availability a = service.get(1);
+        ArrayList<Event> aux = new ArrayList<Event>(Arrays.asList(a.getEventArray()));
+        aux.add(event);
+        Event[] eventArray = new Event[aux.size()];
+        aux.toArray(eventArray);
+        a.setEventArray(eventArray);
+        a = service.save(a);
+    }
     @RequestMapping(value = "/save-availability", method = RequestMethod.POST)
     public @ResponseBody void save(@RequestBody ArrayList<Event> data){
-        System.out.print(data.get(1).getTitle());
+
+        Event[] eventArray = new Event[data.size()];
+        data.toArray(eventArray);
+        for (Event e:eventArray) {
+            System.out.println(e.getEnd());
+        }
+        Availability av= new Availability(1,eventArray);
+        av = service.save(av);
     }
     @RequestMapping(value = "/availability.json", method = RequestMethod.GET)
     public Event[] get(){
-        Event res[] = new Event[3];
-        DateTime start = new DateTime(2017,10,12,12,10);
-        DateTime end = new DateTime(2017,10,12,18,10);
-        res[0] = new Event("No disponible",start.toString(),end.toString());
-        res[1] = new Event("No disponible",start.toString(),end.toString());
-        res[2] = new Event("No disponible",start.toString(),end.toString());
+        Availability a = service.get(1);
+        Event[] res = a.getEventArray();
         return res;
     }
 }

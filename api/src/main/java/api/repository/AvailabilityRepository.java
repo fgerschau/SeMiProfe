@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface AvailabilityRepository extends Repository<Availability,Long>{
     Optional<Availability> findById(Long primaryKey);
-    Availability save (Availability entity);
+    Availability save(Availability entity);
 }

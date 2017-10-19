@@ -13,4 +13,7 @@ public class AvailabilityService {
         Optional<Availability> availability = repository.findById(id);
         return availability.get();
     }
+    public Availability save(Availability a){
+        return repository.save(a);
+    }
 }

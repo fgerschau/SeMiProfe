@@ -1,8 +1,8 @@
 package api.model;
 
-import java.util.Date;
 
-public class Event {
+import java.io.Serializable;
+public class Event implements Serializable{
     private String title;
     private String start;
     private String end;

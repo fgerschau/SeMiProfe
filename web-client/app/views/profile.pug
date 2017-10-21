@@ -1,25 +1,26 @@
 extends ./layout
 block head
+    link(href="css/profile.css" rel="stylesheet")
     link(href="https://bootswatch.com/simplex/bootstrap.min.css" rel="stylesheet")
     link(href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" rel="stylesheet" )
 block body
-    div(style="width: 20%; float: left;")
-        button(id="addAvailabilityButton" style="margin-left: auto;margin-right: auto") Añadir fecha no disponible
-        br
-        div(id="form" style="margin-left: auto;margin-right: auto")
-            form(name="availability-form" onsubmit="return submitCalendarForm()")
-                p Inicio:
-                input(name="start" type="datetime-local")
-                p Fin:
-                input(name="end" type="datetime-local")
-                br
-                br
-                input(type="submit" )
-    div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto;float: left;" )
-    div(id="event-delete" title="" style="float: left; width:20%;background-color: white;") ¿Desea cambiar la disponibilidad?
-        p(id="event-delete-info")
-        button(id="event-delete-button") Eliminar del calendario
-
+    div(style="float: left; width: 22%")
+        div(id='event-add')
+            button(id="addAvailabilityButton") Añadir fecha no disponible
+            br
+            div(id="form" style="margin-left: auto;margin-right: auto")
+                form(name="availability-form" onsubmit="return submitCalendarForm()" )
+                    p(style="text-align: left") Inicio:
+                    input(name="start" type="datetime-local" style="width: 95%")
+                    p(style="text-align: left") Fin:
+                    input(name="end" type="datetime-local" style="width: 95%")
+                    br
+                    br
+                    input(type="submit" style="margin-left: auto; margin-right: auto")
+        div(id="event-delete" title="") ¿Desea cambiar la disponibilidad?
+            p(id="event-delete-info")
+            button(id="event-delete-button") Eliminar del calendario
+    div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto; overflow: auto" )
 block scripts
     script(src="https://momentjs.com/downloads/moment.js")
     script(src="https://code.jquery.com/jquery-3.2.1.min.js")

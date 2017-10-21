@@ -11,41 +11,34 @@ $(document).ready(function () {
         slotDuration: '00:15:00',
         defaultView: 'agendaWeek',
         themeSystem: 'bootstrap3',
-        lazyFetch: false,
         editable: true,
         droppable: true,
         firstDay: 1,
         locale: 'es',
-        eventResourceEditable: true,
         eventColor: 'red',
         eventTextColor: 'black',
         eventDrop: function (event) {
-            saveEvents();
-        },
+            saveEventArray(toArray($('#calendar').fullCalendar('clientEvents')),2);
+            },
         eventResize: function (event, delta, revertFunc, jsEvent, ui, view ) {
-            saveEvents();
-        },
+            saveEventArray(toArray($('#calendar').fullCalendar('clientEvents')),2);
+            },
         eventClick: function(calEvent, jsEvent, view) {
             id = calEvent.id;
-            calEvent.start.locale('es')
-            console.log($('#calendar').fullCalendar('clientEvents'));
+            calEvent.start.locale('es');
             try{
-                $('#event-delete-info').text(" " + calEvent._id + " " + calEvent.start.format('LL') + " de "
+                $('#event-delete-info').text(" " + calEvent.start.format('LL') + " de "
                     + calEvent.start.format('LT') + " hasta " +  calEvent.end.format('LT'));
             }catch(err){
                 console.log(err);
-                $('#event-delete-info').text(calEvent.title + " el " + calEvent.start.day() + "-" + calEvent.start.month() +
-                    "-" + calEvent.start.year() + " de " + calEvent.start.hours() + ":" + calEvent.start.minutes());
+                $('#event-delete-info').text(" " + calEvent.start.format('LL') + " a las " + calEvent.start.format('LT'));
             }
             $('#event-delete').show();
         },
         eventSources: [
             {
                 url: 'http://localhost:3000/availability.json',
-                type: 'GET',
-                data: {},
-                color: 'red',
-                textColor: 'black',
+                type: 'GET'
             }
         ]
     });

@@ -28,7 +28,7 @@ function saveEventArray(eventArray,i){
             if(i==0){
                 $('#event-delete').hide();
                 $("#calendar").fullCalendar('refetchEvents');
-            }else{
+            }if(i==1){
                 $('#form').hide();
                 $("#calendar").fullCalendar('refetchEvents');
             }
@@ -44,22 +44,4 @@ function toArray(event){
         }
     });
     return eventArray;
-}
-function saveEvents(){
-    var event = $('#calendar').fullCalendar('clientEvents');
-    var eventArray = $.map(event, function (item) {
-        return {
-            title: 'No disponible',
-            start: item.start,
-            end: item.end
-        }
-    });
-    $.ajax({
-        contentType: "application/json",
-        type: 'POST',
-        url: 'http://localhost:3000/save-availability',
-        data: JSON.stringify(eventArray)
-
-    });
-
 }

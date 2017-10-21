@@ -1,8 +1,13 @@
+
 $('#addAvailabilityButton').click(function(){
     $('#form').show();
 });
-
+$('#event-delete-button').click(function(){
+    $('#calendar').fullCalendar('removeEvents',id);
+    saveEventArray(toArray($('#calendar').fullCalendar('clientEvents')),0);
+});
 function submitCalendarForm(){
+    var eventArray = toArray($('#calendar').fullCalendar('clientEvents'));
     var start = document.forms["availability-form"]["start"].value;
     var end = document.forms["availability-form"]["end"].value;
     var obj = {
@@ -10,14 +15,51 @@ function submitCalendarForm(){
         start: start.toString(),
         end: end.toString()
     }
-    var event = JSON.stringify(obj);
+    eventArray.push(obj);
+    saveEventArray(eventArray,1);
+}
+function saveEventArray(eventArray,i){
     $.ajax({
         contentType: "application/json",
         type: 'POST',
-        url : 'http://localhost:3000/add-availability',
-        data : event,
-        success: function(text) {
-            $("#calendar").fullCalendar('refetchEvents');
+        url: 'http://localhost:3000/save-availability',
+        data: JSON.stringify(eventArray),
+        success: function(){
+            if(i==0){
+                $('#event-delete').hide();
+                $("#calendar").fullCalendar('refetchEvents');
+            }else{
+                $('#form').hide();
+                $("#calendar").fullCalendar('refetchEvents');
+            }
         }
     });
+}
+function toArray(event){
+    var eventArray = $.map(event, function (item) {
+        return {
+            title: 'No disponible',
+            start: item.start,
+            end: item.end
+        }
+    });
+    return eventArray;
+}
+function saveEvents(){
+    var event = $('#calendar').fullCalendar('clientEvents');
+    var eventArray = $.map(event, function (item) {
+        return {
+            title: 'No disponible',
+            start: item.start,
+            end: item.end
+        }
+    });
+    $.ajax({
+        contentType: "application/json",
+        type: 'POST',
+        url: 'http://localhost:3000/save-availability',
+        data: JSON.stringify(eventArray)
+
+    });
+
 }

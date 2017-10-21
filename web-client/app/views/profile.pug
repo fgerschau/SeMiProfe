@@ -3,11 +3,7 @@ block head
     link(href="https://bootswatch.com/simplex/bootstrap.min.css" rel="stylesheet")
     link(href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" rel="stylesheet" )
 block body
-    div(id="event-delete" title="" style="text-align: center; float: left; width:20%;background-color: white;") ¿Desea cambiar la disponibilidad?
-        p(id="event-delete-info")
-        button(id="event-delete-button") Eliminar del calendario
-    div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto;float: left;" )
-    div(style="width: 20%; float: left;text-align: center;")
+    div(style="width: 20%; float: left;")
         button(id="addAvailabilityButton" style="margin-left: auto;margin-right: auto") Añadir fecha no disponible
         br
         div(id="form" style="margin-left: auto;margin-right: auto")
@@ -19,11 +15,16 @@ block body
                 br
                 br
                 input(type="submit" )
+    div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto;float: left;" )
+    div(id="event-delete" title="" style="float: left; width:20%;background-color: white;") ¿Desea cambiar la disponibilidad?
+        p(id="event-delete-info")
+        button(id="event-delete-button") Eliminar del calendario
+
 block scripts
     script(src="https://momentjs.com/downloads/moment.js")
     script(src="https://code.jquery.com/jquery-3.2.1.min.js")
     script(src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js")
-    script(src="js/screens/calendarEditor.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js")
-    script(src="js/screens/locale-all.js")
+    script(src="js/screens/calendarEditor.js")
     script(src="js/controllers/availability-form.js")
+    script(src="js/screens/locale-all.js")

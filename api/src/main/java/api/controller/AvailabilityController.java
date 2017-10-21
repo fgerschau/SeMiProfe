@@ -15,24 +15,16 @@ public class AvailabilityController{
     @Autowired
     AvailabilityService service;
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-    @RequestMapping(value = "/add-availability", method = RequestMethod.POST)
-    public @ResponseBody void add(@RequestBody Event event){
-        System.out.print(event.getStart());
-        Availability a = service.get(1);
-        ArrayList<Event> aux = new ArrayList<Event>(Arrays.asList(a.getEventArray()));
-        aux.add(event);
-        Event[] eventArray = new Event[aux.size()];
-        aux.toArray(eventArray);
-        a.setEventArray(eventArray);
-        a = service.save(a);
-    }
+
     @RequestMapping(value = "/save-availability", method = RequestMethod.POST)
     public @ResponseBody void save(@RequestBody ArrayList<Event> data){
-
+        long i = 0;
         Event[] eventArray = new Event[data.size()];
         data.toArray(eventArray);
         for (Event e:eventArray) {
+            e.setId(i);
             System.out.println(e.getEnd());
+            i++;
         }
         Availability av= new Availability(1,eventArray);
         av = service.save(av);

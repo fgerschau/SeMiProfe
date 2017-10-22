@@ -20,7 +20,7 @@ public class UserController {
                            @RequestParam(value="language", required=false) String language,
                            Pageable pageable) {
         language = language == null ? "" : language;
-        
+
         Page<User> users = service.get(isTeacher, search, language, pageable);
 
         return users;

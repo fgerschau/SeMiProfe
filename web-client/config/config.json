@@ -1,0 +1,28 @@
+{
+  "port": 3030,
+  "apiUrl": "http://localhost:3000",
+  "log": {
+    "appenders": {
+      "out": {
+        "type": "console"
+      },
+      "debug": {
+        "type": "dateFile",
+        "category": "debug",
+        "filename": "logs/debug/debug.log",
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": false
+      }
+    },
+    "categories": {
+      "debug": {
+        "appenders": ["debug"],
+        "level": "debug"
+      },
+      "default": {
+        "appenders": ["out"],
+        "level": "info"
+      }
+    }
+  }
+}

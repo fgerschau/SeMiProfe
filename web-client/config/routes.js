@@ -1,9 +1,26 @@
 'use strict';
 
+const Auth = require('./middleware');
+
 const controller = require('../app/controllers');
 
-module.exports = function (app) {
-  app.route('/search').get(controller.getSearch);
+module.exports = function (app, passport) {
+  app.get('*', function (req, res, next) {
+    res.locals.loggedIn = !!req.user;
+    res.locals.user = req.user;
+    next();
+  });
 
-  app.route('/').get(controller.getSearch); // TODO: Homepage 
+  app.get('/', Auth.isLoggedIn, controller.getIndex); // TODO: Homepage
+
+  app.get('/login', controller.getLogin);
+
+  app.get('/search', Auth.isLoggedIn, controller.getSearch);
+
+  app.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/search',
+    failureRedirect: '/login',
+  }));
+
+  app.get('/logout', controller.logout);
 };

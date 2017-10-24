@@ -28,32 +28,24 @@ seMiProfeApp.controller('signUpController', function ($scope, userService) {
 
   $scope.getPaginationArray = getPaginationArray;
 
-  function getTeachers(updatePagination) {
-    $scope.filter = {
-      page: $scope.page - 1,
-      size: SIZE,
-      search: $scope.searchQuery,
-      language: $scope.languageCode,
+  function saveUser(updatePagination) {
+    $scope.user = {
+      name: $scope.name,
+      lastname: $scope.lastname,
+      email: $scope.tlf,
+      provincia: $scope.provincia,
+      localidad: $scope.localidad,
+      userType: $scope.userType,
+      password: $scope.password,
+      confirmPassword: $scope.confirmPassword;
     };
 
-    userService.get($scope.filter).then(function (data) {
-      $scope.totalPages = data.totalPages;
-      $scope.totalElements = data.totalElements;
-      if (updatePagination) {
-        getPaginationArray(1, $scope.MAXPAGES);
-      }
-
-      for (var i = 0; i < data.content.length; i++) {
-        data.content[i].languageTranslation = LANGUAGETRANSLATION[data.content[i].language] || '';
-      }
-
-      $scope.tableData = data.content;
-    });
+    userService.post($scope.user).then(function (data) {});
   }
 
-  $scope.search = function () {
-    $scope.page = 1;
-    getTeachers(true);
+  $scope.signUp = function () {
+    //$scope.page = 1;
+    saveUser(true);
   };
 
   function goToPage(page) {

@@ -22,5 +22,6 @@ module.exports = function (app, passport) {
     failureRedirect: '/login',
   }));
 
+  app.route('/profile').get(controller.getProfile);
   app.get('/logout', controller.logout);
 };

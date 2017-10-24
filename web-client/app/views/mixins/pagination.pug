@@ -1,0 +1,19 @@
+mixin pagination
+  .container(style="margin-top: 2em;")
+    .row
+      nav(aria-label="Selección de la página")
+        ul.pagination
+            li.page-item(ng-if="(page - 1) >= 1")
+              a.page-link(href="#" ng-click="getPaginationArray(page - MAXPAGES, page - 1); goToPage(page - 1);" aria-label="Página anterior")
+                span &laquo;
+            li.page-item(class="disabled" ng-if="(page - 1) < 1")
+              a.page-link(href="#")
+                span &laquo;
+            li.page-item(ng-class="(page === p) ? 'active' : ''", ng-repeat="p in pageArray")
+              a.page-link(href="#" ng-click="goToPage(p)") {{p}}
+            li.page-item(ng-if="(page) < totalPages")
+              a.page-link(href="#" ng-click="getPaginationArray(page + 1, page + MAXPAGES); goToPage(page + 1);" aria-label="Página siguiente")
+                span &raquo;
+            li.page-item(class="disabled" ng-if="page >= totalPages")
+              a.page-link(href="#")
+                span &raquo;

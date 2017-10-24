@@ -13,6 +13,10 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
+    private Boolean isTeacher;
+    private String language;
+    private String email;
+    private String password;
 
     protected User() {}
 
@@ -37,4 +41,21 @@ public class User {
 	public String getLastName() {
 		return lastName;
 	}
+
+    public Boolean getIsTeacher() {
+        return isTeacher;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
 }

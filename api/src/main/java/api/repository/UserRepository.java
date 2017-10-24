@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT DISTINCT(u.language) FROM User u")
     List<String> getLanguages();
+
+    User findByEmail(String email);
 }

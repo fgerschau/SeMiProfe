@@ -19,6 +19,15 @@ body(ng-app="seMiProfeApp")
         a.nav-item.nav-link(href='/search')
           | Profesores 
 
+    div(style="margin-top: 20px;")
+    - if (!loggedIn) {
+      a.btn.btn-outline-success(href='/login')
+        | Login
+    - } else if (loggedIn) {
+      a.btn.btn-outline-danger(href='/logout')
+        | Logout
+    - }
+
   .container
     block body
 

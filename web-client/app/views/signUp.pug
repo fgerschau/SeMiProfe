@@ -3,51 +3,57 @@ include ./mixins/pagination
 
 block head
 block body
-  div.col-md-6.form(ng-controller="searchController")
-      form.row(ng-cloak)
-        div.form-group
+  <table style="align:left; width:50%")>
+      <tr>
+        td.form.row(ng-cloak)
           label(for='name') Nombre:
           input#name.form-control(type='text', placeholder='Nombre' ng-model='name')
-      form.row(ng-cloak)
-        div.form-group
+      </tr>
+      <tr>
+        td.form.row(ng-cloak)
           label(for='lastname') Apellidos:
           input#lastname.form-control(type='text', placeholder='Apellidos' ng-model='lastname')
-      form.row(ng-cloak)
-        div.form-group
+      </tr>
+      <tr>
+        td.form.row(ng-cloak)
           label(for='email') Email:
           input#email.form-control(type='email', placeholder='Han@solo.com' ng-model='email')
-      form.row(ng-cloak)
-        div.form-group
+      </tr>
+      <tr>
+        td.form.row(ng-cloak)
           label(for='tlf') Telefono:
           input#tlf.form-control(type='text', placeholder='Numero de telefono' ng-model='tlf')
-      form.row(ng-cloak)
-        div.form-group
+      </tr>
+      <tr>
+        td.form.row(ng-cloak)
           label <strong>Localización:</strong></br>
           label(for='provincia') &nbsp Provincia:
           input#provincia.form-control(type='text', placeholder='Provincia' ng-model='provincia')
           label(for='localidad') &nbsp Localidad:
           input#localidad.form-control(type='text', placeholder='Localidad' ng-model='localidad')
-      form.row(ng-cloak)
-        div.form-group
+      </tr>
+      <tr>
+        td.form.row(ng-cloak)
           label <strong>Tipo de usuario:</strong>
           input#tipo.form-control(type='text', placeholder='Profesor?? ' ng-model='userType')
-      form.row(ng-cloak)
-        div.form-group
+      </tr>
+      <tr>
+        td.form.row(ng-cloak)
           label(for='pw') Password:
           input#pw.form-control(type='password' ng-model='password')
-      form.row(ng-cloak)
-        div.form-group
+      </tr>
+      <tr>
+        td.form.row(ng-cloak)
           label(for='pw2') Confirm Password:
           input#pw2.form-control(type='password' ng-model='confirmPassword')
-      form.row(ng-cloak)
-        div.form-group
-          button.btn.btn-primary.no-label(ng-click="signUp()" style="width: 100%;") Aceptar
-  div.container.col-md-6.form
-      div.form-group
-        .image-block
-          h3 Hello
-          img.className#IdName(src="../images/pug.jpg" alt="pug")
-
+      </tr>
+  </table>
+  <table style="align:right; width:50%")>
+    <tr>
+      td.form.row(ng-cloak)
+        button.btn.btn-primary(ng-click="signUp()" style="width: 100%;") Aceptar
+    </tr>
+  </table>
 block scripts
   script(src="js/controllers/signUp.js")
   script(src="js/services/user.js")

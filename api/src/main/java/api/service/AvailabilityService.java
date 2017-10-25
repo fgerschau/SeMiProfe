@@ -1,4 +1,5 @@
 package api.service;
+
 import api.model.Availability;
 import api.repository.AvailabilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;

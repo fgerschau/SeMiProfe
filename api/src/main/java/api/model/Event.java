@@ -1,5 +1,7 @@
 package api.model;
+
 import java.io.Serializable;
+
 public class Event implements Serializable{
     private Long id;
     private String title;

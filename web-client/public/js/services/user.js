@@ -1,6 +1,5 @@
 seMiProfeApp.service('userService', function ($http) {
   function responseData(response) {
-    console.log(response);
     return response.data;
   }
 
@@ -13,6 +12,6 @@ seMiProfeApp.service('userService', function ($http) {
   };
 
   this.create = function (user) {
-    return $http.post('/signup', user).then(responseData).catch(console.error); // Post to the node application
+    return $http.post('/signup', user).then(responseData); // Post to the node application
   };
 });

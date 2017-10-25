@@ -2,53 +2,51 @@ extends ./layout
 
 block head
 block body
-  form.col-md-6(ng-controller="signUpController")
+  form.col-md-6(ng-controller="signUpController" ng-cloak)
     .form-group(style="padding: 15px 0;")
         h4 Datos personales:
-    .form-group
+    .form-group( ng-class="error.firstName ? 'has-danger' : ''")
       label(for='name') Nombre*
-      input#name.form-control(type='text', placeholder='Nombre' ng-model='user.firstName' ng-class="error.name ? '.is-invalid' : ''")
-      .invalid-feedback(ng-if="error.firstname") Tienes que introducir tu nombre.
-    .form-group
+      input#name.form-control(type='text', placeholder='Nombre' ng-model='user.firstName')
+      .text-danger(ng-if="error.firstName") Tienes que introducir tu nombre.
+    .form-group(ng-class="error.lastName ? 'has-danger' : ''")
       label(for='lastname') Apellidos*
-      input#lastname.form-control(type='text', placeholder='Apellidos' ng-model='user.lastName' ng-class="error.lastname ? '.is-invalid' : ''")
-      .invalid-feedback(ng-if="error.lastname") Tienes que introducir tu(s) apellido(s).
-    .form-group
+      input#lastname.form-control(type='text', placeholder='Apellidos' ng-model='user.lastName')
+      .text-danger(ng-if="error.lastName") Tienes que introducir tu(s) apellido(s).
+    .form-group(ng-class="error.emailExists || error.emailInvalid ? 'has-danger' : ''")
       label(for='email') Email*
-      input#email.form-control(type='email', placeholder='han@solo.com' ng-model='user.email' ng-class="error.email ? '.is-invalid' : ''")
-      .invalid-feedback(ng-if="error.emailExists")
-        Ya hay una cuenta creada con este correo.
-      .invalid-feedback(ng-if="error.emailInvalid")
-        El formato de este correo electrónico no es válido.
+      input#email.form-control(type='email', placeholder='han@solo.com' ng-model='user.email')
+      .text-danger(ng-if="error.emailExists") Ya hay una cuenta creada con este correo.
+      .text-danger(ng-if="error.emailInvalid") El formato de este correo electrónico no es válido.
     .form-group
       label(for='tlf') Teléfono
       input#tlf.form-control(type='text', placeholder='Número de teléfono' ng-model='user.phone')
     .form-group(style="padding: 15px 0;")
         h4 Localización:
-    .form-group
+    .form-group(ng-class="error.province ? 'has-danger' : ''")
       label(for='provincia') Provincia*
-      input#provincia.form-control(type='text', placeholder='Provincia' ng-model='user.province' ng-class="error.province ? '.is-invalid' : ''")
-      .invalid-feedback(ng-if="error.province") Tienes que introducir tu provincia.
+      input#provincia.form-control(type='text', placeholder='Provincia' ng-model='user.province')
+      .text-danger(ng-if="error.province") Tienes que introducir tu provincia.
     .form-group
       label(for='localidad') Localidad
       input#localidad.form-control(type='text', placeholder='Localidad' ng-model='user.town')
     .form-group(style="padding: 15px 0;")
         h4 Datos de usuario:
-    .form-group
+    .form-group(ng-class="error.userType ? 'has-danger' : ''")
       label(for="tipo") Tipo de usuario*
-      select#tipo.form-control(type='text' ng-model='user.isTeacher' ng-class="error.userType ? '.is-invalid' : ''")
+      select#tipo.form-control(type='text' ng-model='user.isTeacher')
         option(value="true") Profesor
         option(value="false") Alumno
-      .invalid-feedback(ng-if="error.userType") Tienes que elegir el tipo de tu perfil.
-    .form-group(ng-show="user.isTeacher")
+      .text-danger(ng-if="error.userType") Tienes que elegir el tipo de tu perfil.
+    .form-group(ng-show="user.isTeacher === 'true'" ng-class="error.language ? 'has-danger' : ''")
       label(for="tipo") Idioma*
-      select#tipo.form-control(type='text' ng-model='user.language' ng-class="error.language ? '.is-invalid' : ''")
+      select#tipo.form-control(type='text' ng-model='user.language')
         option(ng-repeat="(key, value) in languages" ng-value="key") {{value}}
-      .invalid-feedback(ng-if="error.language") Todos los profesores tienen que elegir un idioma.
-    .form-group
+      .text-danger(ng-if="error.language") Todos los profesores tienen que elegir un idioma.
+    .form-group(ng-class="error.password ? 'has-danger' : ''")
       label(for='pw') Contraseña*
-      input#pw.form-control(type='password' ng-model='user.password' placeholder="********" ng-class="error.password ? '.is-invalid' : ''")
-      .invalid-feedback(ng-if="error.password") Tienes que introducir una contraseña.
+      input#pw.form-control(type='password' ng-model='user.password' placeholder="********")
+      .text-danger(ng-if="error.password") Tienes que introducir una contraseña.
     .form-group
       button.btn.btn-primary(ng-click="signUp()" style="width: 100%;") Aceptar
 block scripts

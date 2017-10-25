@@ -7,6 +7,11 @@ seMiProfeApp.service('userService', function ($http) {
     return $http.get(apiUrl + '/user', { params: options }).then(responseData);
   };
 
+  this.getByEmail = function (email) {
+    var url = apiUrl + '/user/email?email=' + email;
+    return $http.get(url).then(responseData);
+  }
+
   this.getLanguages = function () {
     return $http.get(apiUrl + '/languages').then(responseData);
   };

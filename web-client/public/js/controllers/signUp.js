@@ -1,6 +1,7 @@
 seMiProfeApp.controller('signUpController', function ($scope, $window, userService) {
   $scope.error = {};
   $scope.languages = LANGUAGETRANSLATION;
+  $scope.user = {};
 
   function testEmail(email) {
     var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -29,14 +30,15 @@ seMiProfeApp.controller('signUpController', function ($scope, $window, userServi
       $scope.error.lastName = !$scope.user.lastName;
       $scope.error.firstName = !$scope.user.firstName;
       $scope.error.province = !$scope.user.province;
-      $scope.error.userType = $scope.user.isTeacher === null;
+      $scope.error.userType = !$scope.user.isTeacher;
       $scope.error.password = !$scope.user.password;
       $scope.error.emailInvalid = !!$scope.user.email && !testEmail($scope.user.email);
-      $scope.error.language = $scope.user.email != null && !$scope.user.language;
+      $scope.error.language = $scope.user.isTeacher === 'true' && !$scope.user.language;
 
-      userService.get({ email: $scope.email }).then(function (user) {
-        if (user !== null) {
-          $scope.emailExists = true;
+      userService.getByEmail($scope.user.email).then(function (user) {
+        debugger
+        if (user) {
+          $scope.error.emailExists = true;
         }
 
         var errors = checkErrorsExist();

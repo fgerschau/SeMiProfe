@@ -4,5 +4,7 @@ apiUrl = apiUrl + ":3000";
 
 var LANGUAGETRANSLATION = {
   'es-ES': 'Español',
+  'de-DE': 'Alemán',
   'en-GB': 'Inglés británico',
+  'en-US': 'Inglés EEUU',
 };

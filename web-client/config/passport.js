@@ -27,4 +27,30 @@ module.exports = function (passport) {
       return done(null, user);
     });
   }));
+
+  passport.use('local-signup', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true,
+  }, function (req, email, password, done) {
+    userController.getByEmail(email).then(function (user) {
+      if (user) {
+        return done(null, false); // user is taken
+      }
+
+      const newUser = {};
+      newUser.email = email;
+      newUser.password = userController.generateHash(password);
+      newUser.firstName = req.body.firstName;
+      newUser.lastName = req.body.lastName;
+      newUser.phone = req.body.phone;
+      newUser.province = req.body.province
+      newUser.town = req.body.town;
+      newUser.isTeacher = req.body.isTeacher;
+
+      userController.create(newUser).then(function (createdUser) {
+        return done(null, createdUser);
+      });
+    });
+  }));
 };

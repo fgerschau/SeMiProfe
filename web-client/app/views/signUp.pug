@@ -7,11 +7,11 @@ block body
         h4 Datos personales:
     .form-group
       label(for='name') Nombre*
-      input#name.form-control(type='text', placeholder='Nombre' ng-model='user.firstname' ng-class="error.name ? '.is-invalid' : ''")
+      input#name.form-control(type='text', placeholder='Nombre' ng-model='user.firstName' ng-class="error.name ? '.is-invalid' : ''")
       .invalid-feedback(ng-if="error.firstname") Tienes que introducir tu nombre.
     .form-group
       label(for='lastname') Apellidos*
-      input#lastname.form-control(type='text', placeholder='Apellidos' ng-model='user.lastname' ng-class="error.lastname ? '.is-invalid' : ''")
+      input#lastname.form-control(type='text', placeholder='Apellidos' ng-model='user.lastName' ng-class="error.lastname ? '.is-invalid' : ''")
       .invalid-feedback(ng-if="error.lastname") Tienes que introducir tu(s) apellido(s).
     .form-group
       label(for='email') Email*

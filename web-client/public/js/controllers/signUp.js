@@ -25,29 +25,31 @@ seMiProfeApp.controller('signUpController', function ($scope, $window, userServi
   function checkErrors() {
     return new Promise(function (resolve, reject) {
       resetErrors();
-      $scope.error.lastname = !$scope.user.lastname;
-      $scope.error.firstname = !$scope.user.firstname;
+      $scope.error.lastName = !$scope.user.lastName;
+      $scope.error.firstName = !$scope.user.firstName;
       $scope.error.province = !$scope.user.province;
       $scope.error.userType = $scope.user.isTeacher === null;
       $scope.error.password = !$scope.user.password;
       $scope.error.emailInvalid = !!$scope.user.email && !testEmail($scope.user.email);
 
-      // userService.getByEmail($scope.email).then(function (user) {
-      //   if (user !== null) {
-      //     $scope.emailExists = true;
-      //   }
-      // });
+      userService.get({ email: $scope.email }).then(function (user) {
+        if (user !== null) {
+          $scope.emailExists = true;
+        }
 
-      var errors = checkErrorsExist();
+        var errors = checkErrorsExist();
 
-      resolve(errors);
+        resolve(errors);
+      });
     });
   }
 
   $scope.signUp = function () {
     checkErrors().then(function (errors) {
       if (!errors) {
-        $window.location.href = '/search';
+        userService.create($scope.user).then(function () {
+          $window.location.href = '/search';
+        });
       }
     });
   };

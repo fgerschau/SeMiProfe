@@ -13,17 +13,23 @@ module.exports = function (app, passport) {
 
   app.get('/', Auth.isLoggedIn, controller.getIndex); // TODO: Homepage
 
-  app.route('/signup').get(controller.getSignUp);
+  app.get('/signup', controller.getSignUp);
 
   app.get('/login', controller.getLogin);
 
   app.get('/search', Auth.isLoggedIn, controller.getSearch);
+
+  app.get('/profile', Auth.isLoggedIn, controller.getProfile);
+
+  app.get('/logout', controller.logout);
 
   app.post('/login', passport.authenticate('local-login', {
     successRedirect: '/search',
     failureRedirect: '/login',
   }));
 
-  app.route('/profile').get(controller.getProfile);
-  app.get('/logout', controller.logout);
+  app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/search',
+    failureRedirect: '/signup',
+  }));
 };

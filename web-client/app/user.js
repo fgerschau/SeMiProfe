@@ -19,6 +19,23 @@ function getByEmail(email) {
 
 exports.getByEmail = getByEmail;
 
+function create(user) {
+  return co(function* () {
+    const options = {
+      method: 'POST',
+      uri: `${config.apiUrl}/user`,
+      body: user,
+      json: true,
+    };
+
+    const newUser = yield request(options);
+
+    return newUser;
+  }).catch(console.error);
+}
+
+exports.create = create;
+
 function validatePassword(email, password) {
   return co(function* () {
     const user = yield getByEmail(email);
@@ -30,3 +47,9 @@ function validatePassword(email, password) {
 }
 
 exports.validatePassword = validatePassword;
+
+function generateHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+}
+
+exports.generateHash = generateHash;

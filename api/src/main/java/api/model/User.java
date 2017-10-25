@@ -19,6 +19,10 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
+    private int phone;
+    @Column(nullable = false)
+    private String province;
+    private String town;
 
     protected User() {}
 
@@ -60,4 +64,28 @@ public class User {
         return password;
     }
 
+    public int getPhone() {
+        return phone;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
 }

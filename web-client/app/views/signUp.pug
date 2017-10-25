@@ -40,6 +40,11 @@ block body
         option(value="true") Profesor
         option(value="false") Alumno
       .invalid-feedback(ng-if="error.userType") Tienes que elegir el tipo de tu perfil.
+    .form-group(ng-show="user.isTeacher")
+      label(for="tipo") Idioma*
+      select#tipo.form-control(type='text' ng-model='user.language' ng-class="error.language ? '.is-invalid' : ''")
+        option(ng-repeat="(key, value) in languages" ng-value="key") {{value}}
+      .invalid-feedback(ng-if="error.language") Todos los profesores tienen que elegir un idioma.
     .form-group
       label(for='pw') Contraseña*
       input#pw.form-control(type='password' ng-model='user.password' placeholder="********" ng-class="error.password ? '.is-invalid' : ''")

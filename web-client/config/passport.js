@@ -47,6 +47,7 @@ module.exports = function (passport) {
       newUser.province = req.body.province
       newUser.town = req.body.town;
       newUser.isTeacher = req.body.isTeacher;
+      newUser.language = req.body.language;
 
       userController.create(newUser).then(function (createdUser) {
         return done(null, createdUser);

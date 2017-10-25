@@ -16,7 +16,7 @@ module.exports = (() => {
   app.set('port', process.env.PORT || 3000);
   app.set('views', path.join(__dirname, '../app/views'));
   app.set('view engine', 'pug');
-  app.use(favicon('public/images/optical_fibre.jpg'));
+  app.use(favicon('public/images/favicon.png'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(methodOverride());

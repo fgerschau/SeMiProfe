@@ -13,7 +13,9 @@ body(ng-app="seMiProfeApp")
   nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
     button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbar', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
-    a.navbar-brand(href='/') SeMiProfe
+    a.navbar-brand(href='/')
+      img.d-inline-block.align-center(src="/images/favicon.png", width="67px", height="52px" style="margin-right: 2em")
+      | SeMiProfe
     #navbar.collapse.navbar-collapse
       .navbar-nav
         a.nav-item.nav-link(href='/search')

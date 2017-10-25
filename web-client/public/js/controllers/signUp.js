@@ -1,76 +1,54 @@
-seMiProfeApp.controller('signUpController', function ($scope, userService) {
-  var SIZE = 10;
-  $scope.MAXPAGES = 5;
-  $scope.page = 1;
-  $scope.tableData = [];
-  $scope.languages = [{
-    translation: 'Selecciona un idioma',
-    code: '',
-  }];
+seMiProfeApp.controller('signUpController', function ($scope, $window, userService) {
+  $scope.error = {};
 
-  function getPaginationArray(from, to) {
-    if (((from - 1) % $scope.MAXPAGES !== 0 || to % $scope.MAXPAGES !== 0)) {
-      return $scope.pageArray;
-    }
-
-    from = from > 0 ? from : 1;
-    to = to < $scope.totalPages ? to : $scope.totalPages;
-    from = to - from <= $scope.MAXPAGES ? from : to - $scope.MAXPAGES;
-
-    var pages = [];
-    for (var i = from; i <= to; i++) {
-      pages.push(i);
-    }
-
-    $scope.pageArray = pages;
-    return pages;
+  function testEmail(email) {
+    var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email);
   }
 
-  $scope.getPaginationArray = getPaginationArray;
-
-  function saveUser(updatePagination) {
-    $scope.user = {
-      name: $scope.name,
-      lastname: $scope.lastname,
-      email: $scope.tlf,
-      provincia: $scope.provincia,
-      localidad: $scope.localidad,
-      userType: $scope.userType,
-      password: $scope.password,
-      confirmPassword: $scope.confirmPassword;
-    };
-
-    userService.post($scope.user).then(function (data) {});
-  }
-
-  $scope.signUp = function () {
-    //$scope.page = 1;
-    saveUser(true);
-  };
-
-  function goToPage(page) {
-    $scope.page = page;
-    getTeachers(false);
-  }
-
-  $scope.goToPage = goToPage;
-
-  function getLanguages() {
-    userService.getLanguages().then(function (languages) {
-      for (var i = 0; i < languages.length; i++) {
-        var language = languages[i];
-        $scope.languages.push({
-          translation: LANGUAGETRANSLATION[language],
-          code: language,
-        });
+  function checkErrorsExist() {
+    for (var error in $scope.error) {
+      if ($scope.error[error]) {
+        return true;
       }
+    }
+
+    return false;
+  }
+
+  function resetErrors() {
+    for (var error in $scope.error) {
+      $scope.error[error] = false;
+    }
+  }
+
+  function checkErrors() {
+    return new Promise(function (resolve, reject) {
+      resetErrors();
+      $scope.error.lastname = !$scope.user.lastname;
+      $scope.error.firstname = !$scope.user.firstname;
+      $scope.error.province = !$scope.user.province;
+      $scope.error.userType = $scope.user.isTeacher === null;
+      $scope.error.password = !$scope.user.password;
+      $scope.error.emailInvalid = !!$scope.user.email && !testEmail($scope.user.email);
+
+      // userService.getByEmail($scope.email).then(function (user) {
+      //   if (user !== null) {
+      //     $scope.emailExists = true;
+      //   }
+      // });
+
+      var errors = checkErrorsExist();
+
+      resolve(errors);
     });
   }
 
-  function init() {
-    getTeachers(true);
-    getLanguages();
-  }
-
-  init();
+  $scope.signUp = function () {
+    checkErrors().then(function (errors) {
+      if (!errors) {
+        $window.location.href = '/search';
+      }
+    });
+  };
 });

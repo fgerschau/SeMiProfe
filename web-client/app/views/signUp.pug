@@ -1,59 +1,51 @@
 extends ./layout
-include ./mixins/pagination
 
 block head
 block body
-  <table style="align:left; width:50%")>
-      <tr>
-        td.form.row(ng-cloak)
-          label(for='name') Nombre:
-          input#name.form-control(type='text', placeholder='Nombre' ng-model='name')
-      </tr>
-      <tr>
-        td.form.row(ng-cloak)
-          label(for='lastname') Apellidos:
-          input#lastname.form-control(type='text', placeholder='Apellidos' ng-model='lastname')
-      </tr>
-      <tr>
-        td.form.row(ng-cloak)
-          label(for='email') Email:
-          input#email.form-control(type='email', placeholder='Han@solo.com' ng-model='email')
-      </tr>
-      <tr>
-        td.form.row(ng-cloak)
-          label(for='tlf') Telefono:
-          input#tlf.form-control(type='text', placeholder='Numero de telefono' ng-model='tlf')
-      </tr>
-      <tr>
-        td.form.row(ng-cloak)
-          label <strong>Localización:</strong></br>
-          label(for='provincia') &nbsp Provincia:
-          input#provincia.form-control(type='text', placeholder='Provincia' ng-model='provincia')
-          label(for='localidad') &nbsp Localidad:
-          input#localidad.form-control(type='text', placeholder='Localidad' ng-model='localidad')
-      </tr>
-      <tr>
-        td.form.row(ng-cloak)
-          label <strong>Tipo de usuario:</strong>
-          input#tipo.form-control(type='text', placeholder='Profesor?? ' ng-model='userType')
-      </tr>
-      <tr>
-        td.form.row(ng-cloak)
-          label(for='pw') Password:
-          input#pw.form-control(type='password' ng-model='password')
-      </tr>
-      <tr>
-        td.form.row(ng-cloak)
-          label(for='pw2') Confirm Password:
-          input#pw2.form-control(type='password' ng-model='confirmPassword')
-      </tr>
-  </table>
-  <table style="align:right; width:50%")>
-    <tr>
-      td.form.row(ng-cloak)
-        button.btn.btn-primary(ng-click="signUp()" style="width: 100%;") Aceptar
-    </tr>
-  </table>
+  form.col-md-6(ng-controller="signUpController")
+    .form-group(style="padding: 15px 0;")
+        h4 Datos personales:
+    .form-group
+      label(for='name') Nombre*
+      input#name.form-control(type='text', placeholder='Nombre' ng-model='user.firstname' ng-class="error.name ? '.is-invalid' : ''")
+      .invalid-feedback(ng-if="error.firstname") Tienes que introducir tu nombre.
+    .form-group
+      label(for='lastname') Apellidos*
+      input#lastname.form-control(type='text', placeholder='Apellidos' ng-model='user.lastname' ng-class="error.lastname ? '.is-invalid' : ''")
+      .invalid-feedback(ng-if="error.lastname") Tienes que introducir tu(s) apellido(s).
+    .form-group
+      label(for='email') Email*
+      input#email.form-control(type='email', placeholder='han@solo.com' ng-model='user.email' ng-class="error.email ? '.is-invalid' : ''")
+      .invalid-feedback(ng-if="error.emailExists")
+        Ya hay una cuenta creada con este correo.
+      .invalid-feedback(ng-if="error.emailInvalid")
+        El formato de este correo electrónico no es válido.
+    .form-group
+      label(for='tlf') Teléfono
+      input#tlf.form-control(type='text', placeholder='Número de teléfono' ng-model='user.phone')
+    .form-group(style="padding: 15px 0;")
+        h4 Localización:
+    .form-group
+      label(for='provincia') Provincia*
+      input#provincia.form-control(type='text', placeholder='Provincia' ng-model='user.province' ng-class="error.province ? '.is-invalid' : ''")
+      .invalid-feedback(ng-if="error.province") Tienes que introducir tu provincia.
+    .form-group
+      label(for='localidad') Localidad
+      input#localidad.form-control(type='text', placeholder='Localidad' ng-model='user.town')
+    .form-group(style="padding: 15px 0;")
+        h4 Datos de usuario:
+    .form-group
+      label(for="tipo") Tipo de usuario*
+      select#tipo.form-control(type='text' ng-model='user.isTeacher' ng-class="error.userType ? '.is-invalid' : ''")
+        option(value="true") Profesor
+        option(value="false") Alumno
+      .invalid-feedback(ng-if="error.userType") Tienes que elegir el tipo de tu perfil.
+    .form-group
+      label(for='pw') Contraseña*
+      input#pw.form-control(type='password' ng-model='user.password' placeholder="********" ng-class="error.password ? '.is-invalid' : ''")
+      .invalid-feedback(ng-if="error.password") Tienes que introducir una contraseña.
+    .form-group
+      button.btn.btn-primary(ng-click="signUp()" style="width: 100%;") Aceptar
 block scripts
   script(src="js/controllers/signUp.js")
   script(src="js/services/user.js")

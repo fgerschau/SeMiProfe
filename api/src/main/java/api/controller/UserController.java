@@ -4,6 +4,7 @@ import api.model.User;
 import api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
@@ -39,5 +40,10 @@ public class UserController {
         User user = service.getByEmail(email);
 
         return user;
+    }
+
+    @RequestMapping(value="/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public User create(@RequestBody User user) {
+        return service.create(user);
     }
 }

@@ -19,6 +19,15 @@ body(ng-app="seMiProfeApp")
         a.nav-item.nav-link(href='/search')
           | Profesores 
 
+    div(style="margin-top: 20px;")
+    - if (!loggedIn) {
+      a.btn.btn-outline-success(href='/login')
+        | Login
+    - } else if (loggedIn) {
+      a.btn.btn-outline-danger(href='/logout')
+        | Logout
+    - }
+
   .container
     block body
 
@@ -29,7 +38,5 @@ script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap
 script(src="https://use.fontawesome.com/4e134222e7.js")
 script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
 script(src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js")
-
 script(src="js/app.js")
-
 block scripts

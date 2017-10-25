@@ -16,9 +16,11 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    private String password;
     private String email;
     private Image image;
+    private Boolean isTeacher;
+    private String language;
+    private String password;
 
     protected User() {}
 
@@ -74,13 +76,24 @@ public class User {
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getIsTeacher() {
+        return isTeacher;
+    }
+
+    public String getLanguage() {
+        return language;
     }
 }

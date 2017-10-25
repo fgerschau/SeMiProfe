@@ -24,7 +24,6 @@ module.exports = (() => {
   app.use(helmet());
   app.use(log4js.connectLogger(logger, { level: 'auto', format: ':method :url :status - :response-time ms' }));
 
-
   app.use(errorHandler());
 
   return app;

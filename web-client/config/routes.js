@@ -17,7 +17,7 @@ module.exports = function (app, passport) {
 
   app.get('/login', controller.getLogin);
 
-  app.get('/search', Auth.isLoggedIn, controller.getSearch);
+  app.get('/search', controller.getSearch);
 
   app.get('/profile', Auth.isLoggedIn, controller.getProfile);
 

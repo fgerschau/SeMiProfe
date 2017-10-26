@@ -8,6 +8,7 @@ module.exports = function (app, passport) {
   app.get('*', function (req, res, next) {
     res.locals.loggedIn = !!req.user;
     res.locals.user = req.user;
+    res.locals.selectedUser = req.user; //TODO
     next();
   });
 
@@ -20,16 +21,19 @@ module.exports = function (app, passport) {
   app.get('/search', controller.getSearch);
 
   app.get('/profile', Auth.isLoggedIn, controller.getProfile);
+  app.get('/profile/:email', Auth.isLoggedIn, controller.getProfile);
+
+  app.get('/profile', Auth.isLoggedIn, controller.getMyProfile);
 
   app.get('/logout', controller.logout);
 
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/search',
-    failureRedirect: '/login',
+    successRedirect: '/profile',
+    failureRedirect: '/search',
   }));
 
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/search',
-    failureRedirect: '/signup',
+    successRedirect: '/profile',
+    failureRedirect: '/search',
   }));
 };

@@ -7,7 +7,7 @@ head
   // Bootstrap CSS
   link(href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether-theme-arrows-dark.min.css" rel="stylesheet")
   link(href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" rel="stylesheet")
-  link(href="css/layout.css" rel="stylesheet")
+  link(href="/css/layout.css" rel="stylesheet")
 block head
 body(ng-app="seMiProfeApp")
   nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
@@ -28,7 +28,8 @@ body(ng-app="seMiProfeApp")
       a.btn.btn-outline-warning.access-button(href='/signup')
         | Registrar
     - } else if (loggedIn) {
-      a.btn.btn-outline-danger(href='/logout')
+      a.btn.btn-outline-success.access-button(href="/profile")= user.firstName
+      a.btn.btn-outline-danger.access-button(href='/logout')
         | Logout
     - }
 
@@ -42,5 +43,5 @@ script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap
 script(src="https://use.fontawesome.com/4e134222e7.js")
 script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
 script(src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js")
-script(src="js/app.js")
+script(src="/js/app.js")
 block scripts

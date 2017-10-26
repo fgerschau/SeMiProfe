@@ -3,8 +3,8 @@ include ./mixins/pagination
 block head
   link(href="css/search.css" rel="stylesheet")
 block body
-  div(ng-controller="searchController")
-    form.row(ng-cloak)
+  div(ng-controller="searchController" ng-cloak)
+    form.row
       .col-md-6.form
         input.form-control.no-label(type="text" ng-model="searchQuery")
       .col-md-4.form
@@ -16,13 +16,15 @@ block body
       table.table.table-striped
         thead
           tr
-            th Nombre
-            th Apellidos
-            th Idioma
+            th(style="width: 10%") Nombre
+            th(style="width: 30%") Apellidos
+            th(style="width: 80%") Idioma
         tbody(ng-repeat="row in tableData")
           tr
-            td {{row.firstName}}
-            td {{row.lastName}}
+            td
+              a(href="/profile/{{row.email}}") {{row.firstName}}
+            td
+              a(href="/profile/{{row.email}}") {{row.lastName}}
             td {{row.languageTranslation}}
 
     +pagination()

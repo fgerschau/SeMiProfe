@@ -12,11 +12,12 @@ exports.getSignUp = function (req, res) {
   res.render('signUp');
 };
 
-exports.getProfile = function(req,res) {
-  res.render('profile');
+exports.getAvailability = function (req, res) {
+  res.render('availability');
+};
+
 exports.getMyProfile = function (req, res) {
   res.render('myProfile');
-}
 };
 
 exports.getProfile = function (req, res) {

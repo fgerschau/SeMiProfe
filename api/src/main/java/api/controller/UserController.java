@@ -26,7 +26,7 @@ public class UserController {
 
         return users;
     }
-
+    
     @RequestMapping(value="/languages")
     public List<String> getLanguages() {
         List<String> languages = service.getLanguages();

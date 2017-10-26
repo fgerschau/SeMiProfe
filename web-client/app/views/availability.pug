@@ -1,0 +1,36 @@
+extends ./layout
+block head
+  link(href="css/availability.css" rel="stylesheet")
+  link(href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" rel="stylesheet" )
+block body
+  #profileController(ng-controller="availabilityController")
+    .row
+      .col-md-6
+    .row
+      div(style="float: left; width: 22%")
+        div(id='event-add')
+          button(id="addAvailabilityButton") Añadir disponibilidad
+          br
+          div(id="form" style="margin-left: auto;margin-right: auto")
+            form(name="availability-form")
+              p(style="text-align: left") Inicio:
+              input(ng-model="availability.start" type="datetime-local" style="width: 95%")
+              p(style="text-align: left") Fin:
+              input(ng-model="availability.end" type="datetime-local" style="width: 95%")
+              br
+              br
+              btn.btn.btn-primary(ng-click="submitCalendarForm()" style="margin-left: auto; margin-right: auto") Añadir
+        div(id="event-delete" title="") ¿Desea cambiar la disponibilidad?
+            p(id="event-delete-info")
+            button(id="event-delete-button") Eliminar del calendario
+      div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto; overflow: auto" )
+block scripts
+    script(src="https://momentjs.com/downloads/moment.js")
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+    script(src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js")
+    script(src="js/screens/calendarEditor.js")
+    script(src="js/screens/availability-form.js")
+    script(src="js/screens/locale-all.js")
+    script(src="js/controllers/availability.js")
+    script(src="js/services/user.js")

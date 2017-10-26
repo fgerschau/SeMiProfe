@@ -1,5 +1,5 @@
 seMiProfeApp.controller('searchController', function ($scope, userService) {
-  var SIZE = 10;
+  var SIZE = 5;
   $scope.MAXPAGES = 5;
   $scope.page = 1;
   $scope.tableData = [];

@@ -20,7 +20,8 @@ module.exports = function (app, passport) {
 
   app.get('/search', controller.getSearch);
 
-  app.get('/profile', Auth.isLoggedIn, controller.getProfile);
+  app.get('/availability', Auth.isLoggedIn, controller.getAvailability);
+
   app.get('/profile/:email', Auth.isLoggedIn, controller.getProfile);
 
   app.get('/profile', Auth.isLoggedIn, controller.getMyProfile);

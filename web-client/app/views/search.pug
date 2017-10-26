@@ -1,0 +1,34 @@
+extends ./layout
+include ./mixins/pagination
+block head
+  link(href="css/search.css" rel="stylesheet")
+block body
+  div(ng-controller="searchController" ng-cloak)
+    form.row
+      .col-md-6.form
+        input.form-control.no-label(type="text" ng-model="searchQuery")
+      .col-md-4.form
+        select.form-control(ng-model="languageCode")#language
+          option(ng-repeat="language in languages track by $index" value="{{language.code}}") {{language.translation}}
+      .col-md-2.form
+        button.btn.btn-primary.no-label(ng-click="search()" style="width: 100%;") Buscar
+    .row(ng-if="tableData.length")
+      table.table.table-striped
+        thead
+          tr
+            th(style="width: 10%") Nombre
+            th(style="width: 30%") Apellidos
+            th(style="width: 80%") Idioma
+        tbody(ng-repeat="row in tableData")
+          tr
+            td
+              a(href="/profile/{{row.email}}") {{row.firstName}}
+            td
+              a(href="/profile/{{row.email}}") {{row.lastName}}
+            td {{row.languageTranslation}}
+
+    +pagination()
+      
+block scripts
+  script(src="js/controllers/search.js")
+  script(src="js/services/user.js")

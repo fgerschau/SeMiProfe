@@ -1,0 +1,10 @@
+extends ./layout
+block body
+  form(action="/login" method="post")
+    .form-group
+      label(for="name") Correo electrónico
+      input.form-control#name(type="text" name="email")
+    .form-group
+      label(for="password") Contraseña
+      input.form-control#password(type="password" name="password")
+    button.btn.btn-primary(type="submit") Aceptar

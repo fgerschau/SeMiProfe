@@ -12,6 +12,8 @@ exports.getSignUp = function (req, res) {
 
 exports.getProfile = function(req,res) {
   res.render('profile');
+exports.getMyProfile = function (req, res) {
+  res.render('myProfile');
 }
 
 exports.getLogin = function (req, res) {

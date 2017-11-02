@@ -37,4 +37,8 @@ module.exports = function (app, passport) {
     successRedirect: '/profile',
     failureRedirect: '/search',
   }));
+
+  app.get('/get-user-id', controller.getUserId);
+
+  app.get('/get-selectedUser-id', controller.getSelectedUserId);
 };

@@ -23,12 +23,36 @@ public class User {
     @Column(nullable = false)
     private String province;
     private String town;
+    private int level;
+    private int experience;
+    @Column(columnDefinition="longblob")
+    private Achievement[] achievements = Achievement.generateAchievements();
 
     protected User() {}
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setLogros(Achievement[] logros) {
+        this.achievements = logros;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public Achievement[] getAchievements() {
+        return achievements;
     }
 
     @Override

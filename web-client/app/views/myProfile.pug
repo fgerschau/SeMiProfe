@@ -45,13 +45,22 @@ block body
         p(id="event-delete-info")
         button(id="event-delete-button") Eliminar del calendario
     div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto; overflow: auto" )
+  - } else {
+    p Nivel y logros
+    p Nivel
+    p= user.level
+    p Puntos
+    p= user.experience
+    div
+      each val in user.achievements
+        p=val.description
+        p=val.points
   - }
 block scripts
   script(src="https://momentjs.com/downloads/moment.js")
   script(src="https://code.jquery.com/jquery-3.2.1.min.js")
   script(src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js")
   script(src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js")
-  script(src="js/screens/calendarEditor.js")
   script(src="js/controllers/availability.js")
   script(src="js/services/availability.js")
   script(src="js/screens/availability-form.js")

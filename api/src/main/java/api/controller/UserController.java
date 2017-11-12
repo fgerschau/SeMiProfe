@@ -38,12 +38,12 @@ public class UserController {
     public User getByEmail(@RequestParam(value="email") String email) {
 
         User user = service.getByEmail(email);
+
         return user;
     }
 
     @RequestMapping(value="/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public User create(@RequestBody User user) {
-        System.out.println(user);
         return service.create(user);
     }
 }

@@ -54,6 +54,6 @@ public class Achievement implements Serializable{
         aux.add(new Achievement("logro8",12,false));
         Achievement[] res = new Achievement[aux.size()];
         aux.toArray(res);
-        return res;
+        return res; // TODO
     }
 }

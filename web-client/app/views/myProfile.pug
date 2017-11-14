@@ -54,8 +54,7 @@ block body
       div(id="exp-progress-bar" ng-style="{width : userExperience + '%'}")
     div
       each val in user.achievements
-        p=val.description
-        p=val.points
+        p=val.description | p=val.points
   - }
 block scripts
   script(src="https://momentjs.com/downloads/moment.js")

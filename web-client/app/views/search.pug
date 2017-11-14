@@ -5,29 +5,96 @@ block head
 block body
   div(ng-controller="searchController" ng-cloak)
     form.row
-      .col-md-6.form
+      .col-md-10.form
         input.form-control.no-label(type="text" ng-model="searchQuery")
-      .col-md-4.form
-        select.form-control(ng-model="languageCode")#language
-          option(ng-repeat="language in languages track by $index" value="{{language.code}}") {{language.translation}}
       .col-md-2.form
         button.btn.btn-primary.no-label(ng-click="search()" style="width: 100%;") Buscar
     .row(ng-if="tableData.length")
-      table.table.table-striped
-        thead
-          tr
-            th(style="width: 10%") Nombre
-            th(style="width: 30%") Apellidos
-            th(style="width: 80%") Idioma
-        tbody(ng-repeat="row in tableData")
-          tr
-            td
-              a(href="/profile/{{row.email}}") {{row.firstName}}
-            td
-              a(href="/profile/{{row.email}}") {{row.lastName}}
-            td {{row.languageTranslation}}
-
-    +pagination()
+      .col-md-3.form
+        label.title
+          strong Comunidad Autonoma
+        select.form-control(margin-bottom: 20px ng-model="languageCode")
+          option(ng-repeat="state in states track by $index" value="{{state.code}}") {{state.community}}
+        label.title
+          strong Provincia
+        select.form-control(margin-bottom: 20px ng-model="languageCode")#language
+          option(ng-repeat="language in languages track by $index" value="{{language.code}}") {{language.translation}}
+        label.title
+          strong Idioma
+        select.form-control(margin-bottom: 20px ng-model="languageCode")
+          option(ng-repeat="province in provinces track by $index" value="{{province.code}}") {{province.city}}
+        label.title
+          strong Nivel
+        .checkbox
+          label.checkbox-inline
+            input(type="checkbox")
+            | A1
+          label.checkbox-inline
+            input(type="checkbox")
+            | A2
+        .checkbox
+          label.checkbox-inline
+            input(type="checkbox")
+            | B1
+          label.checkbox-inline
+            input(type="checkbox")
+            | B2
+        .checkbox
+          label.checkbox-inline
+            input(type="checkbox")
+            | C1
+          label.checkbox-inline
+            input(type="checkbox")
+            | C2
+        .checkbox
+          label.checkbox-inline
+            input(type="checkbox")
+            | Basico
+          label.checkbox-inline
+            input(type="checkbox")
+            | Intermedio
+        .checkbox
+          label.checkbox-inline
+            input(type="checkbox")
+            | Superior
+          label.checkbox-inline
+            input(type="checkbox")
+            | Nativo
+        label.title
+          strong Tipo de clase
+        .checkbox.general
+          input(type="checkbox")
+          | Presencial
+        .checkbox.general
+          input(type="checkbox")
+          | Domicilio
+        .checkbox.general
+          input(type="checkbox")
+          | Online
+        label.title
+          strong Horarrio
+        .checkbox.general
+          input(type="checkbox")
+          | Mañana
+        .checkbox.general
+          input(type="checkbox")
+          | Tarde
+        button.btn.btn-primary.no-label(ng-click="search()" style="width: 100%;") Buscar
+      .col-md-9.form
+        table.table.table-striped
+          thead
+            tr
+              th(style="width: 10%") Nombre
+              th(style="width: 30%") Apellidos
+              th(style="width: 80%") Idioma
+          tbody(ng-repeat="row in tableData")
+            tr
+              td
+                a(href="/profile/{{row.email}}") {{row.firstName}}
+              td
+                a(href="/profile/{{row.email}}") {{row.lastName}}
+              td {{row.languageTranslation}}
+        +pagination()
       
 block scripts
   script(src="js/controllers/search.js")

@@ -7,6 +7,14 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     translation: 'Selecciona un idioma',
     code: '',
   }];
+  $scope.provinces = [{
+    city: 'Elige una',
+    code: '',
+  }];
+  $scope.states = [{
+    community: 'Com. Valenciana',
+    code: '',
+  }];
 
   function getPaginationArray(from, to) {
     if (((from - 1) % $scope.MAXPAGES !== 0 || to % $scope.MAXPAGES !== 0)) {

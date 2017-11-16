@@ -1,4 +1,5 @@
 extends ./layout
+include ./mixins/socialbar
 block body
   .row(style="margin-top: 3em")
     .col-md-6
@@ -17,3 +18,7 @@ block body
       - }
     .col-md-6(style="margin-top: 4em")
       img(src="/images/favicon.png" width="335px" height="261px")
+  .row
+    .col-md-12
+      +socialbar()
+    

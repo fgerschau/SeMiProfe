@@ -1,0 +1,23 @@
+mixin socialbar
+  // Requires url variables to be rendered
+  link(rel="stylesheet" href="/css/socialbar.css")
+  .social-bar
+    ul
+      li
+        .social-button
+          a(href="https://www.pinterest.com/pin/create/button/" data-pin-tall="true" data-pin-color="red")
+            img(src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png")
+
+      li
+        .social-button
+          .fb-like(ng-data-href='encodeURIComponent(window.location)', data-layout='button', data-action='like', data-size='large', data-show-faces='true', data-share='true')
+
+      li
+        .social-button
+          a.twitter-share-button(href='https://twitter.com/intent/tweet?hashtags=SeMiProfe,minuevoprofe', data-size='large')
+            | Twitter
+
+      li
+        .social-button
+          a(href='//www.reddit.com/submit', onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false")
+            img(style="height: 28px;" src='//www.redditstatic.com/spreddit8.gif', alt='submit to reddit', border='0')

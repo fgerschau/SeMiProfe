@@ -50,6 +50,7 @@ sagan.java.hsp
 jspm_packages/
 npm-debug.log
 
+Dockerfile
 application.properties
 web-client/node_modules/
 web-client/package-lock.json

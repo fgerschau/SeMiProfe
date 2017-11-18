@@ -15,7 +15,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'docker'
 
-group='pin'
+group='semiprofe'
 
 task buildDocker(type: Docker, dependsOn: build) {
   applicationName = jar.baseName
@@ -29,7 +29,7 @@ task buildDocker(type: Docker, dependsOn: build) {
 }
 
 jar {
-    baseName = 'pin'
+    baseName = 'semiprofe'
     version = '0.0.1'
 }
 

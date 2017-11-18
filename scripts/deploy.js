@@ -4,7 +4,7 @@ const fs = require('fs');
 const exec = require('child_process').exec;
 
 function dockerRun() {
-  exec(`cd ${__dirname}/../api/ && docker run --name semiprofe -d -p 3000:3000 pin/api:latest`, function (error, stdout, stderr) {
+  exec(`cd ${__dirname}/../api/ && docker run --name semiprofe -d -p 3000:3000 semiprofe/api:latest`, function (error, stdout, stderr) {
     if (stderr) {
       console.log(`stderr: ${stderr}`);
     }
@@ -32,7 +32,7 @@ function createDockerfile() {
     const to = version.indexOf('\'');
     version = version.substring(0, to);
 
-    const dockerfile = `FROM openjdk:8-jdk-alpine\nVOLUME /tmp\nADD target/pin-${version}.jar app.jar\nENV JAVA_OPTS=""\nENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar\n`;
+    const dockerfile = `FROM openjdk:8-jdk-alpine\nVOLUME /tmp\nADD build/libs/semiprofe-${version}.jar app.jar\nENV JAVA_OPTS=""\nENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar\n`;
 
     fs.writeFile(`/${__dirname}/../api/Dockerfile`, dockerfile, function (err) {
       if (err) {

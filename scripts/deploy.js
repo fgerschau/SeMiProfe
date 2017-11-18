@@ -3,19 +3,39 @@
 const fs = require('fs');
 const exec = require('child_process').exec;
 
-function dockerRun() {
-  exec(`cd ${__dirname}/../api/ && docker run --name semiprofe -d -p 3000:3000 semiprofe/api:latest`, function (error, stdout, stderr) {
+function dockerBuild() {
+  exec(`cd ${__dirname}/../ && docker build -t 'semiprofe:latest' api`, function (error, stdout, stderr) {
+    if (stderr) {
+      console.log(stderr);
+    }
+
+    if (error) {
+      console.log(`Could not create docker image. Error: \n ${error}`);
+      process.exit(0);
+    }
+
+    console.log('Docker image created successfully!');
+    console.log('Trying to run application in docker container...');
+    dockerRun(true);
+  });
+}
+
+function dockerRun(secondTry) {
+  exec(`cd ${__dirname}/../api/ && docker run --name semiprofe -d -p 3000:3000 semiprofe:latest`, function (error, stdout, stderr) {
     if (stderr) {
       console.log(`stderr: ${stderr}`);
     }
 
     if (error) {
-      console.log(`error: ${error}`);
-      process.exit(1);
+      console.log(`Error: ${error}`);
+      if (!secondTry) {
+        console.log('Trying to create a new docker image...');
+        dockerBuild();
+      }
+    } else {
+      console.log('Docker started backend application successfully!');
+      process.exit(0);
     }
-
-    console.log('Docker started backend application successfully!');
-    process.exit(0);
   });
 }
 

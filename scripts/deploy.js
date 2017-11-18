@@ -21,7 +21,7 @@ function dockerBuild() {
 }
 
 function dockerRun(secondTry) {
-  exec(`cd ${__dirname}/../api/ && docker run --name semiprofe -d -p 3000:3000 semiprofe:latest`, function (error, stdout, stderr) {
+  exec(`cd ${__dirname}/../api/ && docker run --restart always --name semiprofe -d -p 3000:3000 semiprofe:latest`, function (error, stdout, stderr) {
     if (stderr) {
       console.log(`stderr: ${stderr}`);
     }

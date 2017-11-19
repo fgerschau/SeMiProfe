@@ -15,6 +15,7 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     community: 'Com. Valenciana',
     code: '',
   }];
+  $scope.levels = [];
 
   function getPaginationArray(from, to) {
     if (((from - 1) % $scope.MAXPAGES !== 0 || to % $scope.MAXPAGES !== 0)) {
@@ -36,12 +37,23 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
 
   $scope.getPaginationArray = getPaginationArray;
 
+
+
+  function levelMap(level) {
+    return level.code;
+  }
+
+  function levelFilter(level) {
+    return level.selected === true;
+  }
+
   function getTeachers(updatePagination) {
     $scope.filter = {
       page: $scope.page - 1,
       size: SIZE,
       search: $scope.searchQuery,
       language: $scope.languageCode,
+      cefrlevels: $scope.levels.filter(levelFilter).map(levelMap),
     };
 
     userService.get($scope.filter).then(function (data) {
@@ -83,9 +95,19 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     });
   }
 
+  function setLevelsArray() {
+    for (var level in CEFR_LEVELS) {
+      $scope.levels.push({
+        code: level,
+        name: CEFR_LEVELS[level],
+      })
+    }
+  }
+
   function init() {
     getTeachers(true);
     getLanguages();
+    setLevelsArray();
   }
 
   init();

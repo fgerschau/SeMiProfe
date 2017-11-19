@@ -9,57 +9,27 @@ block body
         input.form-control.no-label(type="text" ng-model="searchQuery")
       .col-md-2.form
         button.btn.btn-primary.no-label(ng-click="search()" style="width: 100%;") Buscar
-    .row(ng-if="tableData.length")
+    .row
       .col-md-3.form
         label.title
-          strong Comunidad Autonoma
+          strong Comunidad
         select.form-control(margin-bottom: 20px ng-model="languageCode")
           option(ng-repeat="state in states track by $index" value="{{state.code}}") {{state.community}}
         label.title
-          strong Provincia
+          strong Idioma
         select.form-control(margin-bottom: 20px ng-model="languageCode")#language
           option(ng-repeat="language in languages track by $index" value="{{language.code}}") {{language.translation}}
         label.title
-          strong Idioma
+          strong Provincia
         select.form-control(margin-bottom: 20px ng-model="languageCode")
           option(ng-repeat="province in provinces track by $index" value="{{province.code}}") {{province.city}}
         label.title
           strong Nivel
         .checkbox
-          label.checkbox-inline
-            input(type="checkbox")
-            | A1
-          label.checkbox-inline
-            input(type="checkbox")
-            | A2
-        .checkbox
-          label.checkbox-inline
-            input(type="checkbox")
-            | B1
-          label.checkbox-inline
-            input(type="checkbox")
-            | B2
-        .checkbox
-          label.checkbox-inline
-            input(type="checkbox")
-            | C1
-          label.checkbox-inline
-            input(type="checkbox")
-            | C2
-        .checkbox
-          label.checkbox-inline
-            input(type="checkbox")
-            | Basico
-          label.checkbox-inline
-            input(type="checkbox")
-            | Intermedio
-        .checkbox
-          label.checkbox-inline
-            input(type="checkbox")
-            | Superior
-          label.checkbox-inline
-            input(type="checkbox")
-            | Nativo
+          label.checkbox-inline(ng-repeat="level in levels")
+            input(type="checkbox" ng-model="level.selected")
+            | {{level.name}}
+
         label.title
           strong Tipo de clase
         .checkbox.general
@@ -80,7 +50,7 @@ block body
           input(type="checkbox")
           | Tarde
         button.btn.btn-primary.no-label(ng-click="search()" style="width: 100%;") Buscar
-      .col-md-9.form
+      .col-md-9.form(ng-if="tableData.length")
         table.table.table-striped
           thead
             tr

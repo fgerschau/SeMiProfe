@@ -24,10 +24,10 @@ block body
         input#tlf.form-control(type='text', placeholder='Número de teléfono' ng-model='user.phone')
       .form-group(style="padding: 15px 0;")
           h4 Localización:
-      .form-group(ng-class="error.province ? 'has-danger' : ''")
-        label(for='provincia') Provincia*
-        input#provincia.form-control(type='text', placeholder='Provincia' ng-model='user.province')
-        .text-danger(ng-if="error.province") Tienes que introducir tu provincia.
+      .form-group(ng-class="error.state ? 'has-danger' : ''")
+        label(for='state') Comunidad*
+        input#state.form-control(type='text', placeholder='Comunidad' ng-model='user.state')
+        .text-danger(ng-if="error.state") Tienes que introducir tu comunidad.
       .form-group
         label(for='localidad') Localidad
         input#localidad.form-control(type='text', placeholder='Localidad' ng-model='user.town')

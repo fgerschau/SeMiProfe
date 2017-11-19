@@ -19,4 +19,12 @@ seMiProfeApp.service('userService', function ($http) {
   this.create = function (user) {
     return $http.post('/signup', user).then(responseData); // Post to the node application
   };
+
+  this.getStates = function () {
+    return $http.get(apiUrl + '/states').then(responseData);
+  };
+
+  this.getTowns = function () {
+    return $http.get(apiUrl + '/towns').then(responseData);
+  };
 });

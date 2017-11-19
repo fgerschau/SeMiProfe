@@ -9,20 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class UserController {
     @Autowired
     UserService service;
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-     public Page<User> get(@RequestParam(value="search", required=false) String search,
-                           @RequestParam(value="teacher", required=false, defaultValue = "true") Boolean isTeacher,
-                           @RequestParam(value="language", required=false) String language,
+    @RequestMapping(value = "/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+     public Page<User> get(@RequestParam(value="search", required = false) String search,
+                           @RequestParam(value="teacher", required = false, defaultValue = "true") Boolean isTeacher,
+                           @RequestParam(value="language", required = false) String language,
+                           @RequestParam(value="cefrlevels", required = false) Set<Integer> cefrLevels,
                            Pageable pageable) {
+
         language = language == null ? "" : language;
 
-        Page<User> users = service.get(isTeacher, search, language, pageable);
+        Page<User> users = service.get(isTeacher, search, language, cefrLevels, pageable);
 
         return users;
     }

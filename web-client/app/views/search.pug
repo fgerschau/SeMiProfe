@@ -30,25 +30,25 @@ block body
             input(type="checkbox" ng-model="level.selected")
             | {{level.name}}
 
-        label.title
-          strong Tipo de clase
-        .checkbox.general
-          input(type="checkbox")
-          | Presencial
-        .checkbox.general
-          input(type="checkbox")
-          | Domicilio
-        .checkbox.general
-          input(type="checkbox")
-          | Online
-        label.title
-          strong Horarrio
-        .checkbox.general
-          input(type="checkbox")
-          | Mañana
-        .checkbox.general
-          input(type="checkbox")
-          | Tarde
+        //- label.title
+        //-   strong Tipo de clase
+        //- .checkbox.general
+        //-   input(type="checkbox")
+        //-   | Presencial
+        //- .checkbox.general
+        //-   input(type="checkbox")
+        //-   | Domicilio
+        //- .checkbox.general
+        //-   input(type="checkbox")
+        //-   | Online
+        //- label.title
+        //-   strong Horario
+        //- .checkbox.general
+        //-   input(type="checkbox")
+        //-   | Mañana
+        //- .checkbox.general
+        //-   input(type="checkbox")
+        //-   | Tarde
         button.btn.btn-primary.no-label(ng-click="search()" style="width: 100%;") Buscar
       .col-md-9.form(ng-if="tableData.length")
         table.table.table-striped

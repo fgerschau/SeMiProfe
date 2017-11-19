@@ -21,11 +21,13 @@ public class UserController {
                            @RequestParam(value="teacher", required = false, defaultValue = "true") Boolean isTeacher,
                            @RequestParam(value="language", required = false) String language,
                            @RequestParam(value="cefrlevels", required = false) Set<Integer> cefrLevels,
+                           @RequestParam(value="town", required = false) String town,
+                           @RequestParam(value="state", required = false) String state,
                            Pageable pageable) {
 
         language = language == null ? "" : language;
 
-        Page<User> users = service.get(isTeacher, search, language, cefrLevels, pageable);
+        Page<User> users = service.get(isTeacher, search, language, cefrLevels, town, state, pageable);
 
         return users;
     }
@@ -48,5 +50,19 @@ public class UserController {
     @RequestMapping(value="/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public User create(@RequestBody User user) {
         return service.create(user);
+    }
+
+    @RequestMapping(value="/states", method = RequestMethod.GET)
+    public List<String> getStates() {
+        List<String> communities = service.getStates();
+
+        return communities;
+    }
+
+    @RequestMapping(value="/towns", method = RequestMethod.GET)
+    public List<String> getTowns() {
+        List<String> towns = service.getTowns();
+
+        return towns;
     }
 }

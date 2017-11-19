@@ -13,7 +13,7 @@ public class User {
     private String email;
     private String password;
     private int phone;
-    private String province;
+    private String state;
     private String town;
     private Set<CEFRLevel> cefrLevels;
 
@@ -27,7 +27,19 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("User[id=%d, firstName='%s', lastName='%s']", id, firstName, lastName);
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isTeacher=" + isTeacher +
+                ", language='" + language + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone=" + phone +
+                ", state='" + state + '\'' +
+                ", town='" + town + '\'' +
+                ", cefrLevels=" + cefrLevels +
+                '}';
     }
 
     @Id
@@ -102,12 +114,12 @@ public class User {
     }
 
     @Column(nullable = false)
-    public String getProvince() {
-        return province;
+    public String getState() {
+        return state;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+    public void setState(String state) {
+        this.state = state;
     }
 
 

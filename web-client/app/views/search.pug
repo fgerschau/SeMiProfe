@@ -13,16 +13,16 @@ block body
       .col-md-3.form
         label.title
           strong Comunidad
-        select.form-control(margin-bottom: 20px ng-model="languageCode")
-          option(ng-repeat="state in states track by $index" value="{{state.code}}") {{state.community}}
+        select.form-control(margin-bottom: 20px ng-model="selectedState")
+          option(ng-repeat="state in states track by $index" value="{{state}}") {{state}}
         label.title
           strong Idioma
         select.form-control(margin-bottom: 20px ng-model="languageCode")#language
           option(ng-repeat="language in languages track by $index" value="{{language.code}}") {{language.translation}}
         label.title
-          strong Provincia
-        select.form-control(margin-bottom: 20px ng-model="languageCode")
-          option(ng-repeat="province in provinces track by $index" value="{{province.code}}") {{province.city}}
+          strong Ciudad
+        select.form-control(margin-bottom: 20px ng-model="selectedTown")
+          option(ng-repeat="town in towns track by $index" value="{{town}}") {{town}}
         label.title
           strong Nivel
         .checkbox

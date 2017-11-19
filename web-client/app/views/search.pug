@@ -16,13 +16,13 @@ block body
         select.form-control(margin-bottom: 20px ng-model="selectedState")
           option(ng-repeat="state in states track by $index" value="{{state}}") {{state}}
         label.title
-          strong Idioma
-        select.form-control(margin-bottom: 20px ng-model="languageCode")#language
-          option(ng-repeat="language in languages track by $index" value="{{language.code}}") {{language.translation}}
-        label.title
           strong Ciudad
         select.form-control(margin-bottom: 20px ng-model="selectedTown")
           option(ng-repeat="town in towns track by $index" value="{{town}}") {{town}}
+        label.title
+          strong Idioma
+        select.form-control(margin-bottom: 20px ng-model="languageCode")#language
+          option(ng-repeat="language in languages track by $index" value="{{language.code}}") {{language.translation}}
         label.title
           strong Nivel
         .checkbox
@@ -50,7 +50,7 @@ block body
         //-   input(type="checkbox")
         //-   | Tarde
         button.btn.btn-primary.no-label(ng-click="search()" style="width: 100%;") Buscar
-      .col-md-9.form(ng-if="tableData.length")
+      .col-xs-12.col-md-9.form(ng-if="tableData.length" ng-cloak)
         table.table.table-striped
           thead
             tr
@@ -65,6 +65,9 @@ block body
                 a(href="/profile/{{row.email}}") {{row.lastName}}
               td {{row.languageTranslation}}
         +pagination()
+      .col-xs-12.col-md-9(ng-if="!tableData.length" style="margin-top: 3em" ng-cloak)
+        h4.text-danger No se han encontrado resultados para tu búsqueda 😔
+
       
 block scripts
   script(src="js/controllers/search.js")

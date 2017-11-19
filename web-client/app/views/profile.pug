@@ -1,4 +1,5 @@
 extends ./layout
+include ./mixins/socialbar
 block head
   link(href="css/profile.css" rel="stylesheet")
   link(href="https://bootswatch.com/simplex/bootstrap.min.css" rel="stylesheet")
@@ -11,9 +12,9 @@ block body
       p= selectedUser.firstName
       h4 Correo electrónico
       p= selectedUser.email
-      h4 Provincia
-      p= selectedUser.province
-      h4 Localidad
+      h4 Comunidad
+      p= selectedUser.state
+      h4 Ciudad
       p= selectedUser.town
       - if (selectedUser.language) {
         h4 Idioma
@@ -21,6 +22,10 @@ block body
       - }
     .col-md-6(style="margin-top: 4em")
       img(src="/images/favicon.png" width="335px" height="261px")
+  .row
+    .col-md-12
+      +socialbar()
+
   div(style="float: left; width: 22%" ng-controller="availabilityController")
   div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto; overflow: auto" )
 block scripts
@@ -31,3 +36,4 @@ block scripts
     script(src="../js/controllers/availability.js")
     script(src="../js/services/availability.js")
     script(src="../js/screens/locale-all.js")
+    

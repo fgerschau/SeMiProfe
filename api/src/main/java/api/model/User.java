@@ -1,91 +1,136 @@
 package api.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    @Column(nullable = false)
     private String firstName;
-    @Column(nullable = false)
     private String lastName;
-    @Column(nullable = false)
     private Boolean isTeacher;
     private String language;
-    @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = false)
     private String password;
     private int phone;
-    @Column(nullable = false)
-    private String province;
+    private String state;
     private String town;
     private int level;
     private int experience;
-    @Column(columnDefinition="longblob")
     private Achievement[] achievements = Achievement.generateAchievements();
+    private Set<CEFRLevel> cefrLevels;
 
     protected User() {}
 
-    public User(String firstName, String lastName) {
+    public User(String firstName, String lastName, Set<CEFRLevel> cefrLevels) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.cefrLevels = cefrLevels;
     }
 
     public int getLevel() {
         return level;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setLogros(Achievement[] logros) {
-        this.achievements = logros;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public int getExperience() {
         return experience;
     }
 
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    @Column(columnDefinition="longblob")
     public Achievement[] getAchievements() {
         return achievements;
     }
 
-    @Override
-    public String toString() {
-        return String.format("User[id=%d, firstName='%s', lastName='%s']", id, firstName, lastName);
+    public void setAchievements(Achievement[] achievements) {
+        this.achievements = achievements;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isTeacher=" + isTeacher +
+                ", language='" + language + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone=" + phone +
+                ", state='" + state + '\'' +
+                ", town='" + town + '\'' +
+                ", cefrLevels=" + cefrLevels +
+                '}';
+    }
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
 
-	public String getFirstName() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Column(nullable = false)
+    public String getFirstName() {
 		return firstName;
 	}
 
-	public String getLastName() {
+	public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    @Column(nullable = false)
+    public String getLastName() {
 		return lastName;
 	}
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Column(nullable = false)
     public Boolean getIsTeacher() {
         return isTeacher;
+    }
+
+    public void setIsTeacher(Boolean isTeacher) {
+        this.isTeacher = isTeacher;
     }
 
     public String getLanguage() {
         return language;
     }
 
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    @Column(nullable = false, unique = true)
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Column(nullable = false)
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getPhone() {
@@ -96,12 +141,13 @@ public class User {
         this.phone = phone;
     }
 
-    public String getProvince() {
-        return province;
+    @Column(nullable = false)
+    public String getState() {
+        return state;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+    public void setState(String state) {
+        this.state = state;
     }
 
 
@@ -112,4 +158,15 @@ public class User {
     public void setTown(String town) {
         this.town = town;
     }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_CEFRLevel", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "cefrlevel_id", referencedColumnName = "id"))
+    public Set<CEFRLevel> getCefrLevels() {
+        return cefrLevels;
+    }
+
+    public void setCefrLevels(Set<CEFRLevel> cefrLevels) {
+        this.cefrLevels = cefrLevels;
+    }
 }
+

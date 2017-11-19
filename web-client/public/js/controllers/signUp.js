@@ -29,14 +29,13 @@ seMiProfeApp.controller('signUpController', function ($scope, $window, userServi
       resetErrors();
       $scope.error.lastName = !$scope.user.lastName;
       $scope.error.firstName = !$scope.user.firstName;
-      $scope.error.province = !$scope.user.province;
+      $scope.error.state = !$scope.user.state;
       $scope.error.userType = !$scope.user.isTeacher;
       $scope.error.password = !$scope.user.password;
       $scope.error.emailInvalid = !!$scope.user.email && !testEmail($scope.user.email);
       $scope.error.language = $scope.user.isTeacher === 'true' && !$scope.user.language;
 
       userService.getByEmail($scope.user.email).then(function (user) {
-        debugger
         if (user) {
           $scope.error.emailExists = true;
         }

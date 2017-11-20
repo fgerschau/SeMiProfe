@@ -2,7 +2,7 @@ package api.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
+//Clase que contiene informacion sobre un logro
 public class Achievement implements Serializable{
     String description;
     int points;
@@ -37,6 +37,11 @@ public class Achievement implements Serializable{
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+
+    /* Metodo que sirve para inicializar el array de logros que tieene cada usuario
+    tal vez se deberia cambiar esto, ya que alumnos y profesores tienen diferentes tipos de logros
+    No se si los profesores tienen logros asi, que se deberia inicializar de otra forma
+     */
     public static Achievement[] generateAchievements(){
         ArrayList<Achievement> aux = new ArrayList<Achievement>();
         aux.add(new Achievement("logro1",12,false));
@@ -49,6 +54,6 @@ public class Achievement implements Serializable{
         aux.add(new Achievement("logro8",12,false));
         Achievement[] res = new Achievement[aux.size()];
         aux.toArray(res);
-        return res;
+        return res; // TODO
     }
 }

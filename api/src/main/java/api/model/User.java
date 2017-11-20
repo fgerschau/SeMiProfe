@@ -17,6 +17,10 @@ public class User {
     private String town;
     private int level;
     private int experience;
+    
+    /** Se inicializa con el metodo de la clase Achievement con logros por defecto, esto tal vez se deberia
+     *  cambiar ya que hay dos tipos de usuario, profesor y alumno.
+     */
     private Achievement[] achievements = Achievement.generateAchievements();
     private Set<CEFRLevel> cefrLevels;
 

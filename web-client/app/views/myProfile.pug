@@ -46,15 +46,15 @@ block body
         button(id="event-delete-button") Eliminar del calendario
     div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto; overflow: auto" )
   - } else {
-    p Nivel y logros
-    p Nivel
+    h2 Nivel y logros
+    h4 Nivel
     p= user.level
-    p Puntos
-    p= user.experience
+    h4 experiencia
+    div(class="empty-bar" ng-controller="achievementsController", ng-init="userExperience=" + JSON.stringify(user.experience))
+      div(id="exp-progress-bar" ng-style="{width : userExperience + '%'}")
     div
       each val in user.achievements
-        p=val.description
-        p=val.points
+        p=val.description | p=val.points
   - }
 block scripts
   script(src="https://momentjs.com/downloads/moment.js")
@@ -62,6 +62,7 @@ block scripts
   script(src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js")
   script(src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js")
   script(src="js/controllers/availability.js")
+  script(src="js/controllers/achievements.js")
   script(src="js/services/availability.js")
   script(src="js/screens/availability-form.js")
   script(src="js/screens/locale-all.js")

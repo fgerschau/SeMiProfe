@@ -57,8 +57,4 @@ seMiProfeApp.controller('signUpController', function ($scope, $window, userServi
       }
     });
   };
-  function initAchievmentsLevelAndExp(){
-    $scope.user.level = 0;
-    $scope.user.experience = 0;
-  }
 });

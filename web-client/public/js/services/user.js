@@ -31,4 +31,13 @@ seMiProfeApp.service('userService', function ($http) {
   this.update = function (user) {
     return $http.post(apiUrl + '/update-user', user).then(responseData);
   };
+    
+  this.getReviews = function () {
+    return $http.get(apiUrl + '/reviews').then(responseData);
+  };
+    
+  this.postReview = function (review) {
+    return $http.post(apiUrl + '/reviews',review).then(responseData);
+  };
+    
 });

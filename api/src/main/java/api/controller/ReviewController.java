@@ -13,18 +13,18 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-public class UserController {
+public class ReviewController {
     @Autowired
     UserService service;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-     public Page<User> get(@RequestParam(value="search", required = false) String search,
-                           @RequestParam(value="teacher", required = false, defaultValue = "true") Boolean isTeacher,
-                           @RequestParam(value="language", required = false) String language,
-                           @RequestParam(value="cefrlevels", required = false) Set<Integer> cefrLevels,
-                           @RequestParam(value="town", required = false) String town,
-                           @RequestParam(value="state", required = false) String state,
-                           Pageable pageable) {
+    public Page<User> get(@RequestParam(value="search", required = false) String search,
+                          @RequestParam(value="teacher", required = false, defaultValue = "true") Boolean isTeacher,
+                          @RequestParam(value="language", required = false) String language,
+                          @RequestParam(value="cefrlevels", required = false) Set<Integer> cefrLevels,
+                          @RequestParam(value="town", required = false) String town,
+                          @RequestParam(value="state", required = false) String state,
+                          Pageable pageable) {
 
         language = language == null ? "" : language;
 
@@ -32,7 +32,7 @@ public class UserController {
 
         return users;
     }
-    
+
     @RequestMapping(value="/languages")
     public List<String> getLanguages() {
         List<String> languages = service.getLanguages();
@@ -74,3 +74,4 @@ public class UserController {
 
 
 }
+

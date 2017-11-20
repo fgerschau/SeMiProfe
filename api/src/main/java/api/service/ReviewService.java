@@ -1,6 +1,5 @@
 package api.service;
 
-import api.model.Review;
 import api.model.User;
 import api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service("UserService")
-public class UserService {
+public class ReviewService {
     @Autowired
     UserRepository repository;
 

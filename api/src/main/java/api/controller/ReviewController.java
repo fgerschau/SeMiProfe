@@ -2,6 +2,7 @@ package api.controller;
 
 import api.model.Review;
 import api.model.User;
+import api.service.ReviewService;
 import api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -15,9 +16,9 @@ import java.util.Set;
 @RestController
 public class ReviewController {
     @Autowired
-    UserService service;
+    ReviewService service;
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    /*@RequestMapping(value = "/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Page<User> get(@RequestParam(value="search", required = false) String search,
                           @RequestParam(value="teacher", required = false, defaultValue = "true") Boolean isTeacher,
                           @RequestParam(value="language", required = false) String language,
@@ -70,7 +71,7 @@ public class ReviewController {
         List<String> towns = service.getTowns();
 
         return towns;
-    }
+    }*/
 
 
 }

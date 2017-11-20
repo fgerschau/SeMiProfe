@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Service("UserService")
+@Service("ReviewService")
 public class ReviewService {
     @Autowired
     UserRepository repository;

@@ -1,5 +1,6 @@
 mixin achievements
   - var achievements = user ? selectedUser.achievements : user.achievements;
+  - if (achievements && achievements.length) {
     table.table.table-striped(style="margin-bottom: 4em")
       thead
         tr
@@ -15,3 +16,4 @@ mixin achievements
               p= achievement.description
             td
               p= achievement.points
+  - }

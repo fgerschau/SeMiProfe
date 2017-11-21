@@ -1,5 +1,7 @@
 extends ./layout
 include ./mixins/socialbar
+include ./mixins/achievements
+
 block head
   link(href="css/profile.css" rel="stylesheet")
   link(href="https://bootswatch.com/simplex/bootstrap.min.css" rel="stylesheet")
@@ -21,6 +23,7 @@ block body
         p= selectedUser.language
       - }
     .col-md-6(style="margin-top: 4em")
+      +achievements()
       img(src="/images/favicon.png" width="335px" height="261px")
   .row
     .col-md-12

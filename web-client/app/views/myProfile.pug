@@ -1,4 +1,5 @@
 extends ./layout
+include ./mixins/achievements
 block head
   link(href="css/profile.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" rel="stylesheet" )
@@ -26,6 +27,7 @@ block body
         p= user.language
       - }
     .col-md-6(style="margin-top: 4em")
+      +achievements()
       img(src="images/favicon.png" width="335px" height="261px")
   - if (user.isTeacher) {
     div(style="float: left; width: 22%" ng-controller="availabilityController")
@@ -45,17 +47,8 @@ block body
         p(id="event-delete-info")
         button(id="event-delete-button") Eliminar del calendario
     div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto; overflow: auto" )
-  - } else {
-    h2 Nivel y logros
-    h4 Nivel
-    p= user.level
-    h4 experiencia
-    div(class="empty-bar" ng-controller="achievementsController", ng-init="userExperience=" + JSON.stringify(user.experience))
-      div(id="exp-progress-bar" ng-style="{width : userExperience + '%'}")
-    div
-      each val in user.achievements
-        p=val.description | p=val.points
   - }
+
 block scripts
   script(src="https://momentjs.com/downloads/moment.js")
   script(src="https://code.jquery.com/jquery-3.2.1.min.js")

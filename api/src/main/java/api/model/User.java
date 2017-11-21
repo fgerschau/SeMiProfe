@@ -17,12 +17,8 @@ public class User {
     private String town;
     private int level;
     private int experience;
-    
-    /** Se inicializa con el metodo de la clase Achievement con logros por defecto, esto tal vez se deberia
-     *  cambiar ya que hay dos tipos de usuario, profesor y alumno.
-     */
-    private Achievement[] achievements = Achievement.generateAchievements();
     private Set<CEFRLevel> cefrLevels;
+    private Set<Achievement> achievements;
 
     protected User() {}
 
@@ -46,15 +42,6 @@ public class User {
 
     public void setExperience(int experience) {
         this.experience = experience;
-    }
-
-    @Column(columnDefinition="longblob")
-    public Achievement[] getAchievements() {
-        return achievements;
-    }
-
-    public void setAchievements(Achievement[] achievements) {
-        this.achievements = achievements;
     }
 
     @Override
@@ -171,6 +158,16 @@ public class User {
 
     public void setCefrLevels(Set<CEFRLevel> cefrLevels) {
         this.cefrLevels = cefrLevels;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_achievement", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "achievement_id", referencedColumnName = "id"))
+    public Set<Achievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(Set<Achievement> achievements) {
+        this.achievements = achievements;
     }
 }
 

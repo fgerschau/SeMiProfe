@@ -52,4 +52,15 @@ function generateHash(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 }
 
+function getReviews(id) {
+  return co(function* () {  
+
+    const reviews = yield getReviews(id);
+
+    return reviews;
+  }).catch(console.error);
+}
+
+exports.getReviews = getReviews;
+
 exports.generateHash = generateHash;

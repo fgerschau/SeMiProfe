@@ -1,4 +1,9 @@
 extends ./layout
+include ./mixins/achievements
+include ./mixins/review
+block head
+  link(href="css/profile.css" rel="stylesheet")
+  link(href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" rel="stylesheet" )
 block body
   .row
     .col-md-6
@@ -23,4 +28,35 @@ block body
         p= user.language
       - }
     .col-md-6(style="margin-top: 4em")
+      +achievements()
       img(src="images/favicon.png" width="335px" height="261px")
+  - if (user.isTeacher) {
+    div(style="float: left; width: 22%" ng-controller="availabilityController")
+      div(id='event-add')
+        button(id="addAvailabilityButton") Añadir fecha no disponible
+        br
+        div(id="form" style="margin-left: auto;margin-right: auto")
+          form(name="availability-form" ng-submit="submitCalendarForm()" )
+            p(style="text-align: left") Inicio:
+            input(name="start" type="datetime-local" style="width: 95%" ng-model="form.start")
+            p(style="text-align: left") Fin:
+            input(name="end" type="datetime-local" style="width: 95%" ng-model="form.end")
+            br
+            br
+            input(type="submit" style="margin-left: auto; margin-right: auto")
+      div(id="event-delete" title="") ¿Desea cambiar la disponibilidad?
+        p(id="event-delete-info")
+        button(id="event-delete-button") Eliminar del calendario
+    div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto; overflow: auto" )
+  - }
+
+block scripts
+  script(src="https://momentjs.com/downloads/moment.js")
+  script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+  script(src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js")
+  script(src="js/controllers/availability.js")
+  script(src="js/controllers/achievements.js")
+  script(src="js/services/availability.js")
+  script(src="js/screens/availability-form.js")
+  script(src="js/screens/locale-all.js")

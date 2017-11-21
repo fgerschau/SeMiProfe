@@ -15,7 +15,16 @@ public class User {
     private int phone;
     private String state;
     private String town;
+    private int level;
+    private int experience;
+
+    private Set<Review> reviews;
+
+    /** Se inicializa con el metodo de la clase Achievement con logros por defecto, esto tal vez se deberia
+     *  cambiar ya que hay dos tipos de usuario, profesor y alumno.
+     */
     private Set<CEFRLevel> cefrLevels;
+    private Set<Achievement> achievements;
 
     protected User() {}
 
@@ -23,6 +32,22 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cefrLevels = cefrLevels;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
     }
 
     @Override
@@ -140,5 +165,24 @@ public class User {
     public void setCefrLevels(Set<CEFRLevel> cefrLevels) {
         this.cefrLevels = cefrLevels;
     }
-}
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_achievement", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "achievement_id", referencedColumnName = "id"))
+    public Set<Achievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(Set<Achievement> achievements) {
+        this.achievements = achievements;
+    }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    public Set<Review> getReviews() {
+
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+}

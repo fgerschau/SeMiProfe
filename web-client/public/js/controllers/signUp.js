@@ -50,6 +50,7 @@ seMiProfeApp.controller('signUpController', function ($scope, $window, userServi
   $scope.signUp = function () {
     checkErrors().then(function (errors) {
       if (!errors) {
+        // initAchievmentsLevelAndExp();
         userService.create($scope.user).then(function () {
           $window.location.href = '/search';
         });

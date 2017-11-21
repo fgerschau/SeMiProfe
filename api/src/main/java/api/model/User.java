@@ -16,7 +16,6 @@ public class User {
     private String state;
     private String town;
     private Integer level;
-    private Integer experience;
 
     private Set<Review> reviews;
 
@@ -40,15 +39,6 @@ public class User {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    @Column(nullable = true)
-    public int getExperience() {
-        return experience;
-    }
-
-    public void setExperience(int experience) {
-        this.experience = experience;
     }
 
     @Override

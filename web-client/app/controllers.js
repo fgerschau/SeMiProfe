@@ -1,5 +1,5 @@
 const userController = require('./user');
-
+var userId;
 exports.getIndex = function (req, res) {
   res.redirect('/search');
 };
@@ -17,12 +17,14 @@ exports.getAvailability = function (req, res) {
 };
 
 exports.getMyProfile = function (req, res) {
+  userId=req.user.id;
   res.render('myProfile');
 };
 
 exports.getProfile = function (req, res) {
   userController.getByEmail(req.params.email).then(function (user) {
     res.locals.selectedUser = user;
+    userId = user.id;
     res.render('profile');
   })
 };
@@ -35,3 +37,15 @@ exports.logout = function (req, res) {
   req.logout();
   res.redirect('/');
 };
+
+exports.getUserId = function(req,res){
+  res.send(req.user.id.toString());
+};
+exports.getSelectedUserId = function(req,res){
+    res.send(userId.toString());
+};
+
+exports.getReviews = function (req, res) {
+  res.render('reviews');
+};
+

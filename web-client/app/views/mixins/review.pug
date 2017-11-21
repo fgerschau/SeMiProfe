@@ -1,0 +1,6 @@
+mixin review-card(review)
+  div.review-card
+    h4.review-title= review.user_id +", "+ review.valoration + " estrellas."
+    h5 Comentario
+    ul.comment
+      li= review.comment

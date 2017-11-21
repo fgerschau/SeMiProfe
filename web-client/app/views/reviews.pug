@@ -1,0 +1,25 @@
+extends ./layout
+include ./mixins/review
+block head
+block body
+  .col
+    form.col-md-6(ng-controller="reviewController" ng-cloak)
+      .form-group
+        label(for="valoration") Valoración
+        input.form-control#valoration(type="text" name="valoration")
+      .form-group
+        label(for="comment") Comentario
+        input.form-control#comment(type="text" name="comment")
+      .form-group
+        button.btn.btn-primary(ng-click="getReviews()" style="width: 100%;") Comentar
+
+    - var reviews = [{valoration: "5",comment: "buen profesor", user: "Paco",},{ valoration: "4",  comment:"Muy atento y preocupado por la mejora del alumno",user: "manuel7",}];
+    //- var reviews = getReviews()
+    
+    h3 Comentarios:
+    ul
+  each val in reviews.length ? reviews : ['There are no values']
+    +review-card(val)
+block scripts
+  script(src="js/controllers/reviews.js")
+  script(src="js/services/user.js")

@@ -4,7 +4,7 @@ seMiProfeApp.service('userService', function ($http) {
   }
 
   this.get = function (options) {
-    return $http.get(apiUrl + '/user', { params: options }).then(responseData);
+    return $http.get(apiUrl + '/user', {params: options}).then(responseData);
   };
 
   this.getByEmail = function (email) {
@@ -27,4 +27,17 @@ seMiProfeApp.service('userService', function ($http) {
   this.getTowns = function () {
     return $http.get(apiUrl + '/towns').then(responseData);
   };
+
+  this.update = function (user) {
+    return $http.post(apiUrl + '/update-user', user).then(responseData);
+  };
+    
+  this.getReviews = function () {
+    return $http.get(apiUrl + '/reviews').then(responseData);
+  };
+    
+  this.postReview = function (review) {
+    return $http.post(apiUrl + '/reviews',review).then(responseData);
+  };
+    
 });

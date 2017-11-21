@@ -1,9 +1,9 @@
-seMiProfeApp.service('availabilityService', function ($http) {
+seMiProfeApp.service('reviewService', function ($http) {
   function responseData(response) {
     return response.data;
   }
-  this.save = function (events,id) {
-      return $http.post(apiUrl + '/save-availability?id=' + id, events).then(responseData);
+  this.save = function (review) {
+      return $http.post(apiUrl + '/review' ,review).then(responseData);
   };
   this.getId = function (){
     return $http.get('/get-user-id').then(responseData);

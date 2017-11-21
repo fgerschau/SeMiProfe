@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 @RestController
 public class AvailabilityController{
@@ -16,7 +17,7 @@ public class AvailabilityController{
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
     @RequestMapping(value = "/save-availability", method = RequestMethod.POST)
-    public @ResponseBody void save(@RequestBody ArrayList<Event> data){
+    public @ResponseBody void save(@RequestBody ArrayList<Event> data,@RequestParam(value="id") int id){
         long i = 0;
         Event[] eventArray = new Event[data.size()];
         data.toArray(eventArray);
@@ -25,13 +26,21 @@ public class AvailabilityController{
             System.out.println(e.getEnd());
             i++;
         }
-        Availability av= new Availability(1,eventArray);
+        Availability av= new Availability(id,eventArray);
         av = service.save(av);
     }
     @RequestMapping(value = "/availability.json", method = RequestMethod.GET)
-    public Event[] get(){
-        Availability a = service.get(1);
-        Event[] res = a.getEventArray();
-        return res;
+    public Event[] get(@RequestParam("id") int id){
+        try {
+            Availability a = service.get(id);
+            Event[] res = a.getEventArray();
+            return res;
+        }catch (NoSuchElementException e){
+            Event[] eventArray = new Event[0];
+            Availability av= new Availability(1,eventArray);
+            av = service.save(av);
+            eventArray = av.getEventArray();
+            return eventArray;
+        }
     }
 }

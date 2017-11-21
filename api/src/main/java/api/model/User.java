@@ -15,8 +15,8 @@ public class User {
     private int phone;
     private String state;
     private String town;
-    private int level;
-    private int experience;
+    private Integer level;
+    private Integer experience;
 
     private Set<Review> reviews;
 
@@ -42,6 +42,7 @@ public class User {
         this.level = level;
     }
 
+    @Column(nullable = true)
     public int getExperience() {
         return experience;
     }

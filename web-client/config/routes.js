@@ -41,4 +41,13 @@ module.exports = function (app, passport) {
   app.get('/get-user-id', controller.getUserId);
 
   app.get('/get-selectedUser-id', controller.getSelectedUserId);
+    
+    //app.route('/reviews').get(controller.getReviews);
+  app.get('/reviews', controller.getReviews);    
+    
+  app.post('/reviews', passport.authenticate('local-login', {
+    successRedirect: '/profile/:id',
+    failureRedirect: '/login',
+  }));
+    
 };

@@ -44,3 +44,8 @@ exports.getUserId = function(req,res){
 exports.getSelectedUserId = function(req,res){
     res.send(userId.toString());
 };
+
+exports.getReviews = function (req, res) {
+  res.render('reviews');
+};
+

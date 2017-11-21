@@ -17,6 +17,12 @@ public class User {
     private String town;
     private int level;
     private int experience;
+
+    private Set<Review> reviews;
+
+    /** Se inicializa con el metodo de la clase Achievement con logros por defecto, esto tal vez se deberia
+     *  cambiar ya que hay dos tipos de usuario, profesor y alumno.
+     */
     private Set<CEFRLevel> cefrLevels;
     private Set<Achievement> achievements;
 
@@ -169,5 +175,14 @@ public class User {
     public void setAchievements(Set<Achievement> achievements) {
         this.achievements = achievements;
     }
-}
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    public Set<Review> getReviews() {
+
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+}

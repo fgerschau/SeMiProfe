@@ -1,6 +1,7 @@
 package api.controller;
 
 import api.model.Achievement;
+import api.model.Review;
 import api.model.User;
 import api.service.AchievementService;
 import api.service.UserService;
@@ -34,7 +35,7 @@ public class UserController {
 
         return users;
     }
-    
+
     @RequestMapping(value="/languages")
     public List<String> getLanguages() {
         List<String> languages = userService.getLanguages();
@@ -77,4 +78,6 @@ public class UserController {
 
         return towns;
     }
+
+
 }

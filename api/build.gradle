@@ -24,6 +24,7 @@ task buildDocker(type: Docker, dependsOn: build) {
     copy {
       from jar
       into "${stageDir}/build"
+      fileMode = 0644
     }
   }
 }

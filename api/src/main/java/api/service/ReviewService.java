@@ -27,7 +27,7 @@ public class ReviewService {
             return null;
         }
 
-        Review review = new Review(user, author, stars, comment, author.getFirstName() + author.getLastName());
+        Review review = new Review(user, author, stars, comment, author.getFirstName() + " " + author.getLastName());
 
         return repository.save(review);
     }

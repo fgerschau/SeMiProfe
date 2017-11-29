@@ -29,7 +29,7 @@ public class AvailabilityController{
         Availability av= new Availability(id,eventArray);
         av = service.save(av);
     }
-    @RequestMapping(value = "/availability.json", method = RequestMethod.GET)
+    @RequestMapping(value = "/availability", method = RequestMethod.GET)
     public Event[] get(@RequestParam("id") int id){
         try {
             Availability a = service.get(id);

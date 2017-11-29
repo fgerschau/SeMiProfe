@@ -10,7 +10,11 @@ module.exports = function (passport) {
 
   passport.deserializeUser(function (email, done) {
     userController.getByEmail(email).then(function (user) {
-      done(null, user)
+      if (!user) {
+        done(null, null);
+      }
+
+      done(null, user);
     });
   });
 

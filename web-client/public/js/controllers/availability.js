@@ -5,21 +5,20 @@ seMiProfeApp.controller('availabilityController', function ($scope, availability
   var selectedUserId;
 
   $scope.init = function (selectedUser) {
-    console.log(selectedUser);
     if (selectedUser && selectedUser.id) {
       selectedUserId = selectedUser.id;
     }
 
     userService.getLoggedUser().then(function (user) {
       if (user && user.id) {
-        userId = parseInt(user.id);
+        userId = user.id;
       }
     });
   };
 
   function saveEventArray(events, i) {
     var eventArray = getArray(events);
-    availabilityService.save(eventArray,selectedUserId).then(function () {
+    availabilityService.save(eventArray, selectedUserId).then(function () {
       if (i === 0) {
         $('#event-delete').hide();
         $("#calendar").fullCalendar('refetchEvents');
@@ -45,7 +44,7 @@ seMiProfeApp.controller('availabilityController', function ($scope, availability
     var start = this.form.start;
     var end = this.form.end;
     var obj = {
-      title: 'No disponible',
+      title: 'Disponible',
       start: start.toISOString(),
       end: end.toISOString(),
     };
@@ -68,11 +67,11 @@ seMiProfeApp.controller('availabilityController', function ($scope, availability
       editable = false
     }
     $('#calendar').fullCalendar({
-      height: 'auto',
+      height: 'parent',
       slotLabelFormat: 'H:mm',
       defaultTimedEventDuration: '24:00:00',
       minTime: '08:00:00',
-      maxTime: '21:00:00',
+      maxTime: '23:00:00',
       slotDuration: '00:15:00',
       defaultView: 'agendaWeek',
       themeSystem: 'bootstrap3',
@@ -80,7 +79,7 @@ seMiProfeApp.controller('availabilityController', function ($scope, availability
       droppable: editable,
       firstDay: 1,
       locale: 'es',
-      eventColor: 'red',
+      eventColor: 'green',
       eventTextColor: 'black',
       eventDrop: function (event) {
         saveEventArray($('#calendar').fullCalendar('clientEvents'), 2);
@@ -104,7 +103,7 @@ seMiProfeApp.controller('availabilityController', function ($scope, availability
       eventSources: [{
         contentType: 'application/json',
         dataType: 'json',
-        url: 'http://localhost:3000/availability.json',
+        url: apiUrl + '/availability',
         type: 'GET',
         data: {
           id: selectedUserId,

@@ -23,6 +23,13 @@ module.exports = (() => {
   app.use(express.static(path.join(__dirname, '../public')));
   app.use(helmet());
   app.use(log4js.connectLogger(logger, { level: 'auto', format: ':method :url :status - :response-time ms' }));
+  app.use(function (err, req, res, next) {
+    if (err) {
+      req.logout();
+    } else {
+      next();
+    }
+  });
 
   app.use(errorHandler());
 

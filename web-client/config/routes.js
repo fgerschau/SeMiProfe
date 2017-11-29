@@ -40,7 +40,5 @@ module.exports = function (app, passport) {
 
   app.get('/get-user-id', Auth.isLoggedIn, controller.getUserId);
 
-  app.get('/get-selectedUser-id', Auth.isLoggedIn, controller.getSelectedUserId);
-
   app.get('/logged-user', Auth.isLoggedIn, controller.getLoggedUser);
 };

@@ -1,5 +1,4 @@
 const userController = require('./user');
-var userId;
 exports.getIndex = function (req, res) {
   res.redirect('/search');
 };
@@ -25,7 +24,6 @@ exports.getProfile = function (req, res) {
   userController.getByEmail(req.params.email).then(function (user) {
     res.locals.selectedUser = user;
     res.locals.user = req.user;
-    userId = user.id;
     res.render('profile');
   });
 };
@@ -41,9 +39,6 @@ exports.logout = function (req, res) {
 
 exports.getUserId = function (req, res) {
   res.send(req.user.id.toString());
-};
-exports.getSelectedUserId = function (req, res) {
-  res.send(userId.toString());
 };
 
 exports.getLoggedUser = function (req, res) {

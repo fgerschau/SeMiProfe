@@ -17,16 +17,17 @@ exports.getAvailability = function (req, res) {
 };
 
 exports.getMyProfile = function (req, res) {
-  userId=req.user.id;
+  userId = req.user.id;
   res.render('myProfile');
 };
 
 exports.getProfile = function (req, res) {
   userController.getByEmail(req.params.email).then(function (user) {
     res.locals.selectedUser = user;
+    res.locals.user = req.user;
     userId = user.id;
     res.render('profile');
-  })
+  });
 };
 
 exports.getLogin = function (req, res) {
@@ -38,14 +39,13 @@ exports.logout = function (req, res) {
   res.redirect('/');
 };
 
-exports.getUserId = function(req,res){
+exports.getUserId = function (req, res) {
   res.send(req.user.id.toString());
 };
-exports.getSelectedUserId = function(req,res){
-    res.send(userId.toString());
+exports.getSelectedUserId = function (req, res) {
+  res.send(userId.toString());
 };
 
-exports.getReviews = function (req, res) {
-  res.render('reviews');
+exports.getLoggedUser = function (req, res) {
+  res.send(req.user);
 };
-

@@ -61,14 +61,11 @@ public class UserService {
         return repository.getTowns();
     }
 
-    /*public List<Review> getReviews(Long userId) {
-        List<Review> reviews = repository.getReviews(userId);
+    public User getById(Long id) {
+        if (id == null) {
+            return null;
+        }
 
-        return reviews;
-    }*/
-
-    /*public void deleteReview(Long id) {
-       repository.deleteReview(id);
-    }*/
-
+        return repository.findById(id);
+    }
 }

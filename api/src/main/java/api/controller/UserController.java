@@ -78,6 +78,4 @@ public class UserController {
 
         return towns;
     }
-
-
 }

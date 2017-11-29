@@ -35,8 +35,6 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
 
   $scope.getPaginationArray = getPaginationArray;
 
-
-
   function levelMap(level) {
     return level.code;
   }
@@ -87,10 +85,12 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     userService.getLanguages().then(function (languages) {
       for (var i = 0; i < languages.length; i++) {
         var language = languages[i];
-        $scope.languages.push({
-          translation: LANGUAGETRANSLATION[language],
-          code: language,
-        });
+        if (language) {
+          $scope.languages.push({
+            translation: LANGUAGETRANSLATION[language],
+            code: language,
+          });
+        }
       }
     });
   }

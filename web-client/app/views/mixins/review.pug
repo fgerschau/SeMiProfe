@@ -1,6 +1,6 @@
-mixin review-card(review)
-  div.review-card
-    h4.review-title= review.user_id +", "+ review.valoration + " estrellas."
+mixin review-card()
+  div.review-card(ng-if="review")
+    h4.review-title {{review.authorName}}, {{review.stars}} estrellas.
     h5 Comentario
     ul.comment
-      li= review.comment
+      li {{review.comment}}

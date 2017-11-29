@@ -31,7 +31,9 @@ block body
       +achievements()
       img(src="images/favicon.png" width="335px" height="261px")
   - if (user.isTeacher) {
-    div(style="float: left; width: 22%" ng-controller="availabilityController")
+    .row
+      - var selectedUserString = JSON.stringify(selectedUser);
+    div(style="float: left; width: 22%" ng-controller="availabilityController"  ng-init='init(' + selectedUserString + ')')
       div(id='event-add')
         button(id="addAvailabilityButton") Añadir fecha no disponible
         br
@@ -58,5 +60,6 @@ block scripts
   script(src="js/controllers/availability.js")
   script(src="js/controllers/achievements.js")
   script(src="js/services/availability.js")
+  script(src="js/services/user.js")
   script(src="js/screens/availability-form.js")
   script(src="js/screens/locale-all.js")

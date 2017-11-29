@@ -54,14 +54,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT DISTINCT(u.town) FROM User u")
     List<String> getTowns();
-    
-    /*@Query("SELECT r FROM Review r WHERE  r.id = userId  ")
-    List<Review> getReviews(Long userId);
 
-    @Query("DELETE FROM Review r  WHERE  r.reviewedId = reviewId")
-    void deleteReview(Long reviewId);*/
-/*
-    @Query("SELECT (u.review) FROM Review r, User  u WHERE  u.isTeacher and u.id = r.reviewedId")
-    List<Review> updateReview();*/
-
+    User findById(Long id);
 }

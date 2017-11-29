@@ -16,8 +16,8 @@ public class User {
     private String state;
     private String town;
     private Integer level;
-
-    private Set<Review> reviews;
+    private Set<Review> receivedReviews;
+    private Set<Review> givenReviews;
 
     /** Se inicializa con el metodo de la clase Achievement con logros por defecto, esto tal vez se deberia
      *  cambiar ya que hay dos tipos de usuario, profesor y alumno.
@@ -167,13 +167,21 @@ public class User {
         this.achievements = achievements;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    public Set<Review> getReviews() {
-
-        return reviews;
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+    public Set<Review> getReceivedReviews() {
+        return receivedReviews;
     }
 
-    public void setReviews(Set<Review> reviews) {
-        this.reviews = reviews;
+    public void setReceivedReviews(Set<Review> receivedReviews) {
+        this.receivedReviews = receivedReviews;
+    }
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    public Set<Review> getGivenReviews() {
+        return givenReviews;
+    }
+
+    public void setGivenReviews(Set<Review> givenReviews) {
+        this.givenReviews = givenReviews;
     }
 }

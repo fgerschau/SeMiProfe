@@ -10,30 +10,25 @@ public class Review {
 
     private Long id;
 
-    private int valoration;
+    private Integer stars;
     private String comment;
-
-    private  User user;
-    private  User reviewer;
-    private String reviewerName;
-    //private Long reviewerId;
-    //private Long reviewedId;
+    private User receiver;
+    private User author;
+    private String authorName;
 
     protected Review() {}
 
-    public Review(int valoration, String comment,User user, User reviewer) {
-        this.valoration = valoration;
+    public Review(User receiver, User author, Integer stars, String comment, String authorName) {
+        this.stars = stars;
         this.comment = comment;
-        this.user = user;
-        this.reviewer = reviewer;
-        this.reviewerName = reviewer.getFirstName();
-        //this.reviewedId = reviewedId;
-        //this.reviewerId = reviewerId;
+        this.receiver = receiver;
+        this.author = author;
+        this.authorName = authorName;
     }
 
     @Override
     public String toString() {
-        return String.format("User[id=%d, valoration='%s', comment='%s']", id, valoration, comment);
+        return String.format("User[id=%d, stars='%s', comment='%s']", id, stars, comment);
     }
 
     @Id
@@ -46,12 +41,12 @@ public class Review {
         this.id = id;
     }
 
-    public int getValoration() {
-        return valoration;
+    public Integer getStars() {
+        return stars;
     }
 
-    public void setValoration(int valoration){
-        this.valoration = valoration;
+    public void setStars(Integer stars){
+        this.stars = stars;
     }
 
     public String getComment() {
@@ -62,43 +57,36 @@ public class Review {
         this.comment = comment;
     }
 
-    /*public Long getReviewedId() {
-        return reviewedId;
-    }
-
-    public  void setReviewedID(Long reviewedID ){ this.reviewedId = reviewedId; }
-
-    public Long getReviewerId() {
-        return reviewerId;
-    }
-
-    public  void setReviewerId(Long reviewerID ){ this.reviewerId = reviewerID; }*/
-
     @ManyToOne
+    @JoinColumn(name = "receiver")
     @JsonIgnore
-    public User getUser() {
-        return user;
+    public User getReceiver() {
+        return receiver;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     @ManyToOne
+    @JoinColumn(name = "author")
     @JsonIgnore
-    public User getReviewer() {
-        return reviewer;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setReviewer(User reviewer) {
-        this.reviewer = reviewer;
+    public void setAuthor(User author) {
+        this.author = author;
+        if (author != null) {
+            this.authorName = author.getFirstName() + author.getLastName();
+        }
     }
 
-    public String getReviewerName() {
-        return reviewerName;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setReviewerName(String reviewerName) {
-        this.reviewerName = reviewerName;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 }

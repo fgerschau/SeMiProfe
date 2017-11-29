@@ -38,16 +38,9 @@ module.exports = function (app, passport) {
     failureRedirect: '/search',
   }));
 
-  app.get('/get-user-id', controller.getUserId);
+  app.get('/get-user-id', Auth.isLoggedIn, controller.getUserId);
 
-  app.get('/get-selectedUser-id', controller.getSelectedUserId);
-    
-    //app.route('/reviews').get(controller.getReviews);
-  app.get('/reviews', controller.getReviews);    
-    
-  app.post('/reviews', passport.authenticate('local-login', {
-    successRedirect: '/profile/:id',
-    failureRedirect: '/login',
-  }));
-    
+  app.get('/get-selectedUser-id', Auth.isLoggedIn, controller.getSelectedUserId);
+
+  app.get('/logged-user', Auth.isLoggedIn, controller.getLoggedUser);
 };

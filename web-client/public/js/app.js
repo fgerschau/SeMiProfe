@@ -17,3 +17,9 @@ var CEFR_LEVELS = {
   5: 'C1',
   6: 'C2',
 };
+
+seMiProfeApp.filter('mylanguage', function () {
+  return function (code) {
+    return LANGUAGETRANSLATION[code] || '';
+  };
+});

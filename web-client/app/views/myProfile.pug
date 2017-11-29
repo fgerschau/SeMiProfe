@@ -32,24 +32,23 @@ block body
       img(src="images/favicon.png" width="335px" height="261px")
   - if (user.isTeacher) {
     .row
-      - var selectedUserString = JSON.stringify(selectedUser);
-    div(style="float: left; width: 22%" ng-controller="availabilityController"  ng-init='init(' + selectedUserString + ')')
-      div(id='event-add')
-        button(id="addAvailabilityButton") Añadir fecha no disponible
-        br
-        div(id="form" style="margin-left: auto;margin-right: auto")
-          form(name="availability-form" ng-submit="submitCalendarForm()" )
-            p(style="text-align: left") Inicio:
-            input(name="start" type="datetime-local" style="width: 95%" ng-model="form.start")
-            p(style="text-align: left") Fin:
-            input(name="end" type="datetime-local" style="width: 95%" ng-model="form.end")
-            br
-            br
-            input(type="submit" style="margin-left: auto; margin-right: auto")
-      div(id="event-delete" title="") ¿Desea cambiar la disponibilidad?
-        p(id="event-delete-info")
-        button(id="event-delete-button") Eliminar del calendario
-    div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto; overflow: auto" )
+      .col-md-5
+        - var selectedUserString = JSON.stringify(selectedUser);
+        div(ng-controller="availabilityController"  ng-init='init(' + selectedUserString + ')')
+          #event-add
+            button.btn.btn-primary#addAvailabilityButton Añadir disponibilidad
+            #form
+              form(name="availability-form" ng-submit="submitCalendarForm()")
+                p Inicio:
+                input.form-control(name="start" type="datetime-local" style="width: 95%" ng-model="form.start")
+                p Fin:
+                input.form-control(name="end" type="datetime-local" style="width: 95%" ng-model="form.end")
+                input.btn.btn-primary(type="submit" style="margin-left: auto; margin-right: auto; margin-top: 5px;")
+          #event-delete ¿Desea cambiar la disponibilidad?
+            p(id="event-delete-info")
+            button.btn.btn-danger#event-delete-button Eliminar del calendario
+      .col-md-12
+        #calendar
   - }
 
 block scripts

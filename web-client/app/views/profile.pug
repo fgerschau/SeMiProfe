@@ -7,29 +7,33 @@ block head
   link(href="/css/profile.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" rel="stylesheet" )
 block body
-  div(ng-controller="profileController" ng-init="init(JSON.stringify(user))")
-    .row(style="margin-top: 3em")
-      .col-md-6
-        h1(style="margin-bottom: 2em") Perfil de profesor
-        h4 Nombre
-        p {{selectedUser.firstName}}
-        h4 Correo electrónico
-        p {{selectedUser.email}}
-        h4 Comunidad
-        p {{selectedUser.state}}
-        h4 Ciudad
-        p {{selectedUser.town}}
-        div(ng-if="selectedUser.language")
-          h4 Idioma
-          p {{selectedUser.language}}
-
-      .col-md-6(style="margin-top: 4em")
-        +achievements()
-        img(src="/images/favicon.png" width="335px" height="261px")
-    .row
-      .col-md-12
+  div(ng-controller="profileController" ng-init="init(JSON.stringify(user))" ng-cloak)
+    .row.jumbotron(style="margin-top: 3em")
+      .col-md-9.col-xs-12
+        h1 {{selectedUser.firstName}} {{selectedUser.lastName}}
+        span(style="white-space: no-wrap")
+          h5
+            i.fa.fa-envelope-o.profile-icon
+            | #{" "} {{selectedUser.email}}
+        span(style="white-space: no-wrap")
+          h5
+            i.fa.fa-map-marker.profile-icon
+            | #{" "} {{selectedUser.town}}, {{selectedUser.state}}
+        span(style="white-space: no-wrap")
+          h5
+            i.fa.fa-language.profile-icon
+            | #{" "} {{selectedUser.language | mylanguage}}
+      .col-md-3.col-xs-12
         +socialbar()
-    .row(ng-cloak)
+    .row.jumbotron
+      .col-md-12.col-xs-12
+        h1 Logros
+      .col-md-6
+        img(src="/images/favicon.png" width="335px" height="261px")
+      .col-md-6
+        +achievements()
+
+    .row.jumbotron
       form.col-md-6
         .form-group
           label(for="stars") Valoración (0-5)
@@ -39,15 +43,16 @@ block body
           input.form-control#comment(type="text" name="comment" ng-model = "comment")
         .form-group
           button.btn.btn-primary(ng-click="saveReview()" style="width: 100%;") Comentar      
-    .row
-      .col-md-12(ng-if="selectedUser && selectedUser.receivedReviews")
-        div(ng-repeat="review in selectedUser.receivedReviews")
+      .col-md-6(ng-if="selectedUser && selectedUser.receivedReviews")
+        .review(ng-repeat="review in selectedUser.receivedReviews")
          +review-card()
 
-    .row
-      - var selectedUserString = JSON.stringify(selectedUser);
-      div(style="float: left; width: 22%" ng-controller="availabilityController" ng-init='init(' + selectedUserString + ')')
-      div(id="calendar" style="width: 60%;margin-left: auto;margin-right: auto; overflow: auto")
+    .row.jumbotron(style="padding-bottom: 150px;")
+      .col-xs-12
+        h1 Disponibilidad
+        - var selectedUserString = JSON.stringify(selectedUser);
+        div(ng-controller="availabilityController" ng-init='init(' + selectedUserString + ')')
+        #calendar(style="height: 500px;")
 
 block scripts
     script(src="https://code.jquery.com/jquery-3.2.1.min.js")

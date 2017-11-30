@@ -18,10 +18,6 @@ public class User {
     private Integer level;
     private Set<Review> receivedReviews;
     private Set<Review> givenReviews;
-
-    /** Se inicializa con el metodo de la clase Achievement con logros por defecto, esto tal vez se deberia
-     *  cambiar ya que hay dos tipos de usuario, profesor y alumno.
-     */
     private Set<CEFRLevel> cefrLevels;
     private Set<Achievement> achievements;
 

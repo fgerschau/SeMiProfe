@@ -25,7 +25,7 @@ module.exports = function (passport) {
   }, function (req, email, password, done) {
     userController.validatePassword(email, password).then(function (user) {
       if (!user) {
-        return done(null, false);
+        return done(null, false, req.flash('loginMessage', 'Usuario y/o contraseña incorrectos.'));
       }
 
       return done(null, user);
@@ -39,7 +39,7 @@ module.exports = function (passport) {
   }, function (req, email, password, done) {
     userController.getByEmail(email).then(function (user) {
       if (user) {
-        return done(null, false); // user is taken
+        return done(null, false, req.flash('signupMessage', 'Este correo electrónico ya está en uso.')); // user is taken
       }
 
       const newUser = {};
@@ -53,8 +53,11 @@ module.exports = function (passport) {
       newUser.isTeacher = req.body.isTeacher;
       newUser.language = req.body.language;
 
-      userController.create(newUser).then(function (createdUser) {
+      userController.create(newUser).success(function (createdUser) {
         return done(null, createdUser);
+      }).catch(function (error) {
+        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', error);
+        return done(null, false, req.flash('signupMessage', 'Ha habido un error en el servidor.'));
       });
     });
   }));

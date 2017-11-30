@@ -12,7 +12,7 @@ public class User {
     private String language;
     private String email;
     private String password;
-    private int phone;
+    private Integer phone;
     private String state;
     private String town;
     private Integer level;
@@ -31,14 +31,6 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cefrLevels = cefrLevels;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 
     @Override
@@ -95,6 +87,7 @@ public class User {
         this.isTeacher = isTeacher;
     }
 
+    @Column(nullable = true)
     public String getLanguage() {
         return language;
     }
@@ -121,11 +114,12 @@ public class User {
         this.password = password;
     }
 
-    public int getPhone() {
+    @Column(nullable = true)
+    public Integer getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(Integer phone) {
         this.phone = phone;
     }
 
@@ -138,7 +132,7 @@ public class User {
         this.state = state;
     }
 
-
+    @Column(nullable = true)
     public String getTown() {
         return town;
     }
@@ -183,5 +177,14 @@ public class User {
 
     public void setGivenReviews(Set<Review> givenReviews) {
         this.givenReviews = givenReviews;
+    }
+
+    @Column(nullable = true)
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 }

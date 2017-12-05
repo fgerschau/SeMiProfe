@@ -1,0 +1,19 @@
+mixin achievements
+  - var achievements = user ? selectedUser.achievements : user.achievements;
+  - if (achievements && achievements.length) {
+    table.table.table-striped(style="margin-bottom: 4em")
+      thead
+        tr
+          th
+          th Descripción
+          th Puntos
+      tbody
+        each achievement in achievements
+          tr
+            td
+              span.fa.fa-star.fa-2x
+            td
+              p= achievement.description
+            td
+              p= achievement.points
+  - }

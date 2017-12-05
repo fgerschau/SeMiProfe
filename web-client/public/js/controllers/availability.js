@@ -1,6 +1,24 @@
-seMiProfeApp.controller('availabilityController', function ($scope, availabilityService) {
-  function saveEventArray(eventArray, i) {
-    availabilityService.save(eventArray).then(function () {
+seMiProfeApp.controller('availabilityController', function ($scope, availabilityService, userService) {
+  var id;
+  var editable;
+  var userId;
+  var selectedUserId;
+
+  $scope.init = function (selectedUser) {
+    if (selectedUser && selectedUser.id) {
+      selectedUserId = selectedUser.id;
+    }
+
+    userService.getLoggedUser().then(function (user) {
+      if (user && user.id) {
+        userId = user.id;
+      }
+    });
+  };
+
+  function saveEventArray(events, i) {
+    var eventArray = getArray(events);
+    availabilityService.save(eventArray, selectedUserId).then(function () {
       if (i === 0) {
         $('#event-delete').hide();
         $("#calendar").fullCalendar('refetchEvents');
@@ -11,36 +29,86 @@ seMiProfeApp.controller('availabilityController', function ($scope, availability
     });
   }
 
-  function toArray(event) {
-    var eventArray = $.map(event, function (item) {
+  function getArray(events) {
+    return $.map(events, function (item) {
       return {
-        title: 'No disponible',
+        title: 'Disponible',
         start: item.start,
         end: item.end,
       };
     });
-
-    return eventArray;
   }
 
-  function submitCalendarForm() {
-    var eventArray = toArray($('#calendar').fullCalendar('clientEvents'));
-    var start = $scope.availability.start;
-    var end = $scope.availability.end;
+  $scope.submitCalendarForm = function () {
+    var eventArray = getArray($('#calendar').fullCalendar('clientEvents'));
+    var start = this.form.start;
+    var end = this.form.end;
     var obj = {
-      title: 'No disponible',
-      start: start.toString(),
-      end: end.toString(),
+      title: 'Disponible',
+      start: start.toISOString(),
+      end: end.toISOString(),
     };
 
     eventArray.push(obj);
     saveEventArray(eventArray, 1);
-  }
+  };
 
-  exports.submitCalendarForm = submitCalendarForm;
-
-  $('#event-delete-button').click(function (id) {
+  $('#event-delete-button').click(function () {
     $('#calendar').fullCalendar('removeEvents', id);
-    saveEventArray(toArray($('#calendar').fullCalendar('clientEvents')), 0);
+    saveEventArray($('#calendar').fullCalendar('clientEvents'), 0);
+    id = -1;
   });
+  $('#form').hide();
+  $('#event-delete').hide();
+  $(document).ready(setTimeout(function () {
+    if (userId === selectedUserId) {
+      editable = true
+    } else {
+      editable = false
+    }
+    $('#calendar').fullCalendar({
+      height: 'parent',
+      slotLabelFormat: 'H:mm',
+      defaultTimedEventDuration: '24:00:00',
+      minTime: '08:00:00',
+      maxTime: '23:00:00',
+      slotDuration: '00:15:00',
+      defaultView: 'agendaWeek',
+      themeSystem: 'bootstrap3',
+      editable: editable,
+      droppable: editable,
+      firstDay: 1,
+      locale: 'es',
+      eventColor: 'green',
+      eventTextColor: 'black',
+      eventDrop: function (event) {
+        saveEventArray($('#calendar').fullCalendar('clientEvents'), 2);
+      },
+      eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
+        saveEventArray($('#calendar').fullCalendar('clientEvents'), 2);
+      },
+      eventClick: function (calEvent, jsEvent, view) {
+        id = calEvent.id;
+        calEvent.start.locale('es');
+        try {
+          $('#event-delete-info').text(' ' + calEvent.start.format('LL') + ' de '
+              + calEvent.start.format('LT') + " hasta " + calEvent.end.format('LT'));
+        } catch (err) {
+          console.log(err);
+          $('#event-delete-info').text(' ' + calEvent.start.format('LL') + ' a las ' + calEvent.start.format('LT'));
+        }
+
+        $('#event-delete').show();
+      },
+      eventSources: [{
+        contentType: 'application/json',
+        dataType: 'json',
+        url: apiUrl + '/availability',
+        type: 'GET',
+        data: {
+          id: selectedUserId,
+        },
+      }],
+    });
+  }, 250));
 });

@@ -1,0 +1,6 @@
+mixin review-card()
+  div.review-card(ng-if="review")
+    h4.review-title {{review.authorName}}, {{review.stars}} estrellas.
+    h5 Comentario
+    ul.comment
+      li {{review.comment}}

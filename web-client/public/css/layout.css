@@ -5,3 +5,31 @@
 .access-button {
   margin: 2px 15px;
 }
+
+h1 {
+  border-bottom: 1px solid gray;
+}
+
+button.fc-prev-button {
+  background-image: url("/images/arrow-left.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 20px;
+}
+
+button.fc-next-button {
+  background-image: url("/images/arrow-left.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 20px;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}

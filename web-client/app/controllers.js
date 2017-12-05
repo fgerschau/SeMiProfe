@@ -1,5 +1,4 @@
 const userController = require('./user');
-
 exports.getIndex = function (req, res) {
   res.redirect('/search');
 };
@@ -9,7 +8,7 @@ exports.getSearch = function (req, res) {
 };
 
 exports.getSignUp = function (req, res) {
-  res.render('signUp');
+  res.render('signUp', { message: req.flash('signupMessage') });
 };
 
 exports.getAvailability = function (req, res) {
@@ -17,21 +16,31 @@ exports.getAvailability = function (req, res) {
 };
 
 exports.getMyProfile = function (req, res) {
+  userId = req.user.id;
   res.render('myProfile');
 };
 
 exports.getProfile = function (req, res) {
   userController.getByEmail(req.params.email).then(function (user) {
     res.locals.selectedUser = user;
+    res.locals.user = req.user;
     res.render('profile');
-  })
+  });
 };
 
 exports.getLogin = function (req, res) {
-  res.render('login');
+  res.render('login', { message: req.flash('loginMessage') });
 };
 
 exports.logout = function (req, res) {
   req.logout();
   res.redirect('/');
+};
+
+exports.getUserId = function (req, res) {
+  res.send(req.user.id.toString());
+};
+
+exports.getLoggedUser = function (req, res) {
+  res.send(req.user);
 };

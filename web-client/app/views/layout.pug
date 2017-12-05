@@ -7,7 +7,13 @@ head
   // Bootstrap CSS
   link(href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether-theme-arrows-dark.min.css" rel="stylesheet")
   link(href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" rel="stylesheet")
+  link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/css/toastr.min.css")
   link(href="/css/layout.css" rel="stylesheet")
+  !=req.toastr.render()
+
+  // Pinterest script
+  script(type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js") 
+
 block head
 body(ng-app="seMiProfeApp")
   nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
@@ -43,5 +49,36 @@ script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap
 script(src="https://use.fontawesome.com/4e134222e7.js")
 script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
 script(src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js")
+script(src="https://momentjs.com/downloads/moment.js")
+script(src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js")
 script(src="/js/app.js")
+
+// Facebook share button script
+#fb-root
+script.
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.10";
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+// Twitter share button script
+script.
+  window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+  t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+  t._e = [];
+  t.ready = function(f) {
+  t._e.push(f);
+  };
+  return t;
+  }(document, "script", "twitter-wjs"));
+
 block scripts

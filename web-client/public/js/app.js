@@ -8,3 +8,18 @@ var LANGUAGETRANSLATION = {
   'en-GB': 'Inglés británico',
   'en-US': 'Inglés EEUU',
 };
+
+var CEFR_LEVELS = {
+  1: 'A1',
+  2: 'A2',
+  3: 'B1',
+  4: 'B2',
+  5: 'C1',
+  6: 'C2',
+};
+
+seMiProfeApp.filter('mylanguage', function () {
+  return function (code) {
+    return LANGUAGETRANSLATION[code] || '';
+  };
+});

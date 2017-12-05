@@ -6,6 +6,8 @@ const errorHandler = require('errorhandler');
 const path = require('path');
 const log4js = require('log4js');
 const helmet = require('helmet');
+const flash = require('connect-flash');
+const toastr = require('express-toastr');
 
 const logger = log4js.getLogger('Access');
 
@@ -23,6 +25,19 @@ module.exports = (() => {
   app.use(express.static(path.join(__dirname, '../public')));
   app.use(helmet());
   app.use(log4js.connectLogger(logger, { level: 'auto', format: ':method :url :status - :response-time ms' }));
+  app.use(flash());
+  app.use(toastr());
+  app.use(function (req, res, next) {
+    req.toastr.error('Error');
+    next();
+  });
+  app.use(function (err, req, res, next) {
+    if (err) {
+      req.logout();
+    } else {
+      next();
+    }
+  });
 
   app.use(errorHandler());
 

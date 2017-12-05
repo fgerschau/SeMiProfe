@@ -9,6 +9,7 @@ module.exports = function (app, passport) {
     res.locals.loggedIn = !!req.user;
     res.locals.user = req.user;
     res.locals.selectedUser = req.user; //TODO
+    res.locals.toastr = req.toastr;
     next();
   });
 
@@ -30,11 +31,17 @@ module.exports = function (app, passport) {
 
   app.post('/login', passport.authenticate('local-login', {
     successRedirect: '/profile',
-    failureRedirect: '/search',
+    failureRedirect: '/login',
+    failureFlash: true,
   }));
 
   app.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/profile',
-    failureRedirect: '/search',
+    failureRedirect: '/signup',
+    failureFlash: true,
   }));
+
+  app.get('/get-user-id', Auth.isLoggedIn, controller.getUserId);
+
+  app.get('/logged-user', Auth.isLoggedIn, controller.getLoggedUser);
 };

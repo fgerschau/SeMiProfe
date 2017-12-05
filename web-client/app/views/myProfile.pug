@@ -5,34 +5,53 @@ block head
   link(href="css/profile.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" rel="stylesheet" )
 block body
-  .row
-    .col-md-6
-      h2 Mi perfil
-      br
-      h4 Nombre
-      p= user.firstName
-      h4 Correo electrónico
-      p= user.email
-      h4 Comunidad
-      p= user.state
-      h4 Ciudad
-      p= user.town
-      h4 Tipo de perfil
+  .row.jumbotron(style="margin-top: 3em")
+    .col-md-9.col-xs-12
+      h1= user.firstName
+      span(style="white-space: no-wrap")
+        h5
+          i.fa.fa-envelope-o.profile-icon
+          = user.email
+      span(style="white-space: no-wrap")
+        h5
+          i.fa.fa-map-marker.profile-icon
+          = user.town + ', ' + user.state
       - if (user.isTeacher) {
-        p Profesor
+        h5 Profesor
       - } else {
-        p Alumno
+        h5 Alumno
       - }
       - if (user.language) {
-        h4 Idioma
-        p= user.language
+        span(style="white-space: no-wrap")
+          h5
+            i.fa.fa-envelope-o.profile-icon
+            = user.language
       - }
-    .col-md-6(style="margin-top: 4em")
+  .row.jumbotron
+    .col-md-12.col-xs-12
+      h1 Logros
+    .col-md-6
+      img(src="/images/favicon.png" width="335px" height="261px")
+    .col-md-6
       +achievements()
-      img(src="images/favicon.png" width="335px" height="261px")
+
+  .row.jumbotron
+    form.col-md-6
+      .form-group
+        label(for="stars") Valoración (0-5)
+        input.form-control#stars(type="number" name="stars" ng-model = "stars" min="0" max="5")
+      .form-group
+        label(for="comment") Comentario
+        input.form-control#comment(type="text" name="comment" ng-model = "comment")
+      .form-group
+        button.btn.btn-primary(ng-click="saveReview()" style="width: 100%;") Comentar      
+    .col-md-6(ng-if="selectedUser && selectedUser.receivedReviews")
+      .review(ng-repeat="review in selectedUser.receivedReviews")
+       +review-card()
+
   - if (user.isTeacher) {
-    .row
-      .col-md-5
+    .row.jumbotron(style="padding-bottom: 150px;")
+      .col-xs-12
         - var selectedUserString = JSON.stringify(selectedUser);
         div(ng-controller="availabilityController"  ng-init='init(' + selectedUserString + ')')
           #event-add
@@ -47,8 +66,11 @@ block body
           #event-delete ¿Desea cambiar la disponibilidad?
             p(id="event-delete-info")
             button.btn.btn-danger#event-delete-button Eliminar del calendario
-      .col-md-12
-        #calendar
+      .col-xs-12
+        h1 Disponibilidad
+        - var selectedUserString = JSON.stringify(selectedUser);
+        div(ng-controller="availabilityController" ng-init='init(' + selectedUserString + ')')
+        #calendar(style="height: 500px;")
   - }
 
 block scripts

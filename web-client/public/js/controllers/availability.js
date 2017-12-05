@@ -32,7 +32,7 @@ seMiProfeApp.controller('availabilityController', function ($scope, availability
   function getArray(events) {
     return $.map(events, function (item) {
       return {
-        title: 'No disponible',
+        title: 'Disponible',
         start: item.start,
         end: item.end,
       };

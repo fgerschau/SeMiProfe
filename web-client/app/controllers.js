@@ -8,7 +8,7 @@ exports.getSearch = function (req, res) {
 };
 
 exports.getSignUp = function (req, res) {
-  res.render('signUp', { message: req.flash('signupMessage') });
+  res.render('signUp');
 };
 
 exports.getAvailability = function (req, res) {
@@ -29,7 +29,7 @@ exports.getProfile = function (req, res) {
 };
 
 exports.getLogin = function (req, res) {
-  res.render('login', { message: req.flash('loginMessage') });
+  res.render('login');
 };
 
 exports.logout = function (req, res) {

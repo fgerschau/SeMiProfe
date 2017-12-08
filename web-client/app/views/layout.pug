@@ -14,6 +14,10 @@ head
 
 block head
 body(ng-app="seMiProfeApp")
+  - if (user && path.indexOf("/chat") === -1) {
+      a#chat-button(href="/chat")
+        span.fa.fa-commenting.fa-2x
+  - }
   nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
     button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbar', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon

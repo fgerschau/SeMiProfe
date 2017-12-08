@@ -9,6 +9,7 @@ module.exports = function (app, passport) {
     res.locals.loggedIn = !!req.user;
     res.locals.user = req.user;
     res.locals.selectedUser = req.user; //TODO
+    res.locals.path = req.path;
     next();
   });
 

@@ -42,5 +42,5 @@ module.exports = function (app, passport) {
 
   app.get('/logged-user', Auth.isLoggedIn, controller.getLoggedUser);
 
-  app.get('/chat', controller.getChat);
+  app.get('/chat', Auth.isLoggedIn, controller.getChat);
 };

@@ -9,6 +9,7 @@ module.exports = function (app, passport) {
     res.locals.loggedIn = !!req.user;
     res.locals.user = req.user;
     res.locals.selectedUser = req.user; //TODO
+    res.locals.path = req.path;
     next();
   });
 
@@ -41,4 +42,6 @@ module.exports = function (app, passport) {
   app.get('/get-user-id', Auth.isLoggedIn, controller.getUserId);
 
   app.get('/logged-user', Auth.isLoggedIn, controller.getLoggedUser);
+
+  app.get('/chat', Auth.isLoggedIn, controller.getChat);
 };

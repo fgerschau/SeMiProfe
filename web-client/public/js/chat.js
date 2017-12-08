@@ -76,10 +76,10 @@ function onMessageReceived(payload) {
 
   if(message.type === 'JOIN') {
     messageElement.classList.add('event-message');
-    message.content = message.sender + ' joined!';
+    message.content = message.sender + ' se ha unido!';
   } else if (message.type === 'LEAVE') {
     messageElement.classList.add('event-message');
-    message.content = message.sender + ' left!';
+    message.content = message.sender + ' ha salido!';
   } else {
     messageElement.classList.add('chat-message');
 

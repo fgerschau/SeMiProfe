@@ -44,3 +44,7 @@ exports.getUserId = function (req, res) {
 exports.getLoggedUser = function (req, res) {
   res.send(req.user);
 };
+
+exports.getChat = function (req, res) {
+  res.render('chat');
+};

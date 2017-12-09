@@ -57,7 +57,6 @@ public class UserController {
         if (achievementIds != null && achievementIds.size() > 0) {
             Set<Achievement> achievements = achievementService.getByIds(achievementIds);
             if (achievements.size() > 0) {
-                System.out.println(achievements);
                 user.setAchievements(achievements);
             }
         }

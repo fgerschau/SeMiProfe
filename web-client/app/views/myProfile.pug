@@ -27,6 +27,12 @@ block body
             i.fa.fa-language.profile-icon
             = user.language
       - }
+    .col-md-3.col-xs-12
+      h2
+        a.text-success(href="/profile/" + user.email + "/settings")
+          i.fa.fa-cog.pr-md-2
+          | Cambiar datos
+        
   .row.jumbotron
     .col-md-12.col-xs-12
       h1 Logros

@@ -16,8 +16,11 @@ exports.getAvailability = function (req, res) {
 };
 
 exports.getMyProfile = function (req, res) {
-  userId = req.user.id;
   res.render('myProfile');
+};
+
+exports.getProfileSettings = function (req, res) {
+  res.render('profileSettings');
 };
 
 exports.getProfile = function (req, res) {

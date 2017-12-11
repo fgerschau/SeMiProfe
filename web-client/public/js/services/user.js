@@ -35,4 +35,8 @@ seMiProfeApp.service('userService', function ($http) {
   this.getLoggedUser = function () {
     return $http.get('/logged-user').then(responseData);
   };
+
+  this.update = function (user) {
+    return $http.post(apiUrl + '/user', user).then(responseData);
+  };
 });

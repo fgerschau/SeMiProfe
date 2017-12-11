@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -50,7 +51,12 @@ public class UserService {
     }
 
     public User create(User user) {
-         return repository.save(user);
+        Boolean userExists = repository.findByEmail(user.getEmail()) != null;
+        if (userExists) {
+            repository.deleteByEmail(user.getEmail());
+        }
+
+        return repository.save(user);
     }
 
     public List<String> getStates() {

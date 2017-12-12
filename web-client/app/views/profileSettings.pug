@@ -1,6 +1,7 @@
 extends ./layout
 
 block head
+  link(rel="stylesheet" href="/css/profileSettings.css")
 block body
   .row
     .col-xs-12.col-md-12
@@ -47,6 +48,10 @@ block body
         select#tipo.form-control(type='text' ng-model='user.language')
           option(ng-repeat="(key, value) in languages" ng-value="key" value="{{key}}") {{value}}
         .text-danger(ng-if="error.language") Todos los profesores tienen que elegir un idioma.
+      .form-group
+        label.checkbox-inline(ng-repeat="level in levels")
+          input(type="checkbox" ng-model="level.selected")
+          | {{level.name}}
       .form-group
         button.btn.btn-primary(ng-click="update()" style="width: 100%;") Aceptar
     .col-md-6(style="margin-top: 4em")

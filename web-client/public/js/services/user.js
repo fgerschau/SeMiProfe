@@ -37,6 +37,6 @@ seMiProfeApp.service('userService', function ($http) {
   };
 
   this.update = function (user) {
-    return $http.post(apiUrl + '/user', user).then(responseData);
+    return $http.put(apiUrl + '/user', user).then(responseData);
   };
 });

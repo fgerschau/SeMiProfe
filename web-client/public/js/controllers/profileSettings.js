@@ -2,12 +2,35 @@ seMiProfeApp.controller('profileSettingsController', function ($scope, $window, 
   $scope.error = {};
   $scope.languages = LANGUAGETRANSLATION;
   $scope.user = {};
-  $scope.selectedUserEmail;
+  $scope.levels = [];
+
+  function initLevels(user) {
+    for (var level in CEFR_LEVELS) {
+      $scope.levels.push({
+        code: level,
+        name: CEFR_LEVELS[level],
+      })
+    }
+
+    if (user && user.cefrLevels) {
+      for (var i = 0; i < user.cefrLevels.length; i++) {
+        var userLevel = user.cefrLevels[i];
+        $scope.levels = $scope.levels.map(function (level) {
+          if (level.code == userLevel.level) {
+            level.selected = true;
+          }
+
+          return level;
+        });
+      }
+    }
+  }
 
   $scope.init = function () {
     userService.getLoggedUser().then(function (user) {
       user.type = user.isTeacher ? 'teacher' : 'student';
       $scope.user = user;
+      initLevels(user);
     }).catch(console.log);
   };
 
@@ -47,10 +70,22 @@ seMiProfeApp.controller('profileSettingsController', function ($scope, $window, 
     });
   }
 
+  function levelFilter(level) {
+    return level.selected === true;
+  }
+
+  function sanitizeLevel(level) {
+    return {
+      level: level.code,
+      levelName: level.name,
+    };
+  }
+
   $scope.update = function () {
     checkErrors().then(function (errors) {
       const user = $scope.user;
       user.isTeacher = user.type === 'teacher';
+      user.cefrLevels = $scope.levels.filter(levelFilter).map(sanitizeLevel);
       if (!errors) {
         userService.update(user).then(function () {
           $window.location.href = '/profile';

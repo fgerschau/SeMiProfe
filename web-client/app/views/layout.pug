@@ -18,7 +18,7 @@ body(ng-app="seMiProfeApp")
       a#chat-button(href="/chat")
         span.fa.fa-commenting.fa-2x
   - }
-  nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+  nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse
     button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbar', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
     a.navbar-brand(href='/')
@@ -26,18 +26,18 @@ body(ng-app="seMiProfeApp")
       | SeMiProfe
     #navbar.collapse.navbar-collapse
       .navbar-nav
-        a.nav-item.nav-link(href='/search')
+        button.btn.btn-outline-secondary.navbar-btn.text-white.nav-item.nav-link(href='/search')
           | Profesores 
 
     div(style="margin-top: 20px;")
     - if (!loggedIn) {
-      a.btn.btn-outline-success.access-button(href='/login')
+      a.btn.btn-success.access-button(href='/login')
         | Login
-      a.btn.btn-outline-warning.access-button(href='/signup')
+      a.btn.btn-warning.access-button(href='/signup')
         | Registrar
     - } else if (loggedIn) {
-      a.btn.btn-outline-success.access-button(href="/profile")= user.firstName
-      a.btn.btn-outline-danger.access-button(href='/logout')
+      a.btn.btn-success.access-button(href="/profile")= user.firstName
+      a.btn.btn-danger.access-button(href='/logout')
         | Logout
     - }
 

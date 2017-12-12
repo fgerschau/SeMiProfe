@@ -8,12 +8,12 @@ module.exports = function (app, passport) {
   app.get('*', function (req, res, next) {
     res.locals.loggedIn = !!req.user;
     res.locals.user = req.user;
-    res.locals.selectedUser = req.user; //TODO
+    res.locals.selectedUser = req.user;
     res.locals.path = req.path;
     next();
   });
 
-  app.get('/', Auth.isLoggedIn, controller.getIndex); // TODO: Homepage
+  app.get('/', controller.getIndex);
 
   app.get('/signup', controller.getSignUp);
 

@@ -31,13 +31,13 @@ body(ng-app="seMiProfeApp")
 
     div(style="margin-top: 20px;")
     - if (!loggedIn) {
-      a.btn.btn-outline-success.access-button(href='/login')
+      a.btn.btn-success.access-button(href='/login')
         | Login
-      a.btn.btn-outline-warning.access-button(href='/signup')
+      a.btn.btn-warning.access-button(href='/signup')
         | Registrar
     - } else if (loggedIn) {
-      a.btn.btn-outline-success.access-button(href="/profile")= user.firstName
-      a.btn.btn-outline-danger.access-button(href='/logout')
+      a.btn.btn-success.access-button(href="/profile")= user.firstName
+      a.btn.btn-danger.access-button(href='/logout')
         | Logout
     - }
 

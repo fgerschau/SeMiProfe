@@ -12,4 +12,5 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<User, Long> {
     Review save(Review review);
 
+    Review findOneById(Long id);
 }

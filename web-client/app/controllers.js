@@ -1,6 +1,6 @@
 const userController = require('./user');
 exports.getIndex = function (req, res) {
-  res.redirect('/search');
+  res.render('mainPage');
 };
 
 exports.getSearch = function (req, res) {

@@ -1,0 +1,63 @@
+extends ./layout
+
+block head
+    style.
+      .carousel-inner img {
+      width: 100%;
+      height: 100%;
+      }
+      .container {
+      width: 100%;
+      margin: 0;
+      left: 0;
+      padding: 0;
+      }
+      .nav-item {
+      margin-right: 5px;
+      }
+      .row{
+      margin: 20px 0;
+      text-center;
+      center-block;
+      } 
+      .row.first{
+      margin: 0px 0px;
+      text-center;
+      center-block;
+      }
+block body 
+    .row.first
+     .col-sm-12(style='padding: 0')
+       #demo.carousel.slide(data-ride='carousel')
+         ul.carousel-indicators
+           li.active(data-target='#demo', data-slide-to='0')  
+           li(data-target='#demo', data-slide-to='1') 
+         .carousel-inner
+           .carousel-item.active
+             img(src='images/success.jpg', alt='Success')
+           .carousel-item
+             img(src='images/freedom.jpg', alt='Languages')
+         a.carousel-control-prev(href='#demo', data-slide='prev')
+           span.carousel-control-prev-icon
+         a.carousel-control-next(href='#demo', data-slide='next')
+           span.carousel-control-next-icon
+    .row
+        .col-sm-6.bg.text-center.img-center
+          img.rounded-circle(src='images/earth.jpg', alt='Cinque Terre', width='304', height='236')    
+          h3 Cualquier idioma, en cualquier momento 
+          p Todo lo que necesitas hacer es encontrar un profesor adecuado.
+        .col-sm-6.text-center.img-center
+          img.rounded-circle(src='images/anywhere.jpg', alt='Cinque Terre', width='304', height='236')
+          h3 En casa, en la escuela, en l&iacute;nea     
+          p T&uacute; eliges cu&aacute;l es el mejor para ti.
+    .row.s.jumbotron.justify-content-center.align-items-center.text-white.bg-inverse
+       h1 &iquest;Quienes somos?
+    .row
+        .col-sm-6.bg
+          img.rounded(src='images/who.jpg', alt='Cinque Terre', width='550', height='250')    
+          h3   
+        .col-sm-6
+          h2 Maestros, estudiantes, &iexcl;todo en uno!    
+          p
+            | Tenemos la base de estudiantes y profesores, lo que le permite encontrar un maestro perfecto
+            | y mostrarle a su maestro potencial que usted es un alumno perfecto.

@@ -53,11 +53,9 @@ public class UserController {
 
     @RequestMapping(value="/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public User create(@RequestBody User user, @RequestParam(value="achievementids", required = false) Set<Integer> achievementIds) {
-        System.out.println(achievementIds);
         if (achievementIds != null && achievementIds.size() > 0) {
             Set<Achievement> achievements = achievementService.getByIds(achievementIds);
             if (achievements.size() > 0) {
-                System.out.println(achievements);
                 user.setAchievements(achievements);
             }
         }
@@ -77,5 +75,10 @@ public class UserController {
         List<String> towns = userService.getTowns();
 
         return towns;
+    }
+
+    @RequestMapping(value="/user", method = RequestMethod.PUT)
+    public User update(@RequestBody User user) {
+        return userService.update(user);
     }
 }

@@ -10,7 +10,7 @@ For deploying the application you need:
 
 
 ### Backend
-1. In the projects root you have to run
+1. In the project's root you have to run
 ```bash
 	node scripts/deploy.js
     	--username		[the username of your mysql database, the default value is 'dev']

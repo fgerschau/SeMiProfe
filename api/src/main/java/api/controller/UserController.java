@@ -76,4 +76,9 @@ public class UserController {
 
         return towns;
     }
+
+    @RequestMapping(value="/user", method = RequestMethod.PUT)
+    public User update(@RequestBody User user) {
+        return userService.update(user);
+    }
 }

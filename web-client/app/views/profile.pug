@@ -7,7 +7,8 @@ block head
   link(href="/css/profile.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" rel="stylesheet" )
 block body
-  div(ng-controller="profileController" ng-init="init(JSON.stringify(user))" ng-cloak)
+  - var selectedUserString = JSON.stringify(selectedUser);
+  div(ng-controller="profileController" ng-init="init(" + selectedUserString + ")" ng-cloak)
     .row.jumbotron(style="margin-top: 3em")
       .col-md-9.col-xs-12
         h1 {{selectedUser.firstName}} {{selectedUser.lastName}}

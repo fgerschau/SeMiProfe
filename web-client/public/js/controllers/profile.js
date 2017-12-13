@@ -1,8 +1,6 @@
 seMiProfeApp.controller('profileController', function ($scope, userService, reviewService) {
-  $scope.init = function () {
-    var emailIndex = window.location.href.indexOf('profile/');
-    var selectedUserEmail = window.location.href.substring(emailIndex + 8);
-    userService.getByEmail(selectedUserEmail).then(function (user) {
+  $scope.init = function (user) {
+    userService.getByEmail(user.email).then(function (user) {
       $scope.selectedUser = user;
       userService.getLoggedUser().then(function (data) {
         $scope.user = data;

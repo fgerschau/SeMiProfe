@@ -48,4 +48,6 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-websocket")
     compile("org.springframework:spring-messaging")
     compile("mysql:mysql-connector-java")
+    compile("org.springframework.security:spring-security-config:3.2.0.RELEASE")
+    compile("com.google.guava:guava:22.0")
 }

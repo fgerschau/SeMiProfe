@@ -52,3 +52,8 @@ button.fc-next-button {
 #chat-button span:hover {
   color: green;
 }
+
+.report {
+  height: 70px;
+  padding: 100px 0;
+}

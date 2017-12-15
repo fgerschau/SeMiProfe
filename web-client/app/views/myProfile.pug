@@ -43,8 +43,10 @@ block body
       .col-md-6
         h1 Tienes {{user.receivedReviews.length || 0}} reseñas
       .col-md-6(ng-if="user && user.receivedReviews")
-        .review(ng-repeat="review in user.receivedReviews")
-         +review-card()
+        .review(ng-repeat="review in reviews")
+          +review-card()
+        a.btn.btn-success(ng-click="toggleShowMore()" ng-show="showMore && user.receivedReviews.length >= NREVIEWS") Mostrar más
+        a.btn.btn-success(ng-click="toggleShowMore()" ng-show="!showMore && user.receivedReviews.length >= NREVIEWS") Mostrar menos
 
     .row.jumbotron(style="padding-bottom: 150px;" ng-if="user.isTeacher")
       .col-xs-12

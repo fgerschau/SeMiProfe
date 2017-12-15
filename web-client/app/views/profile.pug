@@ -45,8 +45,10 @@ block body
         .form-group
           button.btn.btn-primary(ng-click="saveReview()" style="width: 100%;") Comentar      
       .col-md-6(ng-if="selectedUser && selectedUser.receivedReviews")
-        .review(ng-repeat="review in selectedUser.receivedReviews")
-         +review-card()
+        .review(ng-repeat="review in reviews")
+          +review-card()
+        a.btn.btn-success(ng-click="toggleShowMore()" ng-show="showMore && selectedUser.receivedReviews.length >= NREVIEWS") Mostrar más
+        a.btn.btn-success(ng-click="toggleShowMore()" ng-show="!showMore && selectedUser.receivedReviews.length >= NREVIEWS") Mostrar menos
 
     .row.jumbotron(style="padding-bottom: 150px;")
       .col-xs-12

@@ -41,7 +41,7 @@ block body
 
     .row.jumbotron
       .col-md-6
-        h1 Tienes {{user.reviews.length || 0}} reseñas
+        h1 Tienes {{user.receivedReviews.length || 0}} reseñas
       .col-md-6(ng-if="user && user.receivedReviews")
         .review(ng-repeat="review in user.receivedReviews")
          +review-card()

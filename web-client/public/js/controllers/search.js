@@ -44,6 +44,10 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
   }
 
   function calculateAverageValuation(reviews) {
+    if (!reviews || !reviews.length) {
+      return 0;
+    }
+
     var average = 0;
     for (var i = 0; i < reviews.length; i++) {
       var review = reviews[i];

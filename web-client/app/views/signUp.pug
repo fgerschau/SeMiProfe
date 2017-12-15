@@ -34,14 +34,14 @@ block body
       .form-group(style="padding: 15px 0;")
           h4 Datos de usuario:
       .form-group(ng-class="error.userType ? 'has-danger' : ''")
-        label(for="tipo") Tipo de usuario*
-        select#tipo.form-control(type='text' ng-model='user.isTeacher')
+        label(for="type") Tipo de usuario*
+        select#type.form-control(type='text' ng-model='user.isTeacher')
           option(value="true") Profesor
           option(value="false") Alumno
         .text-danger(ng-if="error.userType") Tienes que elegir el tipo de tu perfil.
       .form-group(ng-show="user.isTeacher === 'true'" ng-class="error.language ? 'has-danger' : ''")
-        label(for="tipo") Idioma*
-        select#tipo.form-control(type='text' ng-model='user.language')
+        label(for="language") Idioma*
+        select#language.form-control(type='text' ng-model='user.language')
           option(ng-repeat="(key, value) in languages" ng-value="key") {{value}}
         .text-danger(ng-if="error.language") Todos los profesores tienen que elegir un idioma.
       .form-group(ng-class="error.password ? 'has-danger' : ''")

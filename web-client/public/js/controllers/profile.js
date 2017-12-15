@@ -1,12 +1,19 @@
 seMiProfeApp.controller('profileController', function ($scope, userService, reviewService) {
-  $scope.init = function (user) {
-    userService.getByEmail(user.email).then(function (user) {
+  $scope.init = function (selectedUser) {
+    $scope.selectedUser = selectedUser;
+    userService.getByEmail(selectedUser.email).then(function (user) {
       $scope.selectedUser = user;
       userService.getLoggedUser().then(function (data) {
         $scope.user = data;
       }).catch(console.log);
     }).catch(console.log);
   };
+
+  function reload() {
+    userService.getByEmail($scope.selectedUser.email).then(function (user) {
+      $scope.selectedUser = user;
+    }).catch(console.log);
+  }
 
   $scope.saveReview = function () {
     var review = {
@@ -16,6 +23,6 @@ seMiProfeApp.controller('profileController', function ($scope, userService, revi
       userId: $scope.selectedUser.id,
     };
 
-    reviewService.save(review).then($scope.init)
+    reviewService.save(review).then(reload);
   };
 });

@@ -23,7 +23,7 @@ module.exports = function (app, passport) {
 
   app.get('/availability', Auth.isLoggedIn, controller.getAvailability);
 
-  app.get('/profile/:email/settings', Auth.isLoggedIn, controller.getProfileSettings);
+  app.get('/profile/settings', Auth.isLoggedIn, controller.getProfileSettings);
 
   app.get('/profile/:email', Auth.isLoggedIn, controller.getProfile);
 

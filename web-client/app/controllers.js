@@ -51,3 +51,7 @@ exports.getLoggedUser = function (req, res) {
 exports.getChat = function (req, res) {
   res.render('chat');
 };
+
+exports.getStatistics = function (req, res) {
+  res.render('profileStatistics');
+};

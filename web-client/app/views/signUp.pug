@@ -48,6 +48,9 @@ block body
         label(for='pw') Contraseña*
         input#pw.form-control(type='password' ng-model='user.password' placeholder="********")
         .text-danger(ng-if="error.password") Tienes que introducir una contraseña.
+      .form-group(ng-show="user.isTeacher === 'true'")
+        label(for="price") Precio por hora en EURO
+        input#price.form-control(type='text' ng-model='user.price' placeholder="€€€")
       .form-group
         button.btn.btn-primary(ng-click="signUp()" style="width: 100%;") Aceptar
     .col-md-6(style="margin-top: 4em")

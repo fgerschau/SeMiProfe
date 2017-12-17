@@ -84,6 +84,7 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
         var user = data.content[i];
         data.content[i].averageValuation = calculateAverageValuation(user.receivedReviews);
         data.content[i].achievementPoints = user.achievements && user.achievements.length ? user.achievements.reduce(addAchievements, { points: 0 }) : 0;
+        data.content[i].averagePrice = $scope.pricesXLanguage[user.language];
       }
 
       $scope.tableData = data.content;
@@ -137,12 +138,19 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     });
   }
 
+  function getPriceAverages() {
+    userService.getPricesXLanguagesAverage().then(function (pricesXLanguage) {
+      $scope.pricesXLanguage = pricesXLanguage || {};
+    });
+  }
+
   function init() {
     getTeachers(true);
     getLanguages();
     setLevelsArray();
     getStates();
     getTowns();
+    getPriceAverages();
   }
 
   init();

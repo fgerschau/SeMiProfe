@@ -25,6 +25,12 @@ block body
           h5
             i.fa.fa-language.profile-icon
             | {{user.language | mylanguage}}
+
+        span(style="white-space: no-wrap")
+          h5
+            i.fa.fa-eur.profile-icon
+            | #{" "} {{user.price}}
+
       .col-md-3.col-xs-12
         h4
           a.text-success(href="/profile/settings")

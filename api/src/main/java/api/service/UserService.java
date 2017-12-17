@@ -4,18 +4,14 @@ import api.model.CEFRLevel;
 import api.model.Review;
 import api.model.User;
 import api.repository.CEFRLevelRepository;
-import api.repository.ReviewRepository;
 import api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service("UserService")
 public class UserService {
@@ -40,7 +36,7 @@ public class UserService {
             
             users = repository.findAllByIdsAndQuery(isTeacher, search, search, language, town, state, userIds, pageable);
         } else {
-            users = repository.findAll(isTeacher, search, search, language, town, state, pageable);
+            users = repository.getAll(isTeacher, search, search, language, town, state, pageable);
         }
 
         return users;
@@ -114,5 +110,23 @@ public class UserService {
         }
 
         return repository.save(user);
+    }
+
+    public Map<String, Double> getPricesXLanguages() {
+        List<User> users = repository.findAll();
+        Map<String, Double> languagePrices = new HashMap<>();
+        Map<String, Integer> count = new HashMap<>();
+        for (User user : users) {
+            if (user.getPrice() != null && user.getLanguage() != null) {
+                Integer languageCount = count.get(user.getLanguage()) == null ? 0 : count.get(user.getLanguage());
+                count.put(user.getLanguage(), languageCount + 1);
+                Double languagePrice = languagePrices.get(user.getLanguage()) == null ? 0.0 : languagePrices.get(user.getLanguage());
+                languagePrices.put(user.getLanguage(), (languagePrice + user.getPrice()));
+            }
+        }
+
+        languagePrices.replaceAll((k, e) -> e / count.get(k));
+
+        return languagePrices;
     }
 }

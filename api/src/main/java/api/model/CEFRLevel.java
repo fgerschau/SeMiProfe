@@ -27,7 +27,7 @@ public class CEFRLevel {
         return id;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "user_CEFRLevel", joinColumns = @JoinColumn(name = "cefrlevel_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     @JsonIgnore
     public Set<User> getUsers() {

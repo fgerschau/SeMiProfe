@@ -14,6 +14,7 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
   $scope.states = [SELECTASTATE];
   $scope.selectedState = $scope.states[0];
   $scope.levels = [];
+  $scope.pricesXLanguage = {};
 
   function getPaginationArray(from, to) {
     if (((from - 1) % $scope.MAXPAGES !== 0 || to % $scope.MAXPAGES !== 0)) {

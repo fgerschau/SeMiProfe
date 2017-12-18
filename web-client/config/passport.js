@@ -10,11 +10,14 @@ module.exports = function (passport) {
 
   passport.deserializeUser(function (email, done) {
     userController.getByEmail(email).then(function (user) {
-      if (!user) {
+      if (!user || typeof user !== 'object' || !user.id) {
         done(null, null);
       }
 
       done(null, user);
+    }).catch(function (err) {
+      console.log(err);
+      done(null, null);
     });
   });
 
@@ -52,6 +55,7 @@ module.exports = function (passport) {
       newUser.town = req.body.town;
       newUser.isTeacher = req.body.isTeacher;
       newUser.language = req.body.language;
+      newUser.price = req.body.price;
 
       userController.create(newUser).then(function (createdUser) {
         return done(null, createdUser);

@@ -31,4 +31,8 @@ public class ReviewService {
 
         return repository.save(review);
     }
+
+    public Review getOne(Long reviewId) {
+        return repository.findOneById(reviewId);
+    }
 }

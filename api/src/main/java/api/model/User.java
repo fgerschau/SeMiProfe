@@ -20,6 +20,7 @@ public class User {
     private Set<Review> givenReviews;
     private Set<CEFRLevel> cefrLevels;
     private Set<Achievement> achievements;
+    private Double price;
 
     protected User() {}
 
@@ -42,7 +43,12 @@ public class User {
                 ", phone=" + phone +
                 ", state='" + state + '\'' +
                 ", town='" + town + '\'' +
+                ", level=" + level +
+                ", receivedReviews=" + receivedReviews +
+                ", givenReviews=" + givenReviews +
                 ", cefrLevels=" + cefrLevels +
+                ", achievements=" + achievements +
+                ", price=" + price +
                 '}';
     }
 
@@ -182,5 +188,13 @@ public class User {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

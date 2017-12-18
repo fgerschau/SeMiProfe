@@ -14,7 +14,11 @@ head
 
 block head
 body(ng-app="seMiProfeApp")
-  nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+  - if (user && path.indexOf("/chat") === -1) {
+      a#chat-button(href="/chat")
+        span.fa.fa-commenting.fa-2x
+  - }
+  nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse
     button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbar', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
     a.navbar-brand(href='/')
@@ -22,25 +26,27 @@ body(ng-app="seMiProfeApp")
       | SeMiProfe
     #navbar.collapse.navbar-collapse
       .navbar-nav
-        a.nav-item.nav-link(href='/search')
+        a.btn.btn-outline-secondary.navbar-btn.text-white.nav-item.nav-link(href='/search')
           | Profesores 
 
     div(style="margin-top: 20px;")
     - if (!loggedIn) {
-      a.btn.btn-outline-success.access-button(href='/login')
+      a.btn.btn-success.access-button(href='/login')
         | Login
-      a.btn.btn-outline-warning.access-button(href='/signup')
+      a.btn.btn-warning.access-button(href='/signup')
         | Registrar
     - } else if (loggedIn) {
-      a.btn.btn-outline-success.access-button(href="/profile")= user.firstName
-      a.btn.btn-outline-danger.access-button(href='/logout')
+      a.btn.btn-success.access-button(href="/profile")= user.firstName
+      a.btn.btn-danger.access-button(href='/logout')
         | Logout
     - }
 
   .container
     block body
+    .row
+      .col-md-12.report
+        a(href="mailto:feger@inf.upv.es?subject=Bug report&body=Descripcion%20del%20problema/error:%0D%0DCómo%20reproducir%20el%20problema/error:" ) Reporta un problema
 
-      
 script(src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous")
 script(src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous")
 script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous")

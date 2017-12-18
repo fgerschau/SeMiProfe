@@ -35,4 +35,12 @@ seMiProfeApp.service('userService', function ($http) {
   this.getLoggedUser = function () {
     return $http.get('/logged-user').then(responseData);
   };
+
+  this.update = function (user) {
+    return $http.put(apiUrl + '/user', user).then(responseData);
+  };
+
+  this.getPricesXLanguagesAverage = function () {
+    return $http.get(apiUrl + '/pricesxlanguages').then(responseData);
+  };
 });

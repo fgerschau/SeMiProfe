@@ -5,53 +5,65 @@ block head
   link(href="css/profile.css" rel="stylesheet")
   link(href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" rel="stylesheet" )
 block body
-  .row.jumbotron(style="margin-top: 3em")
-    .col-md-9.col-xs-12
-      h1= user.firstName
-      span(style="white-space: no-wrap")
-        h5
-          i.fa.fa-envelope-o.profile-icon
-          = user.email
-      span(style="white-space: no-wrap")
-        h5
-          i.fa.fa-map-marker.profile-icon
-          = user.town + ', ' + user.state
-      - if (user.isTeacher) {
-        h5 Profesor
-      - } else {
-        h5 Alumno
-      - }
-      - if (user.language) {
+  - var selectedUserString = JSON.stringify(selectedUser);
+  div(ng-controller="profileController" ng-init="init(" + selectedUserString + ")" ng-cloak)
+    .row.jumbotron(style="margin-top: 3em")
+      .col-md-9.col-xs-12
+        h1 {{user.firstName}}
+        h2.sub(ng-if="user.isTeacher") Profesor
+        h2.sub(ng-if="!user.isTeacher") Alumno
         span(style="white-space: no-wrap")
           h5
+            i.fa.fa-envelope-o.profile-icon
+            | {{user.email}}
+        span(style="white-space: no-wrap")
+          h5
+            i.fa.fa-map-marker.profile-icon
+            | {{user.town}} #{", "} {{user.state}}
+
+        span(style="white-space: no-wrap" ng-if="user.language")
+          h5
             i.fa.fa-language.profile-icon
-            = user.language
-      - }
-  .row.jumbotron
-    .col-md-12.col-xs-12
-      h1 Logros
-    .col-md-6
-      img(src="/images/favicon.png" width="335px" height="261px")
-    .col-md-6
-      +achievements()
+            | {{user.language | mylanguage}}
 
-  .row.jumbotron
-    form.col-md-6
-      .form-group
-        label(for="stars") Valoración (0-5)
-        input.form-control#stars(type="number" name="stars" ng-model = "stars" min="0" max="5")
-      .form-group
-        label(for="comment") Comentario
-        input.form-control#comment(type="text" name="comment" ng-model = "comment")
-      .form-group
-        button.btn.btn-primary(ng-click="saveReview()" style="width: 100%;") Comentar      
-    .col-md-6(ng-if="selectedUser && selectedUser.receivedReviews")
-      .review(ng-repeat="review in selectedUser.receivedReviews")
-       +review-card()
+        span(style="white-space: no-wrap")
+          h5
+            i.fa.fa-eur.profile-icon
+            | #{" "} {{user.price}}
 
-  - if (user.isTeacher) {
-    .row.jumbotron(style="padding-bottom: 150px;")
+      .col-md-3.col-xs-12
+        h4
+          a.text-success(href="/profile/settings")
+            i.fa.fa-cog.pr-md-2
+            | Modificar mi perfil
+          a.text-success(href="/profile/statistics")
+            i.fa.fa-bar-chart.pr-md-2
+            | Estadísticas
+
+    .row.jumbotron
+      .col-md-12.col-xs-12
+        h1 Logros
+      .col-md-6
+        img(src="/images/favicon.png" width="335px" height="261px")
+      .col-md-6
+        +achievements()
+
+    .row.jumbotron
+      .col-md-6
+        h1 Tienes {{user.receivedReviews.length || 0}} reseñas
+      .col-md-6(ng-if="user && user.receivedReviews")
+        .review(ng-repeat="review in reviews")
+          +review-card()
+        a.btn.btn-success(ng-click="toggleShowMore()" ng-show="showMore && user.receivedReviews.length >= NREVIEWS") Mostrar más
+        a.btn.btn-success(ng-click="toggleShowMore()" ng-show="!showMore && user.receivedReviews.length >= NREVIEWS") Mostrar menos
+
+    .row.jumbotron(style="padding-bottom: 150px;" ng-if="user.isTeacher")
       .col-xs-12
+        h1 Disponibilidad
+        - var selectedUserString = JSON.stringify(selectedUser);
+        div(ng-controller="availabilityController" ng-init='init(' + selectedUserString + ')')
+        #calendar(style="height: 500px;")
+      .col-xs-12(style="margin-top: 200px;")
         - var selectedUserString = JSON.stringify(selectedUser);
         div(ng-controller="availabilityController"  ng-init='init(' + selectedUserString + ')')
           #event-add
@@ -66,20 +78,14 @@ block body
           #event-delete ¿Desea cambiar la disponibilidad?
             p(id="event-delete-info")
             button.btn.btn-danger#event-delete-button Eliminar del calendario
-      .col-xs-12
-        h1 Disponibilidad
-        - var selectedUserString = JSON.stringify(selectedUser);
-        div(ng-controller="availabilityController" ng-init='init(' + selectedUserString + ')')
-        #calendar(style="height: 500px;")
-  - }
-
 block scripts
   script(src="https://momentjs.com/downloads/moment.js")
   script(src="https://code.jquery.com/jquery-3.2.1.min.js")
   script(src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js")
   script(src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js")
   script(src="js/controllers/availability.js")
-  script(src="js/controllers/achievements.js")
+  script(src="js/controllers/profile.js")
+  script(src="js/services/review.js")
   script(src="js/services/availability.js")
   script(src="js/services/user.js")
   script(src="js/screens/availability-form.js")

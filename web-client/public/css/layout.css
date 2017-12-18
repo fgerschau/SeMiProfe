@@ -33,3 +33,31 @@ button.fc-next-button {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
+
+#chat-button {
+  bottom: 20px;
+  position: fixed;
+  right: 20px;
+  background: blue;
+  border-radius: 100%;
+  text-align: center;
+  z-index: 100;
+}
+
+#chat-button span {
+  padding: 15px;
+  color: white;
+}
+
+#chat-button span:hover {
+  color: green;
+}
+
+.report {
+  height: 70px;
+  padding: 100px 0;
+}
+
+.jumbotron {
+  padding: 2rem 2rem;
+}

@@ -29,41 +29,30 @@ block body
           label.checkbox-inline(ng-repeat="level in levels")
             input(type="checkbox" ng-model="level.selected")
             | {{level.name}}
-
-        //- label.title
-        //-   strong Tipo de clase
-        //- .checkbox.general
-        //-   input(type="checkbox")
-        //-   | Presencial
-        //- .checkbox.general
-        //-   input(type="checkbox")
-        //-   | Domicilio
-        //- .checkbox.general
-        //-   input(type="checkbox")
-        //-   | Online
-        //- label.title
-        //-   strong Horario
-        //- .checkbox.general
-        //-   input(type="checkbox")
-        //-   | Mañana
-        //- .checkbox.general
-        //-   input(type="checkbox")
-        //-   | Tarde
         button.btn.btn-primary.no-label(ng-click="search()" style="width: 100%;") Buscar
       .col-xs-12.col-md-9.form(ng-if="tableData.length" ng-cloak)
-        table.table.table-striped
+        table.table.table-striped.table-responsive
           thead
             tr
-              th(style="width: 10%") Nombre
-              th(style="width: 30%") Apellidos
-              th(style="width: 80%") Idioma
+              th(style="width: 20%; ") Nombre
+              th(style="width: 10%") Idioma
+              th(style="width: 15%") Ø precio
+              th(style="width: 5%") Precio/hora
+              th(style="width: 20%") Niveles ofrecidos
+              th(style="width: 20%") Ø valoración
+              th(style="width: 10%") Puntos (logros)
           tbody(ng-repeat="row in tableData")
             tr
               td
-                a(href="/profile/{{row.email}}") {{row.firstName}}
+                a(href="/profile/{{row.email}}") {{row.firstName}} #{" "} {{row.lastName}}
+              td {{row.language | mylanguage}}
+              td {{row.averagePrice ? row.averagePrice + "€" : "ND"}}
+              td {{row.price ? row.price +  "€" : "ND"}}
               td
-                a(href="/profile/{{row.email}}") {{row.lastName}}
-              td {{row.languageTranslation}}
+                p.level(ng-repeat="level in row.cefrLevels") {{level.levelName}}
+              td {{row.averageValuation}}
+              td {{row.achievementPoints}}
+
         +pagination()
       .col-xs-12.col-md-9(ng-if="!tableData.length" style="margin-top: 3em" ng-cloak)
         h4.text-danger No se han encontrado resultados para tu búsqueda 😔

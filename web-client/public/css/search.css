@@ -13,3 +13,8 @@ label.title{
 .checkbox.general{
   margin: 2px 65px 5px 5px;
 }
+
+p.level {
+  display: inline-block;
+  margin: 0 3px;
+}

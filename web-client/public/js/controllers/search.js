@@ -14,6 +14,7 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
   $scope.states = [SELECTASTATE];
   $scope.selectedState = $scope.states[0];
   $scope.levels = [];
+  $scope.pricesXLanguage = {};
 
   function getPaginationArray(from, to) {
     if (((from - 1) % $scope.MAXPAGES !== 0 || to % $scope.MAXPAGES !== 0)) {
@@ -43,6 +44,25 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     return level.selected === true;
   }
 
+  function calculateAverageValuation(reviews) {
+    if (!reviews || !reviews.length) {
+      return 0;
+    }
+
+    var average = 0;
+    for (var i = 0; i < reviews.length; i++) {
+      var review = reviews[i];
+      average += review.stars;
+    }
+
+    average /= reviews.length;
+    return average.toFixed(2);
+  }
+
+  function addAchievements(a, b) {
+    return a.points + b.points;
+  }
+
   function getTeachers(updatePagination) {
     $scope.filter = {
       page: $scope.page - 1,
@@ -62,7 +82,10 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
       }
 
       for (var i = 0; i < data.content.length; i++) {
-        data.content[i].languageTranslation = LANGUAGETRANSLATION[data.content[i].language] || '';
+        var user = data.content[i];
+        data.content[i].averageValuation = calculateAverageValuation(user.receivedReviews);
+        data.content[i].achievementPoints = user.achievements && user.achievements.length ? user.achievements.reduce(addAchievements, { points: 0 }) : 0;
+        data.content[i].averagePrice = $scope.pricesXLanguage[user.language];
       }
 
       $scope.tableData = data.content;
@@ -116,12 +139,19 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     });
   }
 
+  function getPriceAverages() {
+    userService.getPricesXLanguagesAverage().then(function (pricesXLanguage) {
+      $scope.pricesXLanguage = pricesXLanguage || {};
+    });
+  }
+
   function init() {
     getTeachers(true);
     getLanguages();
     setLevelsArray();
     getStates();
     getTowns();
+    getPriceAverages();
   }
 
   init();

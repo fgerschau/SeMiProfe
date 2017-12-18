@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -80,5 +81,10 @@ public class UserController {
     @RequestMapping(value="/user", method = RequestMethod.PUT)
     public User update(@RequestBody User user) {
         return userService.update(user);
+    }
+
+    @RequestMapping(value="/pricesxlanguages", method = RequestMethod.GET)
+    public Map<String, Double> getPricesXLanguages() {
+        return userService.getPricesXLanguages();
     }
 }

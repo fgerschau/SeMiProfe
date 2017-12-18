@@ -57,3 +57,7 @@ button.fc-next-button {
   height: 70px;
   padding: 100px 0;
 }
+
+.jumbotron {
+  padding: 2rem 2rem;
+}

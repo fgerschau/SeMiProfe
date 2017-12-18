@@ -1,6 +1,7 @@
 mixin review-card()
   div.review-card(ng-if="review")
-    h4.review-title {{review.authorName}}, {{review.stars}} estrellas.
+    h4.review-title {{review.authorName}}
+      i.fa.fa-star.pl-md-2(ng-repeat="star in getNumber(review.stars) track by $index")
     h5 Comentario
     ul.comment
       li {{review.comment}}

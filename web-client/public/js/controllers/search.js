@@ -14,6 +14,7 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
   $scope.states = [SELECTASTATE];
   $scope.selectedState = $scope.states[0];
   $scope.levels = [];
+  $scope.pricesXLanguage = {};
 
   function getPaginationArray(from, to) {
     if (((from - 1) % $scope.MAXPAGES !== 0 || to % $scope.MAXPAGES !== 0)) {
@@ -55,7 +56,7 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     }
 
     average /= reviews.length;
-    return average;
+    return average.toFixed(2);
   }
 
   function addAchievements(a, b) {
@@ -84,6 +85,7 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
         var user = data.content[i];
         data.content[i].averageValuation = calculateAverageValuation(user.receivedReviews);
         data.content[i].achievementPoints = user.achievements && user.achievements.length ? user.achievements.reduce(addAchievements, { points: 0 }) : 0;
+        data.content[i].averagePrice = $scope.pricesXLanguage[user.language];
       }
 
       $scope.tableData = data.content;
@@ -137,12 +139,19 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     });
   }
 
+  function getPriceAverages() {
+    userService.getPricesXLanguagesAverage().then(function (pricesXLanguage) {
+      $scope.pricesXLanguage = pricesXLanguage || {};
+    });
+  }
+
   function init() {
     getTeachers(true);
     getLanguages();
     setLevelsArray();
     getStates();
     getTowns();
+    getPriceAverages();
   }
 
   init();

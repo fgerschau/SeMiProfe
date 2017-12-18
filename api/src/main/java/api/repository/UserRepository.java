@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u " +
@@ -24,7 +25,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
                 "?6 IS NULL " +
                 "OR LOWER(u.state) LIKE LOWER(CONCAT('%', ?6, '%'))" +
             ") ORDER BY u.firstName")
-    Page<User> findAll(Boolean isTeacher, String firstName, String lastName, String language, String town, String state, Pageable pageable);
+    Page<User> getAll(Boolean isTeacher, String firstName, String lastName, String language, String town, String state, Pageable pageable);
 
     @Query("SELECT u FROM User u " +
             "WHERE u.isTeacher = ?1 " +
@@ -61,4 +62,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
     Long deleteByEmail(String email);
+
+    List<User> findAll();
 }

@@ -14,7 +14,7 @@ seMiProfeApp.controller('profileController', function ($scope, userService, revi
     }).catch(console.log);
   };
 
-  function reload(nReviews) {
+  function reload() {
     userService.getByEmail($scope.selectedUser.email).then(function (user) {
       $scope.selectedUser = user;
       $scope.reviews = $scope.selectedUser.receivedReviews.slice(0, NREVIEWS);
@@ -45,5 +45,9 @@ seMiProfeApp.controller('profileController', function ($scope, userService, revi
     }
 
     $scope.showMore = !$scope.showMore;
+  };
+
+  $scope.getNumber = function (number) {
+    return new Array(number);
   };
 });

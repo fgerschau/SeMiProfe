@@ -56,7 +56,7 @@ seMiProfeApp.controller('searchController', function ($scope, userService) {
     }
 
     average /= reviews.length;
-    return average;
+    return average.toFixed(2);
   }
 
   function addAchievements(a, b) {

@@ -46,4 +46,8 @@ seMiProfeApp.controller('profileController', function ($scope, userService, revi
 
     $scope.showMore = !$scope.showMore;
   };
+
+  $scope.getNumber = function (number) {
+    return new Array(number);
+  };
 });

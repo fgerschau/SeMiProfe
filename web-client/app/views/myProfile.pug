@@ -58,17 +58,16 @@ block body
         a.btn.btn-success(ng-click="toggleShowMore()" ng-show="!showMore && user.receivedReviews.length >= NREVIEWS") Mostrar menos
 
     .row.jumbotron(style="padding-bottom: 150px;" ng-if="user.isTeacher")
-      .col-xs-12
+      .col-md-7
         h1 Disponibilidad
         - var selectedUserString = JSON.stringify(selectedUser);
         div(ng-controller="availabilityController" ng-init='init(' + selectedUserString + ')')
         #calendar(style="height: 500px;")
-      .col-xs-12(style="margin-top: 200px;")
+      .col-md-5(style="margin-top: 200px;")
         - var selectedUserString = JSON.stringify(selectedUser);
         div(ng-controller="availabilityController"  ng-init='init(' + selectedUserString + ')')
           #event-add
             button.btn.btn-primary#addAvailabilityButton Añadir disponibilidad
-            #form
               form(name="availability-form" ng-submit="submitCalendarForm()")
                 p Inicio:
                 input.form-control(name="start" type="datetime-local" style="width: 95%" ng-model="form.start")
@@ -88,5 +87,4 @@ block scripts
   script(src="js/services/review.js")
   script(src="js/services/availability.js")
   script(src="js/services/user.js")
-  script(src="js/screens/availability-form.js")
   script(src="js/screens/locale-all.js")

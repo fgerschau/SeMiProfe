@@ -12,6 +12,8 @@
     "start": "NODE_PATH=src react-scripts start",
     "build": "NODE_PATH=src react-scripts build",
     "test": "NODE_PATH=src react-scripts test --env=jsdom",
+    "test:lint:js": "eslint .",
+    "test:lint:css": "stylelint \"**/*.css\"",
     "eject": "NODE_PATH=src react-scripts eject"
   },
   "devDependencies": {

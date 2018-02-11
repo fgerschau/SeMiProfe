@@ -5,8 +5,8 @@ import './app.css';
 
 const App = () => (
   <div>
-    <Navbar/>
-    <Routes/>
+    <Navbar />
+    <Routes />
   </div>
 );
 

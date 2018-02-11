@@ -2,8 +2,7 @@ import React from 'react';
 import './search.css';
 
 const App = () => (
-  <div>
-  </div>
+  <div />
 );
 
 export default App;

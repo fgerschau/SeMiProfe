@@ -5,8 +5,8 @@ import { Home, Search } from 'screens';
 const Routes = () => (
   <div>
     <Switch>
-      <Route exact path="/" component={ Home }/>
-      <Route path="/search" component={ Search } />
+      <Route exact path="/" component={Home} />
+      <Route path="/search" component={Search} />
     </Switch>
   </div>
 );

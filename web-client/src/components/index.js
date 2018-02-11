@@ -1,2 +1,2 @@
-export { App } from 'App';
-export { Navbar } from 'Navbar';
+export { App } from './App';
+export { Navbar } from './Navbar';

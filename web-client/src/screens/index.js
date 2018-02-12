@@ -1,2 +1,7 @@
-export { Home } from './Home';
-export { Search } from './Search';
+import Home from './Home';
+import Search from './Search';
+
+export {
+  Home,
+  Search,
+};

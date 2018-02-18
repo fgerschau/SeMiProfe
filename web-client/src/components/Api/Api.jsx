@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import config from 'config/config.json';
 import Loading from './components/Loading';
 
-axios.defaults.baseURL = config.apiURL;
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 function handleResponse(response) {
   this.setState({ loading: false, data: response.data });

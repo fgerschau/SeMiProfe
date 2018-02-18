@@ -11,7 +11,8 @@
     }],
     "no-plusplus": ["error", {
       "allowForLoopAfterthoughts": true
-    }]
+    }],
+    "import/no-mutable-exports": false
   },
   "settings": {
     "import/resolver": {

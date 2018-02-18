@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Api from 'components/Api';
+import { Api } from 'components';
 import './search.css';
 
 class App extends React.Component {

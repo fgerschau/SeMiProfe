@@ -8,6 +8,9 @@
       "components": [ "Link" ],
       "specialLink": [ "hrefLeft", "hrefRight", "to" ],
       "aspects": [ "noHref", "invalidHref", "preferButton" ]
+    }],
+    "no-plusplus": ["error", {
+      "allowForLoopAfterthoughts": true
     }]
   },
   "settings": {

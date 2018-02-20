@@ -8,8 +8,14 @@ class App extends React.Component {
 
     this.state = {
       teachers: [],
+      query: {
+        search: '',
+      },
     };
+
     this.setData = this.setData.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -20,22 +26,34 @@ class App extends React.Component {
     this.setState({ teachers: teachers.content });
   }
 
+  handleChange(event) {
+    const { query } = this.state;
+    query.search = event.target.value;
+    this.setState({ query });
+  }
+
+  handleSubmit(event) {
+    const { query } = this.state;
+    this.api.loadTeachers(query);
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div>
-        <div className="row form">
+        <form className="row form" onSubmit={this.handleSubmit}>
           <div className="col-md-10 col-xs-10 form">
-            <input type="text" className="form-control no-label" />
+            <input type="text" value={this.state.query.search} onChange={this.handleChange} className="form-control no-label" />
           </div>
           <div className="col-md-2 col-xs-2 form text-right">
             <button
+              type="submit"
               className="btn btn-primary no-label"
-              onClick={() => this.api.loadTeachers()}
             >
               Buscar
             </button>
           </div>
-        </div>
+        </form>
         <div className="row">
           <div className="col-xs-12 col-md-3 form">
             <label htmlFor="#selectedState" className="title">

@@ -19,10 +19,11 @@ class Api extends React.Component {
     this.setData = setData;
   }
 
-  loadTeachers() {
+  loadTeachers(query = {}) {
     this.setData([]);
     this.setState({ loading: true });
-    return axios.get('/user')
+    const axiosQuery = { params: query };
+    return axios.get('/user', axiosQuery)
       .then(handleResponse.bind(this))
       .catch(() => { this.setState({ loading: false }); });
   }

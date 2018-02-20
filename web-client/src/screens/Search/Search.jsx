@@ -81,7 +81,7 @@ class App extends React.Component {
                   { this.state.teachers ?
                       this.state.teachers.map(teacher => (
                         <tr key={teacher.id}>
-                          <th>{teacher.lastName} {teacher.lastName}</th>
+                          <th>{teacher.firstName} {teacher.lastName}</th>
                           <th>{teacher.language}</th>
                           <th>{teacher.averagePrice}</th>
                           <th>{teacher.price}</th>
